@@ -1,324 +1,1596 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rheivatech // Sovereign Intelligence. Universal Infrastructure.</title>
-    <!-- Premium Google Fonts -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rheivatech :: Sovereign Intelligence | Universal Infrastructure</title>
+    
+    <!-- logo2.png is strictly used for Favicon as requested -->
+    <link rel="icon" type="image/png" href="logo2.png" />
+
+    <!-- External custom styles -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <!-- AMBIENT GLOW BACKDROPS -->
-    <div class="ambient-glow glow-1"></div>
-    <div class="ambient-glow glow-2"></div>
-    <div class="cyber-grid-overlay"></div>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Outfit"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+              mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+            },
+            colors: {
+              'cyber-dark': '#020408',
+              'cyber-card': 'rgba(15, 23, 42, 0.4)',
+              'quantum-blue': '#06b6d4',
+              'quantum-blue-glow': 'rgba(6, 182, 212, 0.15)',
+              'cyber-border': '#1e293b',
+              'text-muted': '#94a3b8',
+            }
+          }
+        }
+      }
+    </script>
+  </head>
+  <body class="relative min-h-screen bg-cyber-dark text-[#cbd5e1] font-sans selection:bg-quantum-blue/30 selection:text-white overflow-x-hidden">
 
-    <!-- HEADER NAVIGATION -->
-    <header class="global-header">
-        <div class="header-container">
-            <div class="brand-logo-wrapper">
-                <img src="logo.png" alt="Rheivatech" class="brand-logo-img">
-                <span class="brand-name">RHEIVATECH</span>
+    <!-- Immersive UI Mesh & Grid Backdrops -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+      <!-- Radial Mesh Gradient -->
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,#1e293b,transparent)] opacity-50"></div>
+      <!-- Micro-dot Grid Layer -->
+      <div class="absolute inset-0 cyber-grid opacity-100 grid-glow"></div>
+      <!-- Adaptive subtle color blooms -->
+      <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-radial from-quantum-blue-glow/10 to-transparent filter blur-3xl"></div>
+      <div class="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-radial from-quantum-blue-glow/10 to-transparent filter blur-3xl"></div>
+    </div>
+
+    <!-- Global Header -->
+    <header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent h-20">
+      <div class="max-w-7xl mx-auto h-full px-6 flex items-center justify-between">
+        
+        <!-- Logo / Brand (uses logo.png for content as requested) -->
+        <a id="logo-link" href="javascript:void(0)" class="flex items-center gap-3 group focus:outline-none relative">
+          <div class="relative flex items-center justify-center">
+            <div class="w-8 h-8 rounded-lg bg-[#020408] border border-quantum-blue/30 p-1 flex items-center justify-center transition-all duration-300 group-hover:border-quantum-blue relative z-10">
+              <img
+                src="logo.png"
+                alt="Rheivatech Logo"
+                referrerPolicy="no-referrer"
+                class="w-full h-full object-contain filter drop-shadow-[0_0_4px_rgba(6,182,212,0.6)] transition-transform duration-500 group-hover:scale-110"
+              />
             </div>
-            <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
-                <span class="hamburger-bar"></span>
-                <span class="hamburger-bar"></span>
-            </button>
-            <nav class="nav-links">
-                <a href="#manifesto" class="nav-item">01_MANIFESTO</a>
-                <a href="#vector" class="nav-item">02_THE_VECTOR</a>
-                <a href="#infrastructure" class="nav-item">03_INTELLIGENCE</a>
-                <a href="#collective" class="nav-item">04_COLLECTIVE</a>
-                <a href="#join" class="btn-nav-action">INITIATE</a>
-            </nav>
+            <!-- Sliding robot head icon peek-a-boo, slides from underneath the logo revealing only half of it -->
+            <div id="robot-head" class="absolute left-0 top-1/2 -translate-y-1/2 w-6 h-6 z-0 flex items-center justify-center transition-all duration-500 ease-out transform translate-x-0 opacity-0 pointer-events-none">
+              <i data-lucide="bot" class="w-4 h-4 text-quantum-blue filter drop-shadow-[0_0_4px_rgba(6,182,212,0.8)]"></i>
+            </div>
+          </div>
+          <div class="flex flex-col relative z-10 ml-1">
+            <span class="text-sm font-sans font-bold tracking-[0.2em] text-white group-hover:text-quantum-blue transition-colors duration-300">RHEIVATECH</span>
+            <span class="text-[9px] uppercase tracking-widest text-quantum-blue/70 -mt-1 font-mono">Innovation Interface</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center gap-8">
+          <div class="flex items-center gap-6">
+            <a href="#manifesto" class="font-mono text-[11px] tracking-widest text-slate-400 hover:text-quantum-blue transition-colors duration-300 py-1">MANIFESTO</a>
+            
+            <!-- Interactive Phases Dropdown (Controlled via click in script.js) -->
+            <div class="relative py-1">
+              <button id="phases-dropdown-btn" class="flex items-center gap-1 font-mono text-[11px] tracking-widest text-slate-400 hover:text-quantum-blue transition-colors duration-300 focus:outline-none uppercase">
+                Phases <i data-lucide="chevron-down" class="w-3 h-3 transition-transform duration-300"></i>
+              </button>
+              <div id="phases-dropdown-menu" class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 rounded-lg border border-cyber-border bg-[#020408]/95 backdrop-blur-md shadow-2xl p-2 hidden z-50">
+                <div class="px-3 py-1.5 border-b border-slate-800/60 mb-1">
+                  <span class="text-[9px] text-slate-500 font-bold tracking-wider uppercase font-mono">System Migration Timeline</span>
+                </div>
+                <a href="#phases-section" class="flex items-center justify-between p-2 rounded hover:bg-quantum-blue/10 hover:text-white transition-colors group">
+                  <div class="flex flex-col text-left">
+                    <span class="text-[10px] font-bold text-quantum-blue uppercase tracking-wider font-mono">Phase 00: Sandbox</span>
+                    <span class="text-[8px] text-slate-400 font-mono">Active tools & statistical engines</span>
+                  </div>
+                  <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
+                </a>
+                <a href="#phase-01" class="flex items-center justify-between p-2 rounded hover:bg-quantum-blue/10 hover:text-white transition-colors group">
+                  <div class="flex flex-col text-left">
+                    <span class="text-[10px] font-bold text-slate-300 uppercase tracking-wider font-mono">Phase 01: Intelligence</span>
+                    <span class="text-[8px] text-slate-400 font-mono">Cognitive MoE offline compilers</span>
+                  </div>
+                  <span class="w-1.5 h-1.5 rounded-full bg-quantum-blue"></span>
+                </a>
+                <a href="#phase-02" class="flex items-center justify-between p-2 rounded hover:bg-quantum-blue/10 hover:text-white transition-colors group">
+                  <div class="flex flex-col text-left">
+                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider font-mono">Phase 02: Interface</span>
+                    <span class="text-[8px] text-slate-500 font-mono">Custom microelectronics & SoC</span>
+                  </div>
+                  <span class="w-1.5 h-1.5 rounded-full bg-slate-800"></span>
+                </a>
+                <a href="#phase-03" class="flex items-center justify-between p-2 rounded hover:bg-quantum-blue/10 hover:text-white transition-colors group">
+                  <div class="flex flex-col text-left">
+                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider font-mono">Phase 03: Mobility</span>
+                    <span class="text-[8px] text-slate-500 font-mono">Sovereign fleet autonomics</span>
+                  </div>
+                  <span class="w-1.5 h-1.5 rounded-full bg-slate-800"></span>
+                </a>
+              </div>
+            </div>
+
+            <a href="#vector" class="font-mono text-[11px] tracking-widest text-slate-400 hover:text-quantum-blue transition-colors duration-300 py-1">INFRASTRUCTURE</a>
+            <a href="#terminal-section" class="font-mono text-[11px] tracking-widest text-slate-400 hover:text-quantum-blue transition-colors duration-300 py-1">SYSTEMS</a>
+            <a href="#tech-stack" class="font-mono text-[11px] tracking-widest text-slate-400 hover:text-quantum-blue transition-colors duration-300 py-1">INTELLIGENCE</a>
+            <a href="#team-carousel" class="font-mono text-[11px] tracking-widest text-slate-400 hover:text-quantum-blue transition-colors duration-300 py-1">COLLECTIVE</a>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <div class="flex flex-col items-end">
+              <span class="text-[9px] text-slate-500 uppercase font-mono">Node Status</span>
+              <span class="text-[11px] text-green-400 font-mono">OPTIMAL | 0.04ms</span>
+            </div>
+            <div class="w-px h-8 bg-slate-800"></div>
+
+            <a
+              href="#join"
+              class="px-4 py-2 bg-slate-900 border border-slate-700 rounded text-[10px] uppercase tracking-widest text-[#cbd5e1] hover:text-white hover:border-slate-500 transition-all font-mono"
+            >
+              Access Login
+            </a>
+          </div>
+        </nav>
+
+        <!-- Mobile Toggle Button -->
+        <button
+          id="mobile-menu-toggle"
+          class="md:hidden flex items-center justify-center w-10 h-10 border border-cyber-border rounded bg-cyber-dark text-white hover:text-quantum-blue hover:border-quantum-blue/50 transition-all duration-300"
+        >
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+
+      </div>
+
+      <!-- Mobile Navigation Drawer -->
+      <div
+        id="mobile-menu"
+        class="hidden absolute top-20 left-0 w-full bg-[#020408]/95 backdrop-blur-lg border-b border-cyber-border py-8 px-6 flex flex-col gap-6 z-40 transition-all duration-300"
+      >
+        <a href="#manifesto" class="font-mono text-sm tracking-widest text-slate-300 hover:text-quantum-blue transition-all" onclick="toggleMobileMenu()">MANIFESTO</a>
+        <a href="#phases-section" class="font-mono text-sm tracking-widest text-slate-300 hover:text-quantum-blue transition-all" onclick="toggleMobileMenu()">SYSTEM PHASES</a>
+        <a href="#vector" class="font-mono text-sm tracking-widest text-slate-300 hover:text-quantum-blue transition-all" onclick="toggleMobileMenu()">INFRASTRUCTURE</a>
+        <a href="#terminal-section" class="font-mono text-sm tracking-widest text-slate-300 hover:text-quantum-blue transition-all" onclick="toggleMobileMenu()">SYSTEMS</a>
+        <a href="#tech-stack" class="font-mono text-sm tracking-widest text-slate-300 hover:text-quantum-blue transition-all" onclick="toggleMobileMenu()">INTELLIGENCE</a>
+        <a href="#team-carousel" class="font-mono text-sm tracking-widest text-slate-300 hover:text-quantum-blue transition-all" onclick="toggleMobileMenu()">COLLECTIVE</a>
+        
+        <div class="w-full h-px bg-slate-800 my-2"></div>
+        
+        <div class="flex items-center justify-between">
+          <div class="flex flex-col">
+            <span class="text-[9px] text-slate-500 uppercase font-mono">Node Status</span>
+            <span class="text-[11px] text-green-400 font-mono">OPTIMAL | 0.04ms</span>
+          </div>
+          <a
+            href="#join"
+            class="px-5 py-2.5 bg-slate-900 border border-slate-700 rounded text-xs uppercase tracking-widest text-[#cbd5e1] hover:text-white font-mono text-center"
+            onclick="toggleMobileMenu()"
+          >
+            Access Login
+          </a>
         </div>
+      </div>
     </header>
 
-    <main class="viewport-wrapper">
+    <!-- Primary Landing Dashboard Layout -->
+    <main class="relative z-10">
 
-        <!-- 1. MANIFESTO (HERO) -->
-        <section id="manifesto" class="hero-section">
-            <div class="hero-content reveal-on-scroll">
-                <div class="hero-logo-frame">
-                    <img src="logo.png" alt="Rheivatech Core Logo" class="hero-logo-large">
-                </div>
-                <span class="section-tag">[ CORE_SYSTEM_INIT ]</span>
-                <h1>Sovereign Intelligence.<br><span class="text-gradient">Universal Infrastructure.</span></h1>
-                <p class="manifesto-paragraph">
-                    Rheivatech is a generational blueprint for continental self-reliance. We are rewriting the tech stack of Africa from the bedrock up. What begins as localized digital intelligence will evolve into physical hardware, secure telecommunications grids, ambient smart environments, and autonomous transit solutions built directly for our unique realities.
-                </p>
-                <p class="manifesto-paragraph">
-                    We reject the passive consumption of foreign architecture. Rheivatech is an uncompromising commitment to complete technology sovereignty—engineering high-availability software platforms and heavy industrial infrastructure designed to endure, empower, and outlive its creators.
-                </p>
-                <div class="hero-actions">
-                    <a href="#vector" class="btn-primary-glow">EXPLORE THE VECTOR</a>
-                </div>
+      <!-- 1. Manifesto / Hero Block -->
+      <section
+        id="manifesto"
+        class="relative min-h-screen py-24 md:py-32 flex flex-col items-center justify-center overflow-hidden px-6"
+      >
+        <div class="absolute inset-0 pointer-events-none cyber-grid opacity-30"></div>
+
+        <!-- Hero Content Wrapper -->
+        <div class="max-w-4xl mx-auto flex flex-col items-center text-center relative z-10 mt-10 md:mt-16">
+          
+          <!-- Glowing Logo Frame (uses logo.png for content as requested) -->
+          <div class="relative w-24 h-24 md:w-28 md:h-28 mb-8">
+            <span class="absolute inset-0 border border-quantum-blue/30 rounded-2xl animate-ping opacity-30"></span>
+            <span class="absolute -inset-2 border border-quantum-blue/10 rounded-3xl animate-pulse"></span>
+            
+            <div class="w-full h-full rounded-2xl border border-quantum-blue/30 p-4 bg-cyber-card backdrop-blur-sm flex items-center justify-center relative overflow-hidden shadow-[0_0_30px_rgba(6,182,212,0.15)] group">
+              <img
+                src="logo.png"
+                alt="Rheivatech Core Logo"
+                referrerPolicy="no-referrer"
+                class="w-full h-full object-contain filter drop-shadow-[0_0_12px_rgba(6,182,212,0.6)]"
+              />
+              <div class="absolute inset-0 bg-gradient-to-b from-transparent via-quantum-blue/5 to-transparent h-1/2 w-full laser-scan opacity-40"></div>
             </div>
-        </section>
+          </div>
 
-        <!-- 2. THE VECTOR PILLARS -->
-        <section id="vector" class="vector-section">
-            <div class="section-title-block reveal-on-scroll">
-                <span class="section-tag">[ LAYER_01 // STRATEGIC_COMPREHENSION ]</span>
-                <h2>The Compounding Vector</h2>
-                <p>Our long-term evolution follows a relentless pipeline where each phase funds, refines, and establishes the mechanical bedrock for the next.</p>
+          <!-- System Initiation Tag -->
+          <div class="inline-flex items-center gap-2 bg-quantum-blue/5 border border-quantum-blue/20 px-3.5 py-1.5 rounded-full mb-8">
+            <span class="w-1.5 h-1.5 rounded-full bg-quantum-blue animate-pulse"></span>
+            <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-quantum-blue font-bold">
+              [ CORE_SYSTEM_INIT ]
+            </span>
+          </div>
+
+          <!-- Primary Heading -->
+          <h1 class="font-sans font-bold text-4xl md:text-6xl tracking-tight leading-[1.08] text-white mb-8 max-w-3xl">
+            Sovereign Intelligence. <br />
+            <span class="text-gradient">Universal Infrastructure.</span>
+          </h1>
+
+          <!-- Manifesto text paragraphs -->
+          <div class="space-y-6 max-w-2xl text-left mb-12">
+            <p class="font-mono text-xs md:text-sm text-slate-400 leading-relaxed text-justify">
+              Rheivatech is a generational blueprint for continental self-reliance. We are rewriting the tech stack of Africa from the bedrock up. What begins as localized digital intelligence will evolve into physical hardware, secure telecommunications grids, ambient smart environments, and autonomous transit solutions built directly for our unique realities.
+            </p>
+            <p class="font-mono text-xs md:text-sm text-slate-400 leading-relaxed text-justify">
+              We reject the passive consumption of foreign architecture. Rheivatech is an uncompromising commitment to complete technology sovereignty—engineering high-availability software platforms and heavy industrial infrastructure designed to endure, empower, and outlive its creators.
+            </p>
+          </div>
+
+          <!-- Live Telemetry Scientific HUD -->
+          <div class="w-full max-w-2xl grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 border border-cyber-border/60 rounded-lg bg-cyber-card backdrop-blur-xs text-left">
+            <div class="p-2 border-r border-slate-800/60 last:border-0">
+              <div class="flex items-center gap-1.5 text-slate-500 text-[9px] font-bold tracking-wider mb-1">
+                <i data-lucide="globe" class="w-3 h-3 text-quantum-blue"></i>
+                SYSTEM_EPOCH
+              </div>
+              <div id="hud-clock" class="font-mono text-[11px] text-white truncate font-medium">CALCULATING...</div>
+            </div>
+            <div class="p-2 border-r border-slate-800/60 sm:border-r last:border-0">
+              <div class="flex items-center gap-1.5 text-slate-500 text-[9px] font-bold tracking-wider mb-1">
+                <i data-lucide="radio" class="w-3 h-3 text-quantum-blue"></i>
+                ACTIVE_SENSORS
+              </div>
+              <div id="hud-nodes" class="font-mono text-[11px] text-white font-medium">148 NODES</div>
+            </div>
+            <div class="p-2 border-r border-slate-800/60 last:border-0">
+              <div class="flex items-center gap-1.5 text-slate-500 text-[9px] font-bold tracking-wider mb-1">
+                <i data-lucide="activity" class="w-3 h-3 text-quantum-blue"></i>
+                CPU_LOAD
+              </div>
+              <div id="hud-cpu" class="font-mono text-[11px] text-white font-medium">2.41%</div>
+            </div>
+            <div class="p-2 last:border-0">
+              <div class="flex items-center gap-1.5 text-slate-500 text-[9px] font-bold tracking-wider mb-1">
+                <i data-lucide="cpu" class="w-3 h-3 text-quantum-blue"></i>
+                VECTOR_STATUS
+              </div>
+              <div class="font-mono text-[11px] text-quantum-blue font-medium">PHASE_01 (LIVE)</div>
+            </div>
+          </div>
+
+          <!-- Down indicator -->
+          <div class="mt-16 flex flex-col items-center gap-2">
+            <span class="text-[9px] uppercase tracking-[0.25em] text-slate-500">Examine Core Pipeline</span>
+            <a href="#vector" class="w-10 h-10 rounded-full border border-slate-800 flex items-center justify-center text-slate-400 hover:text-quantum-blue hover:border-quantum-blue/50 transition-all">
+              <i data-lucide="arrow-down" class="w-4 h-4 animate-bounce"></i>
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 2. The Sovereign System (Earth, Technology, YOU) -->
+      <section id="vector" class="relative py-24 border-t border-cyber-border bg-cyber-dark/40 px-6 overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none cyber-grid opacity-20"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+          
+          <!-- Section Heading Block -->
+          <div class="max-w-3xl mb-16 text-left">
+            <span class="font-mono text-[10px] text-quantum-blue uppercase tracking-[0.2em] font-bold block mb-4">
+              [ LAYER_01 | THE_SOVEREIGN_SYSTEM ]
+            </span>
+            <h2 class="font-sans font-bold text-3xl md:text-5xl text-white tracking-tight mb-6 uppercase">
+              We are one with technology
+            </h2>
+            <p class="font-mono text-xs md:text-sm text-slate-400 leading-relaxed text-justify">
+              Our systems emulate the nativeness of the African ecosystem, bringing the edge of cost over civilization through passion, technicality, complex and dynamic intelligence, and highly integrated devices. Explore our core compartments below.
+            </p>
+          </div>
+
+          <!-- Pipeline Cards Grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+            
+            <!-- Compartment 1: Earth -->
+            <div
+              onclick="selectPhase(1)"
+              id="phase-card-1"
+              class="relative rounded-xl border p-8 bg-cyber-card cursor-pointer transition-all duration-300 overflow-hidden select-none border-quantum-blue shadow-[0_0_30px_rgba(6,182,212,0.08)]"
+            >
+              <div class="absolute top-0 right-0 w-32 h-32 bg-radial from-quantum-blue/5 to-transparent pointer-events-none"></div>
+              <div class="flex items-center justify-between mb-8">
+                <span class="font-mono text-[10px] text-quantum-blue font-bold tracking-widest">COMPARTMENT 01</span>
+                <div class="w-10 h-10 rounded border border-cyber-border flex items-center justify-center bg-cyber-dark/40 text-quantum-blue">
+                  <i data-lucide="globe-2" class="w-5 h-5"></i>
+                </div>
+              </div>
+              <h3 class="font-sans font-bold text-2xl text-white mb-2 uppercase">Earth</h3>
+              <p class="font-mono text-[10px] tracking-widest text-quantum-blue/80 uppercase mb-4">Natural Integration & Resilience</p>
+              <p class="font-mono text-xs text-slate-400 leading-relaxed">
+                Emulating the nativeness of the African ecosystem. Our systems run passive solar circuits with dual thermal convection sinks to sustain peak processing inside extreme climate profiles up to 65°C ambient.
+              </p>
             </div>
 
-            <div class="vector-pipeline-grid">
-                <!-- PHASE 1 -->
-                <div class="pipeline-card reveal-on-scroll" data-phase="1">
-                    <div class="card-glow-overlay"></div>
-                    <div class="phase-header">
-                        <span class="phase-number">PHASE 01</span>
-                        <h3>INTELLIGENCE</h3>
-                    </div>
-                    <p class="phase-desc">Establishing the cognitive layer. We architect open-source, localized language architectures and reasoning models tuned dynamically to regional linguistic context and lifestyle nuances.</p>
-                    <div class="phase-footer">
-                        <img src="logo.png" alt="Phase 1 Mark" class="mini-card-logo">
-                    </div>
+            <!-- Compartment 2: Technology -->
+            <div
+              onclick="selectPhase(2)"
+              id="phase-card-2"
+              class="relative rounded-xl border p-8 bg-cyber-card/60 cursor-pointer transition-all duration-300 overflow-hidden select-none border-cyber-border hover:border-quantum-blue/40"
+            >
+              <div class="absolute top-0 right-0 w-32 h-32 bg-radial from-quantum-blue/5 to-transparent pointer-events-none"></div>
+              <div class="flex items-center justify-between mb-8">
+                <span class="font-mono text-[10px] text-slate-500 font-bold tracking-widest">COMPARTMENT 02</span>
+                <div class="w-10 h-10 rounded border border-cyber-border flex items-center justify-center bg-cyber-dark/40 text-slate-500">
+                  <i data-lucide="cpu" class="w-5 h-5"></i>
                 </div>
-
-                <!-- PHASE 2 -->
-                <div class="pipeline-card reveal-on-scroll" data-phase="2">
-                    <div class="card-glow-overlay"></div>
-                    <div class="phase-header">
-                        <span class="phase-number">PHASE 02</span>
-                        <h3>INTERFACE</h3>
-                    </div>
-                    <p class="phase-desc">Giving intelligence physical utility. Moving deep software into resilient consumer hardware ecosystems, wearables, sovereign communication frameworks, and intelligent appliances.</p>
-                    <div class="phase-footer">
-                        <img src="logo.png" alt="Phase 2 Mark" class="mini-card-logo">
-                    </div>
-                </div>
-
-                <!-- PHASE 3 -->
-                <div class="pipeline-card reveal-on-scroll" data-phase="3">
-                    <div class="card-glow-overlay"></div>
-                    <div class="phase-header">
-                        <span class="phase-number">PHASE 03</span>
-                        <h3>MOBILITY</h3>
-                    </div>
-                    <p class="phase-desc">The industrial endgame. Scaling mature foundational AI models and custom edge compute kernels into heavy mechanical engineering to pioneer autonomous, sustainable vehicular transit complexes.</p>
-                    <div class="phase-footer">
-                        <img src="logo.png" alt="Phase 3 Mark" class="mini-card-logo">
-                    </div>
-                </div>
+              </div>
+              <h3 class="font-sans font-bold text-2xl text-white mb-2 uppercase">Technology</h3>
+              <p class="font-mono text-[10px] tracking-widest text-slate-500 uppercase mb-4">Complex & Dynamic Intelligence</p>
+              <p class="font-mono text-xs text-slate-400 leading-relaxed">
+                The edge of cost over civilization. Engineering custom air-gapped silicon on low-power architectures, driving offline reasoning with compressed Mixture-of-Expert models trained on native regional vectors.
+              </p>
             </div>
-        </section>
 
-        <!-- 3. INTELLIGENCE DEEP DIVE -->
-        <section id="infrastructure" class="deep-dive-section">
-            <div class="grid-two-column">
-                <div class="visual-column reveal-on-scroll">
-                    <div class="terminal-mockup">
-                        <div class="terminal-header">
-                            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-                            <span class="title">rheiva_edge_sync.py</span>
-                        </div>
-                        <div class="terminal-body">
-                            <p class="code-line"><span class="keyword">import</span> rheivatech_core <span class="keyword">as</span> rt</p>
-                            <p class="code-line">cluster = rt.HighAvailabilityCluster()</p>
-                            <p class="code-line">cluster.sync_nodes(offline_first=<span class="string">"true"</span>)</p>
-                            <p class="code-line"><span class="comment"># Deploying edge parameter optimizations...</span></p>
-                            <p class="code-line"><span class="success">>>> [STATUS] Sync Active. Single Point of Failure: 0</span></p>
-                        </div>
-                    </div>
+            <!-- Compartment 3: YOU -->
+            <div
+              onclick="selectPhase(3)"
+              id="phase-card-3"
+              class="relative rounded-xl border p-8 bg-cyber-card/60 cursor-pointer transition-all duration-300 overflow-hidden select-none border-cyber-border hover:border-quantum-blue/40"
+            >
+              <div class="absolute top-0 right-0 w-32 h-32 bg-radial from-quantum-blue/5 to-transparent pointer-events-none"></div>
+              <div class="flex items-center justify-between mb-8">
+                <span class="font-mono text-[10px] text-slate-500 font-bold tracking-widest">COMPARTMENT 03</span>
+                <div class="w-10 h-10 rounded border border-cyber-border flex items-center justify-center bg-cyber-dark/40 text-slate-500">
+                  <i data-lucide="user-check" class="w-5 h-5"></i>
                 </div>
-                <div class="text-content-column reveal-on-scroll">
-                    <span class="section-tag">[ LAYER_02 // COGNITIVE_FOUNDATION ]</span>
-                    <h2>Intelligence Architecture</h2>
-                    <p class="section-intro">Every sovereign ecosystem requires an absolute foundation. We build high-utility, decentralized conversational systems that scale directly into advanced deep-reasoning structures.</p>
+              </div>
+              <h3 class="font-sans font-bold text-2xl text-white mb-2 uppercase">YOU</h3>
+              <p class="font-mono text-[10px] tracking-widest text-slate-500 uppercase mb-4">Highly Integrated Devices</p>
+              <p class="font-mono text-xs text-slate-400 leading-relaxed">
+                The human element. Merging technology into user-centric interfaces and responsive wear modules, offering unmatched data sovereignty where your thoughts and assets are never sent to foreign servers.
+              </p>
+            </div>
+
+          </div>
+
+          <!-- Dynamic Panel metrics shown for selected phase -->
+          <div id="phase-specs" class="border border-cyber-border rounded-xl p-6 md:p-8 bg-cyber-card">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-cyber-border pb-6 mb-6">
+              <div>
+                <span id="spec-phase-num" class="text-[9px] font-mono text-quantum-blue uppercase tracking-widest block mb-1">COMPARTMENT 01 LOGISTICS</span>
+                <h4 id="spec-phase-title" class="font-sans font-bold text-xl text-white uppercase tracking-wider">EARTH SPECIFICATION</h4>
+              </div>
+              <div class="flex items-center gap-2 text-green-400 font-mono text-xs">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-green-400"></i>
+                <span>NATIVE SYSTEM HARMONIZED</span>
+              </div>
+            </div>
+
+            <div id="spec-metrics-grid" class="grid grid-cols-2 md:grid-cols-4 gap-6">
+              <div class="p-4 border border-slate-800/40 rounded bg-[#020408]/40">
+                <span class="text-[9px] text-slate-500 font-bold tracking-wider block mb-1">ECOSYSTEM_NATIVITY</span>
+                <span class="text-white font-mono text-sm font-medium">100% REGIONAL</span>
+              </div>
+              <div class="p-4 border border-slate-800/40 rounded bg-[#020408]/40">
+                <span class="text-[9px] text-slate-500 font-bold tracking-wider block mb-1">CLIMATE_RESILIENCE</span>
+                <span class="text-white font-mono text-sm font-medium">UP TO 65°C</span>
+              </div>
+              <div class="p-4 border border-slate-800/40 rounded bg-[#020408]/40">
+                <span class="text-[9px] text-slate-500 font-bold tracking-wider block mb-1">RESOURCE_OPTIMIZATION</span>
+                <span class="text-white font-mono text-sm font-medium">PASSIVE SOLAR</span>
+              </div>
+              <div class="p-4 border border-slate-800/40 rounded bg-[#020408]/40">
+                <span class="text-[9px] text-slate-500 font-bold tracking-wider block mb-1">CARBON_FOOTPRINT</span>
+                <span class="text-white font-mono text-sm font-medium">0.00 NET_ZERO</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 3. Terminal & Blueprint Deep Dives -->
+      <section id="terminal-section" class="relative py-24 px-6 border-t border-cyber-border bg-[#020408]/60 overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none cyber-grid opacity-15"></div>
+
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          
+          <!-- Left Column: Interactive Terminal -->
+          <div class="lg:col-span-7">
+            <div class="relative border border-cyber-border rounded-lg bg-cyber-dark shadow-[0_20px_50px_rgba(0,0,0,0.6)] overflow-hidden">
+              
+              <!-- Terminal Header -->
+              <div class="bg-cyber-dark/80 px-5 py-3 border-b border-cyber-border flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-green-500"></span>
+                  <span class="ml-2 font-mono text-[9px] text-slate-500">R-TECH@SOVEREIGN_NODE:~</span>
+                </div>
+                <div class="flex items-center gap-1.5 font-mono text-[9px] text-quantum-blue">
+                  <span class="w-1.5 h-1.5 rounded-full bg-quantum-blue animate-ping"></span>
+                  <span>SESSION_SECURE</span>
+                </div>
+              </div>
+
+              <!-- Terminal Output Display Box -->
+              <div id="terminal-screen" class="p-5 h-[280px] overflow-y-auto font-mono text-xs text-slate-300 space-y-2 leading-relaxed">
+                <div><span class="text-quantum-blue">r-tech_init:</span> booting Rheivatech continental telemetry...</div>
+                <div><span class="text-slate-500">Node initialized at Africa/Distributed Core [127.0.0.1]</span></div>
+                <div><span class="text-slate-500">Verifying secure pipeline structural integrity...</span></div>
+                <div><span class="text-green-400">STATUS: OPTIMAL. Complete Sovereignty Ensured.</span></div>
+                <div>Type '<span class="text-quantum-blue">help</span>' or tap triggers below to investigate system properties.</div>
+              </div>
+
+              <!-- Terminal Interactive Toolbar -->
+              <div class="bg-cyber-dark/80 p-4 border-t border-cyber-border flex flex-wrap gap-2 items-center justify-between">
+                <span class="font-mono text-[9px] text-slate-500 flex items-center gap-1">
+                  <i data-lucide="terminal" class="w-3 h-3 text-quantum-blue"></i>
+                  EXEC_TRIGGER:
+                </span>
+                <div class="flex gap-2 flex-wrap">
+                  <button onclick="runDiagnostic('scan')" class="text-[9px] px-2.5 py-1 rounded bg-[#020408] border border-slate-800 text-slate-300 hover:border-quantum-blue/50 hover:text-quantum-blue transition-all">SCAN_CHASSIS</button>
+                  <button onclick="runDiagnostic('nodes')" class="text-[9px] px-2.5 py-1 rounded bg-[#020408] border border-slate-800 text-slate-300 hover:border-quantum-blue/50 hover:text-quantum-blue transition-all">DIAG_GRID</button>
+                  <button onclick="runDiagnostic('protocols')" class="text-[9px] px-2.5 py-1 rounded bg-[#020408] border border-slate-800 text-slate-300 hover:border-quantum-blue/50 hover:text-quantum-blue transition-all">INIT_PROTOCOL</button>
+                </div>
+              </div>
+
+              <!-- Terminal Input Box -->
+              <div class="bg-cyber-dark/95 border-t border-cyber-border p-3 flex items-center gap-3">
+                <span class="text-quantum-blue text-xs ml-2 font-bold">$</span>
+                <input
+                  type="text"
+                  id="terminal-input"
+                  placeholder="enter telemetry commands (e.g. status, clear, vector)..."
+                  class="bg-transparent text-white border-0 outline-none w-full text-xs font-mono placeholder:text-slate-600 focus:ring-0 focus:border-0"
+                  onkeydown="handleTerminalSubmit(event)"
+                />
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive Description -->
+          <div class="lg:col-span-5 text-left">
+            <span class="font-mono text-[10px] text-quantum-blue uppercase tracking-[0.2em] font-bold block mb-4">
+              [ LAYER_02 | SYSTEM_SANDBOX ]
+            </span>
+            <h2 class="font-sans font-bold text-3xl md:text-5xl text-white tracking-tight mb-6">
+              Sovereignty Sandbox
+            </h2>
+            <p class="font-mono text-xs md:text-sm text-slate-400 leading-relaxed mb-6 text-justify">
+              Our interactive sovereign environment lets you probe active hardware and software telemetry kernels directly from your console. Verify node connections, check physical diagnostics, and review active secure routing matrices across regional nodes.
+            </p>
+            <div class="space-y-4">
+              <div class="flex items-start gap-3">
+                <div class="w-5 h-5 rounded bg-quantum-blue/10 border border-quantum-blue/30 flex items-center justify-center text-quantum-blue mt-0.5">
+                  <i data-lucide="shield" class="w-3.5 h-3.5"></i>
+                </div>
+                <div>
+                  <h4 class="font-sans font-bold text-sm text-white">Encrypted Handshakes</h4>
+                  <p class="font-mono text-xs text-slate-500">Multi-point distributed telemetry logs secured via post-quantum cryptography layers.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="w-5 h-5 rounded bg-quantum-blue/10 border border-quantum-blue/30 flex items-center justify-center text-quantum-blue mt-0.5">
+                  <i data-lucide="cpu" class="w-3.5 h-3.5"></i>
+                </div>
+                <div>
+                  <h4 class="font-sans font-bold text-sm text-white">Independent Edge Processing</h4>
+                  <p class="font-mono text-xs text-slate-500">Decentralized firmware routines designed to run continuously during massive network disconnects.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 3.5 Hidden Data Analytics & Science Section -->
+      <section id="analytics-section" class="hidden transition-all duration-700 ease-in-out py-24 px-6 border-t border-cyber-border bg-[#020408]/80 overflow-hidden relative">
+        <div class="absolute inset-0 pointer-events-none cyber-grid opacity-15"></div>
+        <div class="absolute top-1/2 right-10 w-96 h-96 bg-radial from-yellow-500/5 to-transparent pointer-events-none filter blur-2xl"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10 text-left">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div class="max-w-3xl">
+              <span class="font-mono text-[10px] text-yellow-500 uppercase tracking-[0.2em] font-bold block mb-4">
+                [ LAYER_02_EXT | DATA_SCIENCE_PORTAL ]
+              </span>
+              <div class="flex flex-wrap items-center gap-3">
+                <h2 class="font-sans font-bold text-3xl md:text-5xl text-white tracking-tight uppercase">
+                  Rheivada Analytics Hub
+                </h2>
+                <span class="px-2.5 py-0.5 rounded text-[8px] font-mono font-bold tracking-widest text-yellow-500 border border-yellow-500/30 bg-yellow-500/5 uppercase">
+                  ● ACTIVE DATA SCIENCE LAB
+                </span>
+              </div>
+              <p class="font-mono text-xs md:text-sm text-slate-400 leading-relaxed mt-4">
+                We engineer localized, robust analytical engines that turn offline and online datasets into highly polished intelligence reports. We specialize in custom predictive modeling, regional pattern extraction, and private database reporting.
+              </p>
+            </div>
+            <button onclick="closeAnalyticsSection()" class="px-4 py-2 border border-slate-800 hover:border-red-500/40 text-slate-400 hover:text-red-400 font-mono text-[10px] font-bold tracking-widest uppercase rounded transition-all flex items-center gap-1.5 bg-[#020408]/40">
+              <i data-lucide="x" class="w-3.5 h-3.5"></i> Close Analysis
+            </button>
+          </div>
+
+          <!-- Services Grid & Simulated Chart -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            <!-- Services Checklist -->
+            <div class="lg:col-span-5 space-y-4 flex flex-col justify-between">
+              <div class="p-5 border border-slate-900 rounded bg-[#020408]/60">
+                <h4 class="font-sans font-bold text-sm text-white mb-2 flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span>
+                  Predictive Modeling & Trend Extraction
+                </h4>
+                <p class="font-mono text-xs text-slate-500">Training specialized regional algorithms for agriculture, commerce, and bandwidth capacity trends.</p>
+              </div>
+              <div class="p-5 border border-slate-900 rounded bg-[#020408]/60">
+                <h4 class="font-sans font-bold text-sm text-white mb-2 flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span>
+                  Dialect & Regional Text Mining
+                </h4>
+                <p class="font-mono text-xs text-slate-500">Mining localized conversations and communication patterns without relaying raw customer data to third-party APIs.</p>
+              </div>
+              <div class="p-5 border border-slate-900 rounded bg-[#020408]/60">
+                <h4 class="font-sans font-bold text-sm text-white mb-2 flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span>
+                  Sovereign Custom Reports Generation
+                </h4>
+                <p class="font-mono text-xs text-slate-500">Automating high-fidelity reports tailored directly to regional regulations and independent logistics standards.</p>
+              </div>
+            </div>
+
+            <!-- Simulated Dashboard Panel -->
+            <div class="lg:col-span-7">
+              <div class="relative border border-yellow-500/20 rounded-xl bg-cyber-card p-6 sm:p-8 flex flex-col justify-between h-full shadow-[0_20px_40px_rgba(0,0,0,0.4)]">
+                <div class="flex items-center justify-between mb-6">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-yellow-500 animate-pulse"></span>
+                    <span class="font-mono text-[10px] text-yellow-500 font-bold tracking-widest uppercase">RHEIVADA MODEL RUNNER v1.0</span>
+                  </div>
+                  <span class="font-mono text-[9px] text-slate-500 font-bold">STATUS: DEMO_LAB_STANDALONE</span>
+                </div>
+
+                <!-- Simulation Interactive Chart -->
+                <div class="bg-[#020408] rounded border border-slate-900 p-6 flex-1 flex flex-col justify-between mb-6">
+                  <div>
+                    <span class="text-[9px] text-slate-500 font-bold block mb-3 uppercase tracking-wider">PROJECTED YIELD TREND (REGIONAL INTENSITY INDEX)</span>
                     
-                    <div class="spec-block">
-                        <h4>Hyper-Localized Optimization</h4>
-                        <p>Models trained natively to grasp complex multi-lingual rhythms, informal business models, and everyday regional dynamics seamlessly.</p>
+                    <!-- Beautiful Custom CSS Bar/Line Chart representation -->
+                    <div class="h-32 flex items-end gap-3 px-2">
+                      <div class="flex-1 flex flex-col items-center h-full justify-end">
+                        <div class="w-full bg-yellow-500/20 hover:bg-yellow-500/40 border-t border-yellow-500/60 rounded-t transition-all duration-500" style="height: 45%;"></div>
+                        <span class="font-mono text-[8px] text-slate-600 mt-1">JAN</span>
+                      </div>
+                      <div class="flex-1 flex flex-col items-center h-full justify-end">
+                        <div class="w-full bg-yellow-500/20 hover:bg-yellow-500/40 border-t border-yellow-500/60 rounded-t transition-all duration-500" style="height: 60%;"></div>
+                        <span class="font-mono text-[8px] text-slate-600 mt-1">FEB</span>
+                      </div>
+                      <div class="flex-1 flex flex-col items-center h-full justify-end">
+                        <div class="w-full bg-yellow-500/30 hover:bg-yellow-500/50 border-t border-yellow-500/80 rounded-t transition-all duration-500" style="height: 85%;"></div>
+                        <span class="font-mono text-[8px] text-slate-600 mt-1">MAR</span>
+                      </div>
+                      <div class="flex-1 flex flex-col items-center h-full justify-end">
+                        <div class="w-full bg-yellow-500/20 hover:bg-yellow-500/40 border-t border-yellow-500/60 rounded-t transition-all duration-500" style="height: 50%;"></div>
+                        <span class="font-mono text-[8px] text-slate-600 mt-1">APR</span>
+                      </div>
+                      <div class="flex-1 flex flex-col items-center h-full justify-end">
+                        <div class="w-full bg-yellow-500/40 hover:bg-yellow-500/60 border-t border-yellow-500 rounded-t transition-all duration-500 animate-pulse" style="height: 95%;"></div>
+                        <span class="font-mono text-[8px] text-yellow-500 mt-1 font-bold">MAY*</span>
+                      </div>
                     </div>
-                    <div class="spec-block">
-                        <h4>Edge-First High Availability</h4>
-                        <p>Compiled to process complex tasks locally in low-bandwidth, low-compute, or completely disconnected settings with zero architectural lag.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+                  </div>
 
-        <!-- 4. HARDWARE EVOLUTION -->
-        <section class="deep-dive-section bg-alt">
-            <div class="grid-two-column reverse">
-                <div class="visual-column reveal-on-scroll">
-                    <div class="glass-blueprint-frame">
-                        <div class="blueprint-mesh"></div>
-                        <img src="logo.png" alt="Interface Spec Schematic" class="blueprint-center-logo">
-                        <div class="hud-data-tag">RHEIVA_SPEC_v2.0_SYS</div>
-                    </div>
+                  <div class="flex justify-between items-center text-[10px] font-mono text-slate-400 mt-4 pt-4 border-t border-slate-900">
+                    <span>Active Algorithm: <span class="text-white font-bold">M-MARKOV_CHAIN_GRID</span></span>
+                    <span>Confidence Coefficient: <span class="text-green-400 font-bold">94.8%</span></span>
+                  </div>
                 </div>
-                <div class="text-content-column reveal-on-scroll">
-                    <span class="section-tag">[ LAYER_03 // HARDWARE_VESSEL ]</span>
-                    <h2>Intelligent Devices</h2>
-                    <p class="section-intro">When intelligence matures, it breaks free from pure software. Rheivatech builds physical vessels that create a unified ecosystem of everyday utility.</p>
-                    
-                    <div class="spec-block">
-                        <h4>Sovereign Wearables & Smart Handsets</h4>
-                        <p>Ultra-efficient consumer devices built around custom on-device core models, maximizing structural durability and computational density.</p>
-                    </div>
-                    <div class="spec-block">
-                        <h4>Connected Smart Homes</h4>
-                        <p>Ambient home appliances, high-fidelity sound fields, and display modules functioning as safe, interconnected nodes within your personal space.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- 5. AUTONOMOUS MOBILITY -->
-        <section class="deep-dive-section">
-            <div class="grid-two-column">
-                <div class="visual-column reveal-on-scroll">
-                    <div class="mobility-chassis-wrapper">
-                        <div class="laser-scanner-line"></div>
-                        <img src="logo.png" alt="Chassis Outline" class="chassis-core-img">
-                        <span class="hud-status">AUTONOMOUS_ENGAGED</span>
-                    </div>
+                <div class="font-mono text-[9px] text-slate-500 text-justify uppercase leading-relaxed">
+                  ⚠️ This lab environment allows testing our pattern synthesis models. You can close this portal using the button above or by typing <span class="text-white font-bold">close analysis</span> into the sovereignty console.
                 </div>
-                <div class="text-content-column reveal-on-scroll">
-                    <span class="section-tag">[ LAYER_04 // TRANSIT_ECOSYSTEM ]</span>
-                    <h2>Autonomous Mobility</h2>
-                    <p class="section-intro">The ultimate integration phase. When software maturity meets localized hardware frameworks, we converge both tracks into heavy industrial automotive robotics.</p>
-                    
-                    <div class="spec-block">
-                        <h4>The Mechanical Transformation</h4>
-                        <p>Engineering autonomous, self-sustaining transit layouts customized specifically to navigate, adapt to, and master real-world topographic traffic challenges.</p>
-                    </div>
-                    <div class="spec-block">
-                        <h4>Aerodynamic & Energy Integrity</h4>
-                        <p>Architectures crafted for extreme energy resilience, keeping regional transits operational across distributed, independent power grids.</p>
-                    </div>
-                </div>
+              </div>
             </div>
-        </section>
+          </div>
+        </div>
+      </section>
 
-        <!-- 6. THE ARCHITECTURAL STACK -->
-        <section class="stack-section">
-            <div class="section-title-block centered reveal-on-scroll">
-                <span class="section-tag">[ LAYER_05 // SYSTEM_ENGINE_ROOM ]</span>
-                <h2>The Technical Engine Room</h2>
-                <p>Chosen exclusively for lightning execution, deterministic memory safety, and complete infrastructure fault-tolerance.</p>
+      <!-- 4. System Stack Grid -->
+      <section id="tech-stack" class="relative py-24 px-6 border-t border-cyber-border bg-cyber-dark/40 overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none cyber-grid opacity-15"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10 text-left">
+          
+          <!-- Header Block -->
+          <div class="max-w-3xl mb-16">
+            <span class="font-mono text-[10px] text-quantum-blue uppercase tracking-[0.2em] font-bold block mb-4">
+              [ LAYER_03 | SOVEREIGN_COMPONENTS ]
+            </span>
+            <div class="flex flex-wrap items-center gap-3 mb-6">
+              <h2 class="font-sans font-bold text-3xl md:text-5xl text-white tracking-tight">
+                Uncompromising Architecture
+              </h2>
+              <span class="px-2.5 py-1 rounded text-[9px] font-mono font-bold tracking-widest text-yellow-500 border border-yellow-500/30 bg-yellow-500/10 uppercase inline-block">
+                ● FUTURE DESIGN VISION
+              </span>
+            </div>
+            <p class="font-mono text-xs md:text-sm text-slate-400 leading-relaxed mb-4">
+              We operate across the complete computational spectrum. From building offline AI compilers to fabricating robust physical chassis, each architectural segment is designed for extreme endurance and localization.
+            </p>
+            <p class="font-mono text-[11px] text-yellow-500/80 italic leading-relaxed">
+              *(Note: The technical designs below represent our long-term hardware and software vision—a futuristic architectural blueprint we are actively working to materialize.)*
+            </p>
+          </div>
+
+          <!-- Dynamic Stack Navigation -->
+          <div class="flex flex-wrap gap-2 border-b border-cyber-border pb-6 mb-12">
+            <button onclick="selectCategory('hardware')" id="cat-btn-hardware" class="px-5 py-2.5 font-mono text-[11px] font-bold tracking-widest uppercase transition-all duration-300 rounded border border-quantum-blue text-quantum-blue bg-quantum-blue-glow">
+              HARDWARE
+            </button>
+            <button onclick="selectCategory('protocols')" id="cat-btn-protocols" class="px-5 py-2.5 font-mono text-[11px] font-bold tracking-widest uppercase transition-all duration-300 rounded border border-slate-800 text-slate-500 hover:border-slate-700 hover:text-slate-300">
+              PROTOCOLS
+            </button>
+            <button onclick="selectCategory('intelligence')" id="cat-btn-intelligence" class="px-5 py-2.5 font-mono text-[11px] font-bold tracking-widest uppercase transition-all duration-300 rounded border border-slate-800 text-slate-500 hover:border-slate-700 hover:text-slate-300">
+              INTELLIGENCE
+            </button>
+            <button onclick="selectCategory('secure_grid')" id="cat-btn-secure_grid" class="px-5 py-2.5 font-mono text-[11px] font-bold tracking-widest uppercase transition-all duration-300 rounded border border-slate-800 text-slate-500 hover:border-slate-700 hover:text-slate-300">
+              SECURE GRID
+            </button>
+          </div>
+
+          <!-- Dynamic Category Content -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Category Specs Info (Left) -->
+            <div id="stack-info-col" class="lg:col-span-5 space-y-6">
+              <span id="stack-tag" class="text-[9px] font-mono text-quantum-blue uppercase tracking-widest block font-bold">[ SPEC_INDEX | HARDWARE_FAB ]</span>
+              <h3 id="stack-title" class="font-sans font-bold text-2xl md:text-3xl text-white tracking-tight uppercase">PHYSICAL ENDURANCE HARDWARE</h3>
+              <p id="stack-description" class="font-mono text-xs md:text-sm text-slate-400 leading-relaxed text-justify">
+                Forging tactical electronics and heavy mechanical structures. We engineer custom microcontrollers, low-power system-on-chips (SoCs), military-spec wear structures, and heavy battery enclosures built to withstand regional thermal profiles.
+              </p>
+              
+              <div id="stack-points" class="space-y-4 pt-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-1.5 h-1.5 rounded-full bg-quantum-blue"></div>
+                  <span class="font-mono text-xs text-white">TACTILE_CHASSIS | SOLID-CORE ENCLOSURES</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-1.5 h-1.5 rounded-full bg-quantum-blue"></div>
+                  <span class="font-mono text-xs text-white">SOLAR_THERMAL | PASSIVE CONVECTIVE COOLING</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-1.5 h-1.5 rounded-full bg-quantum-blue"></div>
+                  <span class="font-mono text-xs text-white">MODULAR_SOC | SWAPPABLE COMPUTATIONAL CORES</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Interactive Blueprint Scanner (Right) -->
+            <div class="lg:col-span-7">
+              <div class="relative rounded-xl border border-cyber-border bg-cyber-card/60 backdrop-blur-sm p-6 overflow-hidden">
+                <div class="relative h-60 w-full rounded-lg border border-cyber-border bg-[#020408]/80 flex items-center justify-center overflow-hidden">
+                  
+                  <div class="absolute inset-0 cyber-grid opacity-15 pointer-events-none"></div>
+                  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-quantum-blue/10 to-transparent h-1/2 w-full laser-scan pointer-events-none"></div>
+
+                  <!-- Blueprint Line Overlay -->
+                  <div class="text-center relative z-10 px-6">
+                    <p class="font-mono text-[9px] text-slate-500 uppercase tracking-widest mb-2">[ CAD_SCHEMATIC_VIEWPORT ]</p>
+                    <div id="blueprint-content" class="text-quantum-blue text-lg font-bold tracking-widest animate-pulse font-sans">
+                      R-CHASSIS_V4_CORE.3D
+                    </div>
+                    <div id="blueprint-stats" class="mt-4 font-mono text-[10px] text-slate-400 space-y-1">
+                      <div>DIMENSIONS: 340mm x 210mm x 45mm</div>
+                      <div>THERMAL_TOLERANCE: -20C TO +65C</div>
+                      <div>FABRICATION_ACCURACY: 0.02 Microns</div>
+                    </div>
+                  </div>
+
+                  <!-- Scientific Crosshairs -->
+                  <div class="absolute top-4 left-4 w-4 h-4 border-t border-l border-quantum-blue/30"></div>
+                  <div class="absolute top-4 right-4 w-4 h-4 border-t border-r border-quantum-blue/30"></div>
+                  <div class="absolute bottom-4 left-4 w-4 h-4 border-b border-l border-quantum-blue/30"></div>
+                  <div class="absolute bottom-4 right-4 w-4 h-4 border-b border-r border-quantum-blue/30"></div>
+                </div>
+
+                <div class="mt-4 flex items-center justify-between font-mono text-[9px] text-slate-500 uppercase">
+                  <span>SCALE: 1:0.15 VECTOR MODEL</span>
+                  <span class="text-quantum-blue">SCAN_STATUS: STABLE</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 5. Team Collective Radar Slider -->
+      <section id="team-carousel" class="relative py-24 px-6 border-t border-cyber-border bg-[#020408]/60 overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none cyber-grid opacity-15"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10 text-left">
+          
+          <!-- Section Header and navigation buttons in header -->
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+            <div class="max-w-3xl">
+              <span class="font-mono text-[10px] text-quantum-blue uppercase tracking-[0.2em] font-bold block mb-4">
+                [ LAYER_04 | INTELLECT_POOL ]
+              </span>
+              <h2 class="font-sans font-bold text-3xl md:text-5xl text-white tracking-tight mb-6">
+                Founding Collective
+              </h2>
+              <p class="font-mono text-xs md:text-sm text-slate-400 leading-relaxed">
+                Architected by a specialized collective of African hardware engineering specialists, localized language model designers, sovereign grid researchers, and manufacturing pioneers.
+              </p>
             </div>
             
-            <div class="table-container reveal-on-scroll">
-                <table class="stack-table">
-                    <thead>
-                        <tr>
-                            <th>Layer</th>
-                            <th>Deployment Paradigm</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="layer-title">Languages</td>
-                            <td><strong>Python</strong> (R&D, Data Chains) // <strong>Rust</strong> (Memory-Safe Infrastructure) // <strong>C++</strong> (Hardware Abstraction)</td>
-                        </tr>
-                        <tr>
-                            <td class="layer-title">Acceleration</td>
-                            <td><strong>PyTorch // CUDA // TensorRT</strong> for squeezing peak performance out of low-power local edge units.</td>
-                        </tr>
-                        <tr>
-                            <td class="layer-title">Architecture</td>
-                            <td><strong>High-availability designs</strong>, offline database synchronization arrays, and failure-immune configurations handling active concurrent user traffic smoothly.</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <!-- Carousel Navigation Buttons -->
+            <div class="flex gap-3">
+              <button onclick="slideCarousel('prev')" class="w-12 h-12 rounded border border-cyber-border flex items-center justify-center text-slate-400 hover:text-quantum-blue hover:border-quantum-blue/50 transition-all bg-[#020408]/40">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+              </button>
+              <button onclick="slideCarousel('next')" class="w-12 h-12 rounded border border-cyber-border flex items-center justify-center text-slate-400 hover:text-quantum-blue hover:border-quantum-blue/50 transition-all bg-[#020408]/40">
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+              </button>
             </div>
-        </section>
+          </div>
 
-        <!-- 7. THE CORE COLLECTIVE CAROUSEL -->
-        <section id="collective" class="collective-carousel-section">
-            <div class="section-title-block reveal-on-scroll">
-                <span class="section-tag">[ LAYER_06 // SYSTEM_ARCHITECTS ]</span>
-                <h2>The Core Collective</h2>
-                <p>The system engineering minds driving regional technology sovereignty.</p>
+          <!-- Slider Container -->
+          <div class="overflow-hidden relative w-full pb-4">
+            <div id="carousel-track" class="flex gap-6 transition-transform duration-500 ease-out" style="transform: translateX(0px);">
+              <!-- Rendered Dynamically via script.js -->
             </div>
+          </div>
 
-            <div class="carousel-master-wrapper reveal-on-scroll">
-                <div class="carousel-window">
-                    <div class="carousel-slider-track">
+        </div>
+      </section>
 
-                        <!-- SLIDE 1: OWNER / LEADER -->
-                        <div class="carousel-slide active">
-                            <div class="slide-flex-layout">
-                                <div class="member-image-frame">
-                                    <img src="logo.png" alt="Omotayo Oladapo Dan" class="member-photo">
-                                    <div class="glowing-corner-tag"></div>
-                                </div>
-                                <div class="member-info-frame">
-                                    <span class="member-badge">Core Systems // AI Architecture R&D</span>
-                                    <h3>Omotayo Oladapo Dan</h3>
-                                    <p class="member-bio">
-                                        Computer scientist and infrastructure architect specializing in high-performance, intelligent execution matrices. Overseeing foundational model engineering, distributed dataset configurations, and the long-term technical pipeline transitioning from open cognitive frameworks to bare-metal embedded physical environments.
-                                    </p>
-                            </div>
-                        </div>
+      <!-- 5.5 Sovereign Phases & Portfolio Roadmap -->
+      <section id="phases-section" class="relative py-24 px-6 border-t border-cyber-border bg-cyber-dark/40 overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none cyber-grid opacity-15"></div>
+        <div class="absolute top-0 left-1/4 w-[300px] h-[300px] bg-radial from-quantum-blue/5 to-transparent pointer-events-none filter blur-2xl"></div>
 
-                        <!-- SLIDE 2: DATA SCIENCE -->
-                        <div class="carousel-slide">
-                            <div class="slide-flex-layout">
-                                <div class="member-image-frame">
-                                    <img src="logo.png" alt="System Researcher Placeholder" class="member-photo">
-                                    <div class="glowing-corner-tag"></div>
-                                </div>
-                                <div class="member-info-frame">
-                                    <span class="member-badge">Data Science // Pipeline Exploration</span>
-                                    <h3>Future System Researcher</h3>
-                                    <p class="member-bio">
-                                        Investigating non-traditional distributed data orchestration techniques. This research vertical analyzes how shifting and transforming asynchronous pipeline modules in high-availability environments boosts foundational performance and ensures zero single-point-of-failure architectures.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+        <div class="max-w-7xl mx-auto relative z-10 text-left">
+          
+          <!-- Section Header -->
+          <div class="max-w-3xl mb-16">
+            <span class="font-mono text-[10px] text-quantum-blue uppercase tracking-[0.2em] font-bold block mb-4">
+              [ LAYER_05 | MIGRATION_PIPELINE ]
+            </span>
+            <h2 class="font-sans font-bold text-3xl md:text-5xl text-white tracking-tight mb-6">
+              Sovereign Evolution Roadmap
+            </h2>
+            <p class="font-mono text-xs md:text-sm text-slate-400 leading-relaxed">
+              Tracking our development milestones across physical, cognitive, and network planes. Toggle through our active and conceptual phases below to inspect the deployed nodes.
+            </p>
+          </div>
 
-                    </div>
+          <!-- Timeline Layout -->
+          <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            
+            <!-- Phase 00 (Start Phase) -->
+            <div class="border border-quantum-blue/30 rounded-xl p-6 bg-[#020408]/60 backdrop-blur-sm relative group overflow-hidden transition-all duration-300 hover:border-quantum-blue hover:shadow-[0_0_30px_rgba(6,182,212,0.06)] flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="font-mono text-[9px] text-quantum-blue font-bold tracking-widest uppercase">[ PHASE 00 ]</span>
+                  <span class="px-2 py-0.5 rounded text-[8px] font-mono font-bold tracking-widest text-green-400 border border-green-400/20 bg-green-400/5 animate-pulse uppercase">● LIVE ENGINE</span>
                 </div>
+                <h3 class="font-sans font-bold text-lg text-white mb-2 uppercase">Sandbox & Portfolio</h3>
+                <p class="font-mono text-xs text-slate-400 leading-relaxed mb-6">
+                  Our current sandbox of active, distributed tools powering sovereign data computations and modeling workflows across regional nodes.
+                </p>
 
-                <!-- MODERN CAROUSEL NAV CONTROLS -->
-                <div class="carousel-navigation-row">
-                    <span class="slide-numeric-index">01 / 02</span>
-                    <div class="carousel-arrow-buttons">
-                        <button class="nav-arrow-btn prev-arrow" aria-label="Previous">&larr;</button>
-                        <button class="nav-arrow-btn next-arrow" aria-label="Next">&rarr;</button>
+                <!-- Active Portfolio Instances -->
+                <div class="space-y-4">
+                  <div class="border border-cyber-border/80 rounded-lg p-4 bg-cyber-dark/40 hover:border-quantum-blue/40 transition-all cursor-pointer" onclick="document.getElementById('logo-link').click()">
+                    <div class="flex items-center justify-between mb-1">
+                      <span class="font-sans font-bold text-xs text-white">RheivaAI</span>
+                      <span class="font-mono text-[8px] text-quantum-blue font-bold tracking-wider">[ SOVEREIGN LLM ]</span>
                     </div>
-                </div>
-            </div>
-        </section>
+                    <p class="font-mono text-[10px] text-slate-500 leading-normal">
+                      Conversational reasoning engine built to operate air-gapped on lightweight chips.
+                    </p>
+                  </div>
 
-        <!-- 8. RECRUITMENT GATEWAY -->
-        <section id="join" class="gate-section">
-            <div class="premium-gate-box reveal-on-scroll">
-                <div class="gate-light-leak"></div>
-                <span class="section-tag">[ LAYER_07 // INFRASTRUCTURE_RECRUITMENT ]</span>
-                <h2>We seek the unreasonable ones.</h2>
-                <p class="gate-subtext">Assemble alongside a highly focused collective of developers, system architects, and researchers building a tech ecosystem engineered to endure generations.</p>
+                  <div class="border border-cyber-border/80 rounded-lg p-4 bg-cyber-dark/40 hover:border-quantum-blue/40 transition-all">
+                    <div class="flex items-center justify-between mb-1">
+                      <span class="font-sans font-bold text-xs text-white">Rheiva Stats</span>
+                      <span class="font-mono text-[8px] text-quantum-blue font-bold tracking-wider">[ DATA SCIENCE ]</span>
+                    </div>
+                    <p class="font-mono text-[10px] text-slate-500 leading-normal">
+                      High-throughput data science & analytics module for regional statistical indexing.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-slate-800/60 flex items-center justify-between font-mono text-[9px] text-slate-500 uppercase">
+                <span>Active Nodes: 140+</span>
+                <span class="text-green-400">100% SECURE</span>
+              </div>
+            </div>
+
+            <!-- Phase 01 -->
+            <div class="border border-cyber-border rounded-xl p-6 bg-[#020408]/20 backdrop-blur-sm relative group overflow-hidden transition-all duration-300 hover:border-quantum-blue/40 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="font-mono text-[9px] text-slate-500 font-bold tracking-widest uppercase">[ PHASE 01 ]</span>
+                  <span class="px-2 py-0.5 rounded text-[8px] font-mono font-bold tracking-widest text-quantum-blue border border-quantum-blue/20 bg-quantum-blue/5 uppercase">DEPLOYED</span>
+                </div>
+                <h3 class="font-sans font-bold text-lg text-white mb-2 uppercase">Intelligence Spec</h3>
+                <p class="font-mono text-xs text-slate-400 leading-relaxed mb-6">
+                  Compiling heavy offline AI clusters and Mixture-of-Expert reasoning models trained specifically on dialect variations.
+                </p>
+
+                <div class="space-y-2 font-mono text-[10px] text-slate-500">
+                  <div class="flex items-center gap-2">
+                    <div class="w-1 h-1 rounded-full bg-quantum-blue"></div>
+                    <span>Dialect Compilation Layer</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <div class="w-1 h-1 rounded-full bg-quantum-blue"></div>
+                    <span>70B Local Compiler Core</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <div class="w-1 h-1 rounded-full bg-quantum-blue"></div>
+                    <span>Zero Data Cloud Leak</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-slate-800/60 flex items-center justify-between font-mono text-[9px] text-slate-500 uppercase">
+                <span>Active State: Active</span>
+                <span class="text-quantum-blue">STABLE RUN</span>
+              </div>
+            </div>
+
+            <!-- Phase 02 -->
+            <div class="border border-cyber-border rounded-xl p-6 bg-[#020408]/20 backdrop-blur-sm relative group overflow-hidden transition-all duration-300 hover:border-quantum-blue/40 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="font-mono text-[9px] text-slate-500 font-bold tracking-widest uppercase">[ PHASE 02 ]</span>
+                  <span class="px-2 py-0.5 rounded text-[8px] font-mono font-bold tracking-widest text-slate-500 border border-slate-800 bg-[#020408]/40 uppercase">PLANNED</span>
+                </div>
+                <h3 class="font-sans font-bold text-lg text-white mb-2 uppercase">Interface Spec</h3>
+                <p class="font-mono text-xs text-slate-400 leading-relaxed mb-6">
+                  Establishing the physical vessels. Fabricating custom low-power system-on-chips (SoCs) and solid-core wear enclosures.
+                </p>
+
+                <div class="space-y-2 font-mono text-[10px] text-slate-500">
+                  <div class="flex items-center gap-2">
+                    <div class="w-1 h-1 rounded-full bg-slate-700"></div>
+                    <span>8nm Semiconductor Blueprint</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <div class="w-1 h-1 rounded-full bg-slate-700"></div>
+                    <span>Long-range solar microwave mesh</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <div class="w-1 h-1 rounded-full bg-slate-700"></div>
+                    <span>72-Hour Ambient thermal backup</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-slate-800/60 flex items-center justify-between font-mono text-[9px] text-slate-500 uppercase">
+                <span>Timeline: H1 2027</span>
+                <span>READYING DESIGN</span>
+              </div>
+            </div>
+
+            <!-- Phase 03 -->
+            <div class="border border-cyber-border rounded-xl p-6 bg-[#020408]/20 backdrop-blur-sm relative group overflow-hidden transition-all duration-300 hover:border-quantum-blue/40 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="font-mono text-[9px] text-slate-500 font-bold tracking-widest uppercase">[ PHASE 03 ]</span>
+                  <span class="px-2 py-0.5 rounded text-[8px] font-mono font-bold tracking-widest text-slate-500 border border-slate-800 bg-[#020408]/40 uppercase">CONCEPTUAL</span>
+                </div>
+                <h3 class="font-sans font-bold text-lg text-white mb-2 uppercase">Mobility Spec</h3>
+                <p class="font-mono text-xs text-slate-400 leading-relaxed mb-6">
+                  Integrating high-torque heavy automobile chassis with stage-4 local autonomy and solid-state LIDAR grids.
+                </p>
+
+                <div class="space-y-2 font-mono text-[10px] text-slate-500">
+                  <div class="flex items-center gap-2">
+                    <div class="w-1 h-1 rounded-full bg-slate-700"></div>
+                    <span>0.21 drag aerodynamic frame</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <div class="w-1 h-1 rounded-full bg-slate-700"></div>
+                    <span>Sovereign fleet telemetry</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <div class="w-1 h-1 rounded-full bg-slate-700"></div>
+                    <span>All-wheel hub traction grid</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-slate-800/60 flex items-center justify-between font-mono text-[9px] text-slate-500 uppercase">
+                <span>Timeline: H2 2027</span>
+                <span>INITIAL RESEARCH</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      </section>
+
+      <!-- PHASE 01 DETAILED SECTION -->
+      <section id="phase-01" class="relative py-24 px-6 border-t border-cyber-border bg-[#020408] overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none cyber-grid opacity-10"></div>
+        <div class="absolute top-1/2 right-1/4 w-[350px] h-[350px] bg-radial from-quantum-blue/5 to-transparent pointer-events-none filter blur-2xl"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <!-- Text Specifications -->
+          <div class="lg:col-span-5 text-left">
+            <span class="font-mono text-[10px] text-quantum-blue uppercase tracking-[0.2em] font-bold block mb-4">
+              [ TIMELINE_PHASE_01 | COMPILER_PLANE ]
+            </span>
+            <span class="px-2.5 py-1 rounded text-[9px] font-mono font-bold tracking-widest text-quantum-blue border border-quantum-blue/20 bg-quantum-blue/5 uppercase mb-6 inline-block">
+              ● DEPLOYED STATUS: OPERATIONAL
+            </span>
+            <h2 class="font-sans font-bold text-3xl md:text-4xl text-white tracking-tight mb-6 uppercase">
+              Phase 01 | Cognitive MoE Intelligence
+            </h2>
+            <p class="font-mono text-xs md:text-sm text-slate-400 leading-relaxed mb-6">
+              Our cognitive framework is founded on offline Mixture-of-Experts (MoE) topologies, compiled directly for secure local infrastructure. By distributing specialized subnetworks, we run complex reasoning pipelines without cloud dependencies.
+            </p>
+            
+            <div class="space-y-4 font-mono text-xs text-slate-500 mb-8">
+              <div class="p-3 border border-slate-900 rounded bg-[#020408]/60">
+                <span class="text-white block font-bold mb-1">COGNITIVE COMPRESSION KEY</span>
+                Sovereign dialect compilation incorporates 18 regional vectors, tuning local language weights to native colloquialism patterns.
+              </div>
+              <div class="p-3 border border-slate-900 rounded bg-[#020408]/60">
+                <span class="text-white block font-bold mb-1">ZERO DATA SANCTION RISK</span>
+                Because weights are compressed to 4-bit INT representations, models compile directly on standard custom silicon with zero external internet pings.
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive MOE Compiler Widget -->
+          <div class="lg:col-span-7">
+            <div class="relative border border-quantum-blue/20 rounded-xl bg-cyber-card p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden">
+              <!-- Grid accent lines -->
+              <div class="absolute top-0 right-0 w-16 h-16 border-t border-r border-quantum-blue/20 pointer-events-none"></div>
+              <div class="absolute bottom-0 left-0 w-16 h-16 border-b border-l border-quantum-blue/20 pointer-events-none"></div>
+
+              <!-- SVG Robot Head battery-style filling preloader overlay -->
+              <div id="moe-preloader" class="absolute inset-0 bg-[#020408]/95 backdrop-blur-sm flex flex-col items-center justify-center gap-4 z-40 hidden opacity-0 transition-all duration-300 rounded-xl">
+                <!-- Outer Robot Head shape -->
+                <div class="relative w-28 h-28 flex items-center justify-center">
+                  <!-- SVG base outlined robot head -->
+                  <svg class="w-full h-full text-slate-800 stroke-current fill-none stroke-2" viewBox="0 0 100 100">
+                    <!-- Head Box -->
+                    <rect x="25" y="25" width="50" height="46" rx="8" />
+                    <!-- Neck -->
+                    <rect x="42" y="71" width="16" height="8" />
+                    <!-- Antenna -->
+                    <line x1="50" y1="25" x2="50" y2="10" />
+                    <circle cx="50" cy="10" r="4" class="fill-current text-slate-800" />
+                    <!-- Ears -->
+                    <rect x="19" y="40" width="6" height="16" rx="2" />
+                    <rect x="75" y="40" width="6" height="16" rx="2" />
+                  </svg>
+                  
+                  <!-- Inside filling layer representing the battery-like charging effect -->
+                  <div class="absolute bottom-[29px] left-[27px] right-[27px] bg-gradient-to-t from-quantum-blue/20 via-quantum-blue/40 to-quantum-blue overflow-hidden transition-all duration-100 ease-out flex items-center justify-center rounded-[4px]" style="height: 0%;" id="preloader-fill-box">
+                    <div class="absolute inset-0 bg-[linear-gradient(45deg,rgba(255,255,255,0.15)_25%,transparent_25%,transparent_50%,rgba(255,255,255,0.15)_50%,rgba(255,255,255,0.15)_75%,transparent_75%,transparent)] bg-[length:12px_12px] animate-[pulse_1s_infinite]"></div>
+                  </div>
+                  
+                  <!-- Glowing Cyan Eyes overlay once full -->
+                  <div class="absolute top-[42px] left-[35px] w-3 h-3 rounded-full bg-quantum-blue border-2 border-white hidden animate-ping" id="preloader-eye-l"></div>
+                  <div class="absolute top-[42px] right-[35px] w-3 h-3 rounded-full bg-quantum-blue border-2 border-white hidden animate-ping" id="preloader-eye-r"></div>
+                </div>
                 
-                <div class="gate-tracks-flex">
-                    <div class="gate-track-pill"><h6>AI Researchers</h6></div>
-                    <div class="gate-track-pill"><h6>Embedded Systems Engineers</h6></div>
-                    <div class="gate-track-pill"><h6>Autonomous Robotics Leads</h6></div>
-                    <div class="gate-track-pill"><h6>Data Scientists (Migration R&D)</h6></div>
+                <span class="font-mono text-[10px] text-quantum-blue font-bold tracking-widest uppercase animate-pulse" id="preloader-status-text">INITIALIZING MOE COMPILER...</span>
+                <span class="font-mono text-lg text-white font-bold" id="preloader-percentage">0%</span>
+              </div>
+
+              <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-2">
+                  <div class="w-2.5 h-2.5 rounded-full bg-quantum-blue animate-pulse"></div>
+                  <span class="font-mono text-[10px] text-quantum-blue font-bold tracking-widest uppercase">INTERACTIVE WEIGHT COMPILER</span>
+                </div>
+                <span class="font-mono text-[9px] text-slate-500 font-bold">DEVICE: LOCAL_HOST_CORE</span>
+              </div>
+
+              <!-- Simulator Controls -->
+              <div class="space-y-6 mb-6">
+                <div>
+                  <div class="flex justify-between font-mono text-[10px] text-slate-400 mb-2">
+                    <span>1. BASE PARAMETER SCALE (Billion)</span>
+                    <span id="param-val" class="text-white font-bold">70B</span>
+                  </div>
+                  <input id="param-slider" type="range" min="8" max="120" value="70" class="w-full accent-quantum-blue bg-slate-900" oninput="updateMoeMetrics()"/>
+                  <div class="flex justify-between font-mono text-[8px] text-slate-600 mt-1">
+                    <span>8B (EDGE LITE)</span>
+                    <span>120B (CONTINENTAL)</span>
+                  </div>
                 </div>
 
-                <div class="gate-action-area">
-                    <button class="btn-terminal-trigger">[ INITIATE SECURE PROTOCOL ]</button>
+                <div>
+                  <div class="flex justify-between font-mono text-[10px] text-slate-400 mb-2">
+                    <span>2. WEIGHT QUANTIZATION</span>
+                    <span id="quant-val" class="text-white font-bold">4-BIT INT</span>
+                  </div>
+                  <select id="quant-select" class="w-full bg-[#020408] border border-slate-800 rounded px-3 py-2 font-mono text-xs text-slate-300 focus:outline-none focus:border-quantum-blue" onchange="updateMoeMetrics()">
+                    <option value="16">16-BIT FLOAT (UNCOMPRESSED)</option>
+                    <option value="8">8-BIT INT (STANDARD)</option>
+                    <option value="4" selected>4-BIT INT (HIGH EFFICIENCY)</option>
+                    <option value="2">2-BIT TENSOR (EXTREME SQUEEZE)</option>
+                  </select>
                 </div>
+              </div>
+
+              <!-- Dynamic Computer Resource Approximation -->
+              <div class="p-4 border border-slate-900 rounded bg-[#020408]/80 mb-6 text-left">
+                <span class="font-mono text-[9px] text-quantum-blue font-bold tracking-widest block mb-2 uppercase">💻 DYNAMIC COMPUTER COMPATIBILITY ESTIMATE</span>
+                <div class="grid grid-cols-2 gap-4 text-[10px] font-mono">
+                  <div>
+                    <span class="text-slate-500 block">ESTIMATED RAM NEEDED</span>
+                    <span id="est-ram" class="text-white font-bold">35.0 GB</span>
+                  </div>
+                  <div>
+                    <span class="text-slate-500 block">LOCAL FILE SIZE (DISK)</span>
+                    <span id="est-storage" class="text-white font-bold">35.0 GB</span>
+                  </div>
+                  <div class="col-span-2 border-t border-slate-800/60 pt-2">
+                    <span class="text-slate-500 block">MINIMUM HARDWARE SUITE</span>
+                    <span id="est-hardware" class="text-green-400 font-bold">Standard Workstation / Dedicated Developer PC</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Compile trigger action -->
+              <button id="moe-compile-btn" class="w-full py-2.5 bg-quantum-blue-glow border border-quantum-blue/50 hover:border-quantum-blue text-quantum-blue font-mono text-[10px] font-bold tracking-widest uppercase rounded transition-all flex items-center justify-center gap-2 mb-6 shadow-[0_0_15px_rgba(6,182,212,0.1)]" onclick="simulateMoeCompile()">
+                <i data-lucide="cpu" class="w-3.5 h-3.5"></i>
+                Initiate Weight Pruning & Compile
+              </button>
+
+              <!-- Simulated Terminal Console Output -->
+              <div id="moe-terminal" class="bg-[#020408] rounded border border-slate-900 p-4 h-32 font-mono text-[10px] text-slate-400 overflow-y-auto mb-6 text-left">
+                <div class="text-slate-600">&gt; ready for localized MoE compilation parameters...</div>
+              </div>
+
+              <!-- Output Metrics Grid -->
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
+                  <span class="text-[8px] text-slate-500 font-bold block mb-1">MEMORY FOOTPRINT</span>
+                  <span id="m-footprint" class="text-white font-mono text-xs font-bold">35.0 GB</span>
+                </div>
+                <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
+                  <span class="text-[8px] text-slate-500 font-bold block mb-1">COMPRESSION RATE</span>
+                  <span id="m-compression" class="text-white font-mono text-xs font-bold">4.00 x</span>
+                </div>
+                <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
+                  <span class="text-[8px] text-slate-500 font-bold block mb-1">LATENCY EXP</span>
+                  <span id="m-latency" class="text-quantum-blue font-mono text-xs font-bold">12 ms</span>
+                </div>
+                <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
+                  <span class="text-[8px] text-slate-500 font-bold block mb-1">REASONING ACCURACY</span>
+                  <span id="m-accuracy" class="text-green-400 font-mono text-xs font-bold">96.8%</span>
+                </div>
+              </div>
+
             </div>
-        </section>
+          </div>
+        </div>
+      </section>
 
-    </main>
+      <!-- PHASE 02 DETAILED SECTION -->
+      <section id="phase-02" class="relative py-24 px-6 border-t border-cyber-border bg-cyber-dark/60 overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none cyber-grid opacity-15"></div>
+        <div class="absolute bottom-0 right-0 w-[300px] h-[300px] bg-radial from-quantum-blue/5 to-transparent pointer-events-none filter blur-2xl"></div>
 
-    <footer class="global-footer">
-        <p>&copy; 2026 RHEIVATECH. ALL RIGHTS RESERVED. CONTINENTAL SOVEREIGNTY SECURED.</p>
+        <div class="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Interactive Solar Mesh Connection optimizer -->
+          <div class="lg:col-span-7 order-2 lg:order-1">
+            <div class="relative border border-cyber-border rounded-xl bg-cyber-card p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+              
+              <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-2">
+                  <div class="w-2.5 h-2.5 rounded-full bg-quantum-blue animate-pulse"></div>
+                  <span class="font-mono text-[10px] text-quantum-blue font-bold tracking-widest uppercase">Zone-Independent Architecture</span>
+                </div>
+                <span class="font-mono text-[9px] text-slate-500 font-bold">STATE_OF_THE_ART: INNEPT_TECH</span>
+              </div>
+
+              <!-- Mode Tabs Selector -->
+              <div class="grid grid-cols-2 gap-2 mb-6 border-b border-slate-800 pb-4">
+                <button onclick="selectMeshMode('local')" id="mode-btn-local" class="py-2 font-mono text-[10px] font-bold border border-quantum-blue text-quantum-blue bg-quantum-blue-glow rounded transition-all uppercase flex items-center justify-center gap-1.5">
+                  <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> LOCAL MODE
+                </button>
+                <button onclick="selectMeshMode('global')" id="mode-btn-global" class="py-2 font-mono text-[10px] font-bold border border-slate-800 text-slate-500 hover:border-slate-700 hover:text-slate-300 rounded transition-all uppercase flex items-center justify-center gap-1.5 bg-[#020408]/40">
+                  <i data-lucide="globe" class="w-3.5 h-3.5"></i> GLOBAL MODE
+                </button>
+              </div>
+
+              <!-- Node Selection Toggles -->
+              <p id="node-selection-title" class="font-mono text-[10px] text-slate-400 mb-3 text-left uppercase">Sovereign Local Coordinate Signal Mapping:</p>
+              
+              <!-- Local Mode Nodes container (Interactive Geolocation Probe) -->
+              <div id="local-nodes-container" class="grid grid-cols-1 gap-2 mb-6">
+                <button onclick="triggerGeolocationProbe()" id="probe-geo-btn" class="w-full py-3 px-4 font-mono text-[10px] font-bold border border-quantum-blue/40 text-quantum-blue hover:text-white hover:bg-quantum-blue/10 bg-[#020408]/60 hover:border-quantum-blue rounded transition-all uppercase flex items-center justify-center gap-2">
+                  <i data-lucide="crosshair" class="w-4 h-4 animate-pulse"></i> Detect &amp; Probe Local Region Coords
+                </button>
+              </div>
+
+              <!-- Global Mode Nodes container (Nigeria-specific hubs) -->
+              <div id="global-nodes-container" class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6 hidden">
+                <button onclick="selectMeshNode('lagos-ng')" id="node-lagos-ng" class="px-3 py-2 font-mono text-[9px] font-bold border border-quantum-blue text-quantum-blue bg-quantum-blue-glow rounded transition-all uppercase">
+                  Lagos Hub
+                </button>
+                <button onclick="selectMeshNode('abuja-ng')" id="node-abuja-ng" class="px-3 py-2 font-mono text-[9px] font-bold border border-slate-800 text-slate-500 hover:border-slate-700 hover:text-slate-300 rounded transition-all uppercase bg-[#020408]/40">
+                  Abuja Link
+                </button>
+                <button onclick="selectMeshNode('ph-ng')" id="node-ph-ng" class="px-3 py-2 font-mono text-[9px] font-bold border border-slate-800 text-slate-500 hover:border-slate-700 hover:text-slate-300 rounded transition-all uppercase bg-[#020408]/40">
+                  P.H. Terminal
+                </button>
+                <button onclick="selectMeshNode('kano-ng')" id="node-kano-ng" class="px-3 py-2 font-mono text-[9px] font-bold border border-slate-800 text-slate-500 hover:border-slate-700 hover:text-slate-300 rounded transition-all uppercase bg-[#020408]/40">
+                  Kano Node
+                </button>
+              </div>
+
+              <!-- Dynamic Calibration Readouts (Fetched cleanly) -->
+              <div id="mesh-specs-display" class="space-y-4 border border-slate-900 rounded p-4 bg-[#020408]/60 text-left font-mono text-xs mb-6 min-h-[140px] flex flex-col justify-center">
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
+                    <span class="text-[9px] text-slate-500 font-bold block mb-1">PROBED REGION</span>
+                    <span class="text-slate-500 font-mono italic">[AWAITING PROBE]</span>
+                  </div>
+                  <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
+                    <span class="text-[9px] text-slate-500 font-bold block mb-1">COORDINATES</span>
+                    <span class="text-slate-500 font-mono italic">[LAT: -- / LON: --]</span>
+                  </div>
+                  <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
+                    <span class="text-[9px] text-slate-500 font-bold block mb-1">SOLAR YIELD</span>
+                    <span class="text-slate-500 font-mono italic">[AWAITING SENSOR]</span>
+                  </div>
+                  <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
+                    <span class="text-[9px] text-slate-500 font-bold block mb-1">HARDWARE AVAILABILITY</span>
+                    <span class="text-slate-500 font-mono italic">[AWAITING LINK]</span>
+                  </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 pt-2 border-t border-slate-800/60 font-mono text-[9px] text-slate-500 uppercase">
+                  <div>Transmitting latency: <span class="text-slate-500">-- ms</span></div>
+                  <div>Mesh coordination: <span class="text-slate-500">OFFLINE</span></div>
+                </div>
+              </div>
+
+              <!-- Action Button to Request Specs -->
+              <button onclick="fetchMeshSpecs()" id="mesh-fetch-btn" class="w-full py-2.5 bg-slate-950 hover:bg-slate-900 text-quantum-blue hover:text-white border border-slate-800 hover:border-quantum-blue/50 rounded text-[10px] uppercase tracking-widest transition-all font-mono flex items-center justify-center gap-2">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i> Request Specifications Data
+              </button>
+
+            </div>
+          </div>
+
+          <!-- Text Specifications -->
+          <div class="lg:col-span-5 text-left order-1 lg:order-2">
+            <span class="font-mono text-[10px] text-quantum-blue uppercase tracking-[0.2em] font-bold block mb-4">
+              [ TIMELINE_PHASE_02 | HARDWARE_PLANE ]
+            </span>
+            <span class="px-2.5 py-1 rounded text-[9px] font-mono font-bold tracking-widest text-slate-500 border border-slate-800 bg-[#020408]/40 uppercase mb-6 inline-block">
+              ● DEPLOYED STATUS: IN DEVELOPMENT
+            </span>
+            <h2 class="font-sans font-bold text-3xl md:text-4xl text-white tracking-tight mb-6 uppercase">
+              Phase 02 | Custom Architecture & Zone-Independent Technology
+            </h2>
+            <p class="font-mono text-xs md:text-sm text-slate-400 leading-relaxed mb-6">
+              Establishing physical independent vessels. We are designing low-power system-on-chips (SoCs) fabricated on customized 8nm nodes and convective-cooled chassis to resist heavy extreme climate profiles.
+            </p>
+
+            <div class="space-y-4 font-mono text-xs text-slate-500">
+              <div class="p-3 border border-slate-900 rounded bg-[#020408]/60">
+                <span class="text-white block font-bold mb-1">SOVEREIGN AIR-GAPPED LINK</span>
+                Deploying long-distance solar microwave communication channels, avoiding commercial trunklines and foreign network monitoring pipelines.
+              </div>
+              <div class="p-3 border border-slate-900 rounded bg-[#020408]/60">
+                <span class="text-white block font-bold mb-1">CONVECTIVE CHASSIS LIFE</span>
+                No air conditioner required. Mechanical enclosures use dual thermal convection sinks to run at peak capacity up to 65C ambient temperatures.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- PHASE 03 DETAILED SECTION -->
+      <section id="phase-03" class="relative py-24 px-6 border-t border-cyber-border bg-[#020408] overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none cyber-grid opacity-10"></div>
+        <div class="absolute top-1/4 left-1/4 w-[350px] h-[350px] bg-radial from-quantum-blue/5 to-transparent pointer-events-none filter blur-2xl"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <!-- Text Specifications -->
+          <div class="lg:col-span-5 text-left">
+            <span class="font-mono text-[10px] text-quantum-blue uppercase tracking-[0.2em] font-bold block mb-4">
+              [ TIMELINE_PHASE_03 | MOBILITY_PLANE ]
+            </span>
+            <span class="px-2.5 py-1 rounded text-[9px] font-mono font-bold tracking-widest text-slate-500 border border-slate-800 bg-[#020408]/40 uppercase mb-6 inline-block">
+              ● DEPLOYED STATUS: CONCEPTUAL RESEARCH
+            </span>
+            <h2 class="font-sans font-bold text-3xl md:text-4xl text-white tracking-tight mb-6 uppercase">
+              Phase 03 | Autonomous Heavy Mobility
+            </h2>
+            <p class="font-mono text-xs md:text-sm text-slate-400 leading-relaxed mb-6">
+              Our ultimate objective scales sovereign physical autonomy. We are modeling high-torque heavy-duty vehicular chassis with fully integrated localized Stage-4 autonomous systems and solid-state LIDAR grids.
+            </p>
+
+            <div class="space-y-4 font-mono text-xs text-slate-500 mb-8">
+              <div class="p-3 border border-slate-900 rounded bg-[#020408]/60">
+                <span class="text-white block font-bold mb-1">AERODYNAMIC PROFILE</span>
+                Optimizing aerodynamic coefficients down to 0.21 Drag rating to protect localized power cells and extend tactical range up to 1,200km.
+              </div>
+              <div class="p-3 border border-slate-900 rounded bg-[#020408]/60">
+                <span class="text-white block font-bold mb-1">LOCALIZED LIDAR INTELLIGENCE</span>
+                Collision telemetry remains internal to the vehicle. Real-time pathplanning and tracking avoid transmitting raw sensor vectors to external clouds.
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Aero Configurator Widget -->
+          <div class="lg:col-span-7">
+            <div class="relative border border-quantum-blue/20 rounded-xl bg-cyber-card p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+              
+              <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-2">
+                  <div class="w-2.5 h-2.5 rounded-full bg-quantum-blue animate-pulse"></div>
+                  <span class="font-mono text-[10px] text-quantum-blue font-bold tracking-widest uppercase">Chassis Aero-Tuning Simulator</span>
+                </div>
+                <span class="font-mono text-[9px] text-slate-500 font-bold">FLUID_DYNAMICS: LIVE_3D</span>
+              </div>
+
+              <!-- Mode Selection Buttons -->
+              <p class="font-mono text-[10px] text-slate-400 mb-3 text-left uppercase">Select Aero-dynamic Structural Frame Config:</p>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+                <button onclick="selectChassisProfile('slim')" id="chassis-slim" class="px-4 py-3 font-mono text-[9px] font-bold border border-quantum-blue text-quantum-blue bg-quantum-blue-glow rounded transition-all uppercase flex flex-col items-center">
+                  <span class="text-[11px] text-white">Slimline Utility</span>
+                  <span class="text-[8px] text-slate-400 font-normal mt-0.5">High range, low drag</span>
+                </button>
+                <button onclick="selectChassisProfile('reinforced')" id="chassis-reinforced" class="px-4 py-3 font-mono text-[9px] font-bold border border-slate-800 text-slate-500 hover:border-slate-700 hover:text-slate-300 rounded transition-all uppercase flex flex-col items-center">
+                  <span class="text-[11px] text-white">Reinforced Cargo</span>
+                  <span class="text-[8px] text-slate-400 font-normal mt-0.5">High defense, balanced</span>
+                </button>
+                <button onclick="selectChassisProfile('heavy')" id="chassis-heavy" class="px-4 py-3 font-mono text-[9px] font-bold border border-slate-800 text-slate-500 hover:border-slate-700 hover:text-slate-300 rounded transition-all uppercase flex flex-col items-center">
+                  <span class="text-[11px] text-white">Heavy Transport</span>
+                  <span class="text-[8px] text-slate-400 font-normal mt-0.5">Extreme payload capacity</span>
+                </button>
+              </div>
+
+              <!-- Animated ASCII Chassis Representation -->
+              <div class="bg-[#020408] rounded border border-slate-900 p-4 h-36 font-mono text-xs text-quantum-blue text-center flex flex-col justify-center items-center mb-6 overflow-hidden">
+                <pre id="chassis-ascii" class="leading-tight text-quantum-blue filter drop-shadow-[0_0_2px_rgba(6,182,212,0.4)]">
+      ___...---...___
+  ======================\__
+   O - O            O - O  \
+  --------------------------
+                </pre>
+                <span class="text-[8px] text-slate-500 mt-2 block uppercase tracking-wider font-bold">Chassis Wireframe: Vector Rendering Live</span>
+              </div>
+
+              <!-- Metrics Readout Grid -->
+              <div id="chassis-specs-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6 min-h-[64px] items-center">
+                <div class="p-3 border border-slate-900 rounded bg-[#020408]/40 text-left">
+                  <span class="text-[8px] text-slate-500 font-bold block mb-1">DRAG RATING</span>
+                  <span class="text-white font-mono text-xs font-bold">0.21 Cd</span>
+                </div>
+                <div class="p-3 border border-slate-900 rounded bg-[#020408]/40 text-left">
+                  <span class="text-[8px] text-slate-500 font-bold block mb-1">BATTERY RANGE</span>
+                  <span class="text-white font-mono text-xs font-bold">1,200 km</span>
+                </div>
+                <div class="p-3 border border-slate-900 rounded bg-[#020408]/40 text-left">
+                  <span class="text-[8px] text-slate-500 font-bold block mb-1">PAYLOAD LIMIT</span>
+                  <span class="text-white font-mono text-xs font-bold">2.5 tonnes</span>
+                </div>
+                <div class="p-3 border border-slate-900 rounded bg-[#020408]/40 text-left">
+                  <span class="text-[8px] text-slate-500 font-bold block mb-1">LIDAR ACCURACY</span>
+                  <span class="text-green-400 font-mono text-xs font-bold">STAGE 4 READY</span>
+                </div>
+              </div>
+
+              <!-- Action Button to Request Chassis Specs -->
+              <button onclick="fetchChassisSpecs()" id="chassis-fetch-btn" class="w-full py-2.5 bg-slate-950 hover:bg-slate-900 text-quantum-blue hover:text-white border border-slate-800 hover:border-quantum-blue/50 rounded text-[10px] uppercase tracking-widest transition-all font-mono flex items-center justify-center gap-2">
+                <i data-lucide="shield" class="w-3.5 h-3.5"></i> Request Blueprint Specs
+              </button>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. Sovereign Gate Recruitment Portal -->
+      <section id="join" class="relative py-24 px-6 border-t border-cyber-border bg-cyber-dark overflow-hidden">
+        <div class="absolute top-1/2 right-0 w-[400px] h-[400px] bg-radial from-quantum-blue/5 to-transparent pointer-events-none glow-ambient"></div>
+
+        <div class="max-w-5xl mx-auto relative z-10 text-left">
+          <div class="relative rounded-2xl border border-cyber-border bg-cyber-card backdrop-blur-md p-8 sm:p-16 shadow-[0_40px_80px_rgba(0,0,0,0.6)]">
+            
+            <div class="max-w-3xl">
+              <span class="font-mono text-[10px] text-quantum-blue uppercase tracking-[0.2em] font-bold block mb-4">
+                [ SECURE_ACCESS_PORTAL ]
+              </span>
+              <h2 class="font-sans font-bold text-3xl md:text-5xl text-white tracking-tight leading-none mb-8">
+                Stay in Touch & Join Rheivatech
+              </h2>
+              <p class="font-sans text-xs md:text-sm text-slate-400 leading-relaxed mb-12 normal-case tracking-normal">
+                We are currently in active research and development. Whether you are an engineer, a designer, or just interested in our vision, let's connect. Sign up below to join our network and stay updated!
+              </p>
+
+              <!-- Recruitment form -->
+              <form id="recruitment-form" onsubmit="handleRecruitSubmit(event)" class="space-y-6 max-w-2xl">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div>
+                    <label class="block font-mono text-[10px] uppercase text-slate-400 tracking-wider mb-2" for="reg-name">Your Full Name</label>
+                    <input
+                      required
+                      type="text"
+                      id="reg-name"
+                      placeholder="e.g. Kofi Okafor"
+                      class="w-full bg-[#020408] border border-cyber-border rounded px-4 py-3 font-mono text-xs text-white focus:outline-none focus:border-quantum-blue transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label class="block font-mono text-[10px] uppercase text-slate-400 tracking-wider mb-2" for="reg-email">Your Email Address</label>
+                    <input
+                      required
+                      type="email"
+                      id="reg-email"
+                      placeholder="e.g. kofi@gmail.com"
+                      class="w-full bg-[#020408] border border-cyber-border rounded px-4 py-3 font-mono text-xs text-white focus:outline-none focus:border-quantum-blue transition-all"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block font-mono text-[10px] uppercase text-slate-400 tracking-wider mb-2" for="reg-specialty">What is your specialty? / How can you help?</label>
+                  <select
+                    id="reg-specialty"
+                    class="w-full bg-[#020408] border border-cyber-border rounded px-4 py-3 font-mono text-xs text-slate-300 focus:outline-none focus:border-quantum-blue transition-all"
+                  >
+                    <option value="linguistic_ai">Localized AI & Data Analysis</option>
+                    <option value="microelectronics">Hardware & Device Design</option>
+                    <option value="satellite_mesh">Solar Mesh & Wireless Communication</option>
+                    <option value="autonomous_mobility">Autonomous Vehicles & Car Systems</option>
+                    <option value="other">Other Services or Collaboration</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block font-mono text-[10px] uppercase text-slate-400 tracking-wider mb-2" for="reg-statement">Tell us about yourself / how you'd like to help</label>
+                  <textarea
+                    required
+                    id="reg-statement"
+                    rows="4"
+                    placeholder="Describe how you would like to help us build the future of local, secure technology..."
+                    class="w-full bg-[#020408] border border-cyber-border rounded px-4 py-3 font-mono text-xs text-white focus:outline-none focus:border-quantum-blue transition-all resize-none"
+                  ></textarea>
+                </div>
+
+                <!-- Submit button -->
+                <button
+                  type="submit"
+                  class="px-8 py-3 bg-quantum-blue-glow border border-quantum-blue text-quantum-blue hover:bg-quantum-blue hover:text-cyber-dark transition-all rounded font-mono text-xs font-bold tracking-widest uppercase flex items-center gap-2"
+                >
+                  <i data-lucide="send" class="w-4 h-4"></i>
+                  Join Our Network
+                </button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+       <!-- Modern Global Footer -->
+    <footer class="relative border-t border-cyber-border bg-[#020408]/90 py-12 px-8 z-10 text-xs md:text-sm font-mono uppercase tracking-widest text-slate-500">
+      <div class="max-w-7xl mx-auto space-y-12">
+        <!-- Service listings grid -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 text-left normal-case tracking-normal border-b border-slate-900 pb-12">
+          <div class="md:col-span-4 space-y-4">
+            <div class="flex items-center gap-2 text-white">
+              <div class="w-5 h-5 border border-quantum-blue/40 rounded-sm p-0.5 bg-cyber-dark/60 flex items-center justify-center">
+                <img
+                  src="logo.png"
+                  alt="Rheivatech"
+                  referrerPolicy="no-referrer"
+                  class="w-full h-full object-contain filter drop-shadow-[0_0_4px_rgba(6,182,212,0.6)]"
+                />
+              </div>
+              <span class="font-sans font-bold tracking-[0.2em] text-xs">RHEIVATECH</span>
+            </div>
+            <p class="text-xs text-slate-400 font-sans leading-relaxed max-w-sm">
+              We emulate the native durability of our ecosystem. Bringing the edge of cost over civilization through passion, absolute technical competence, and local sovereign engineering.
+            </p>
+          </div>
+
+          <!-- Services Column 1 -->
+          <div class="md:col-span-4 space-y-3">
+            <span class="font-mono text-[9px] text-quantum-blue font-bold tracking-widest uppercase block mb-1">
+              [ CORE_INFRASTRUCTURE_SERVICES ]
+            </span>
+            <ul class="space-y-2 font-mono text-xs text-slate-400">
+              <li class="flex items-center gap-2"><span class="w-1 h-1 bg-quantum-blue"></span> Web Design &amp; UI Craft</li>
+              <li class="flex items-center gap-2"><span class="w-1 h-1 bg-quantum-blue"></span> Web App Development (Full-Stack)</li>
+              <li class="flex items-center gap-2"><span class="w-1 h-1 bg-quantum-blue"></span> Native App Development</li>
+              <li class="flex items-center gap-2"><span class="w-1 h-1 bg-quantum-blue"></span> Local Database Management</li>
+              <li class="flex items-center gap-2"><span class="w-1 h-1 bg-quantum-blue"></span> Heavy Backend Engineering</li>
+            </ul>
+          </div>
+
+          <!-- Services Column 2 -->
+          <div class="md:col-span-4 space-y-3">
+            <span class="font-mono text-[9px] text-yellow-500 font-bold tracking-widest uppercase block mb-1">
+              [ THIRD_PARTY_SUPPORT_&amp;_ANALYTICS ]
+            </span>
+            <ul class="space-y-2 font-mono text-xs text-slate-400">
+              <li class="flex items-center gap-2"><span class="w-1 h-1 bg-yellow-500"></span> Custom Email Solutions</li>
+              <li class="flex items-center gap-2"><span class="w-1 h-1 bg-yellow-500"></span> Regional Database Administration</li>
+              <li class="flex items-center gap-2">
+                <span class="w-1 h-1 bg-yellow-500"></span> 
+                RheivaAI / Rheivada Custom Reports
+              </li>
+              <li class="flex items-center gap-2 text-slate-500 italic">
+                <span>(Our offline custom data analytics tools coming soon)</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-6 text-xs md:text-sm font-mono text-slate-500">
+          <!-- Left Side: Brand, OS and Location -->
+          <div class="flex flex-col sm:flex-row items-center gap-6">
+            <span>OS: <span class="text-slate-300">R-TECH v4.0.2</span></span>
+            <div class="hidden sm:block w-px h-4 bg-slate-800"></div>
+            <span>LOCATION: <span class="text-slate-300">DISTRIBUTED SOVEREIGN NODES</span></span>
+          </div>
+
+          <!-- Right Side: Connection status and Copyright -->
+          <div class="flex flex-col sm:flex-row items-center gap-4">
+            <span class="text-quantum-blue animate-pulse flex items-center gap-1.5 font-bold">
+              <span class="w-1.5 h-1.5 rounded-full bg-quantum-blue"></span>
+              Connection Secured
+            </span>
+            <p class="text-slate-500">
+              &copy; 2026 RHEIVATECH. ALL RIGHTS RESERVED.
+            </p>
+          </div>
+        </div>
+      </div>
     </footer>
 
-    <script src="script.js"></script>
-</body>
+    <!-- Beautiful In-Page AI Modal -->
+    <div id="ai-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#020408]/85 backdrop-blur-md">
+      <div class="relative w-full max-w-lg border border-quantum-blue/40 bg-cyber-card rounded-xl p-8 shadow-[0_0_50px_rgba(6,182,212,0.15)] text-left flex flex-col justify-between overflow-hidden">
+        
+        <!-- Corner crosshairs for futuristic styling -->
+        <div class="absolute top-4 left-4 w-3 h-3 border-t border-l border-quantum-blue/40"></div>
+        <div class="absolute top-4 right-4 w-3 h-3 border-t border-r border-quantum-blue/40"></div>
+        <div class="absolute bottom-4 left-4 w-3 h-3 border-b border-l border-quantum-blue/40"></div>
+        <div class="absolute bottom-4 right-4 w-3 h-3 border-b border-r border-quantum-blue/40"></div>
+
+        <!-- Modal Close Button -->
+        <button id="close-modal-btn" class="absolute top-6 right-6 text-slate-400 hover:text-quantum-blue transition-colors duration-200 focus:outline-none">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+
+        <div class="space-y-6">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-quantum-blue-glow border border-quantum-blue flex items-center justify-center">
+              <i data-lucide="bot" class="w-6 h-6 text-quantum-blue filter drop-shadow-[0_0_4px_rgba(6,182,212,0.6)]"></i>
+            </div>
+            <div>
+              <span class="text-[9px] font-mono text-quantum-blue font-bold tracking-widest block uppercase">[ KERNEL | ACTIVE_DIALECT_AI ]</span>
+              <h2 class="font-sans font-bold text-xl text-white tracking-tight">RheivaAI Portal</h2>
+            </div>
+          </div>
+
+          <div class="bg-[#020408]/80 rounded border border-cyber-border p-6 font-mono text-xs text-slate-300 leading-relaxed">
+            <span class="text-quantum-blue block mb-2">&gt; rheiva_ai_handshake: INITIATED</span>
+            "Hi, I am <span class="text-white font-bold">RheivaAI</span>. I am being trained as your air-gapped regional intelligence interface. By compiling Mixture-of-Expert frameworks entirely on local systems, I ensure your strategic queries never traverse foreign servers."
+          </div>
+
+          <!-- Bottom placeholder input field -->
+          <div class="relative bg-[#020408]/40 border border-slate-800 rounded px-4 py-3 text-center">
+            <span class="font-mono text-xs text-slate-500 font-bold uppercase tracking-widest block">
+              ⚠️ RheivaAI is under production and coming soon.
+            </span>
+          </div>
+
+          <!-- Footer Buttons -->
+          <div class="flex items-center justify-between pt-4 border-t border-slate-800/60">
+            <span class="text-[9px] font-mono text-slate-500 uppercase font-bold tracking-wider">SECURE LINK STATUS: COMMENCING</span>
+            
+            <button id="view-other-portfolio-btn" class="px-4 py-2 border border-slate-800 bg-[#020408]/80 text-slate-400 hover:text-slate-300 font-mono text-[10px] font-bold tracking-widest uppercase rounded transition-all flex items-center gap-1.5">
+              <i data-lucide="folder-git" class="w-3.5 h-3.5"></i>
+              View other product portfolio
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Interactive Recruitment Operator Registration Modal -->
+    <div id="submit-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#020408]/90 backdrop-blur-md">
+      <div class="relative w-full max-w-lg border border-quantum-blue/40 bg-cyber-card rounded-xl p-8 shadow-[0_0_60px_rgba(6,182,212,0.2)] text-left flex flex-col overflow-hidden">
+        
+        <!-- Crosshairs styling -->
+        <div class="absolute top-4 left-4 w-3 h-3 border-t border-l border-quantum-blue/40"></div>
+        <div class="absolute top-4 right-4 w-3 h-3 border-t border-r border-quantum-blue/40"></div>
+        <div class="absolute bottom-4 left-4 w-3 h-3 border-b border-l border-quantum-blue/40"></div>
+        <div class="absolute bottom-4 right-4 w-3 h-3 border-b border-r border-quantum-blue/40"></div>
+
+        <button onclick="closeSubmitModal()" class="absolute top-6 right-6 text-slate-400 hover:text-quantum-blue transition-colors duration-200">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+
+        <!-- Loading state of modal -->
+        <div id="modal-loading-state" class="flex flex-col items-center justify-center py-12 gap-4">
+          <div class="relative w-12 h-12">
+            <div class="absolute inset-0 rounded-full border-4 border-slate-900"></div>
+            <div class="absolute inset-0 rounded-full border-4 border-t-quantum-blue border-r-quantum-blue/40 animate-spin"></div>
+          </div>
+          <span class="font-mono text-xs text-quantum-blue font-bold tracking-widest uppercase animate-pulse">TRANSMITTING CREDENTIALS...</span>
+        </div>
+
+        <!-- Success details state of modal -->
+        <div id="modal-success-state" class="hidden space-y-6">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-green-500/15 border border-green-500/40 flex items-center justify-center">
+              <i data-lucide="shield-check" class="w-6 h-6 text-green-400"></i>
+            </div>
+            <div>
+              <span class="text-[9px] font-mono text-green-400 font-bold tracking-widest block uppercase">[ SYSTEM | REGISTRATION_LOGGED ]</span>
+              <h2 class="font-sans font-bold text-xl text-white tracking-tight">Sovereign Node Secured</h2>
+            </div>
+          </div>
+
+          <!-- Display Submitted info -->
+          <div class="bg-[#020408]/90 border border-slate-900 rounded p-4 font-mono text-xs space-y-2">
+            <div class="text-slate-500 border-b border-slate-900/60 pb-1 flex justify-between"><span class="font-bold">OPERATOR NAME:</span> <span id="m-success-name" class="text-white font-medium"></span></div>
+            <div class="text-slate-500 border-b border-slate-900/60 pb-1 flex justify-between"><span class="font-bold">EMAIL ADDRESS:</span> <span id="m-success-email" class="text-white font-medium"></span></div>
+            <div class="text-slate-500 border-b border-slate-900/60 pb-1 flex justify-between"><span class="font-bold">SPECIALTY:</span> <span id="m-success-specialty" class="text-white font-medium"></span></div>
+            <div class="text-slate-500 pt-1 leading-relaxed"><span class="font-bold block mb-1">STATED ALIGNMENT:</span> <span id="m-success-statement" class="text-slate-300 italic"></span></div>
+          </div>
+
+          <!-- Absolute core key constraint requested: Access key : You will recieve an email when Rheiva is Executed. -->
+          <div class="p-4 bg-quantum-blue/5 border border-quantum-blue/20 rounded font-mono text-xs text-center leading-relaxed">
+            <span class="font-bold text-quantum-blue block mb-1">ACCESS STATUS: PENDING EXECUTION</span>
+            <span class="text-slate-300">Access key : You will receive an email when Rheiva is Executed.</span>
+          </div>
+
+          <button onclick="closeSubmitModal()" class="w-full py-2.5 bg-[#020408] border border-slate-800 hover:border-slate-700 text-slate-400 hover:text-white font-mono text-[10px] font-bold tracking-widest uppercase rounded transition-all">
+            Dismiss Connection
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Lucide Icons via CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Link to external javascript -->
+    <script src="script.js" defer></script>
+  </body>
 </html>
