@@ -18,6 +18,24 @@ const FOUNDERS_REGISTRY = [
   }
 ];
 
+/* =========================================================================
+   ERP SALES ANALYSIS PORTFOLIO (DATA SCIENCE SECTION)
+   To add more analysis screens/images, simply add objects to this array.
+   The system will dynamically render them in the unlocked "analysis" section.
+   ========================================================================= */
+const ANALYSIS_PORTFOLIO = [
+  {
+    image: "analysis_1.jpeg",
+    title: "Analysis 1: Sales & Buy-Sell Analytics Dashboard",
+    writeup: "Our flagship ERP analytics engine tracking wholesale purchase orders, high-frequency sales metrics, margin analysis, and inventory re-ordering trends in real-time."
+  },
+  {
+    image: "analysis_2.jpeg",
+    title: "Analysis 2: Intelligent Profit-Margin Tracking",
+    writeup: "Advanced margin forecasting and dynamic optimization engine. Detects supply gaps and computes pricing thresholds to secure sovereign merchant profit lines."
+  }
+];
+
 document.addEventListener('DOMContentLoaded', () => {
   /* Render Founders Carousel Dynamically */
   const carouselTrack = document.getElementById('carousel-track');
@@ -83,6 +101,50 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span class="font-mono text-[10px] text-quantum-blue font-bold tracking-widest uppercase text-center px-4">LinkedIn Portal</span>
               </a>
             </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  /* Render ERP Analysis Portfolios Dynamically */
+  const portfolioContainer = document.getElementById('analytics-portfolio-container');
+  if (portfolioContainer) {
+    portfolioContainer.innerHTML = ANALYSIS_PORTFOLIO.map((item, index) => {
+      return `
+        <div class="border border-slate-900 rounded-xl p-6 bg-cyber-card/60 flex flex-col justify-between hover:border-yellow-500/30 transition-all duration-300 relative group overflow-hidden">
+          <div class="absolute inset-0 bg-radial from-yellow-500/2 to-transparent pointer-events-none"></div>
+          
+          <div class="space-y-4">
+            <!-- Image Frame -->
+            <div class="relative w-full aspect-video rounded-lg overflow-hidden border border-slate-900 bg-slate-950 flex items-center justify-center group-hover:border-yellow-500/20 transition-colors duration-300">
+              <img 
+                src="${item.image}" 
+                alt="${item.title}" 
+                referrerPolicy="no-referrer"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div class="absolute inset-0 bg-[#020408]/65 backdrop-blur-[2px] opacity-100 group-hover:opacity-0 transition-opacity duration-300 flex flex-col items-center justify-center gap-2">
+                <div class="w-8 h-8 rounded-full border border-yellow-500/40 flex items-center justify-center bg-yellow-500/5 text-yellow-500">
+                  <i data-lucide="eye" class="w-4 h-4"></i>
+                </div>
+                <span class="font-mono text-[9px] text-yellow-500 font-bold uppercase tracking-widest px-2 py-0.5 border border-yellow-500/15 bg-yellow-500/5 rounded">Reveal ERP Interface</span>
+              </div>
+            </div>
+            
+            <div class="space-y-2">
+              <h4 class="font-sans font-bold text-lg text-white group-hover:text-yellow-500 transition-colors duration-200">
+                ${item.title}
+              </h4>
+              <p class="font-mono text-xs text-slate-400 leading-relaxed text-justify">
+                ${item.writeup}
+              </p>
+            </div>
+          </div>
+          
+          <div class="mt-6 pt-3 border-t border-slate-900/60 flex justify-between items-center text-[10px] font-mono text-slate-500 uppercase">
+            <span>Module status: <span class="text-green-400 font-bold">● ONLINE</span></span>
+            <span class="font-bold">SPEC_0${index + 1}</span>
           </div>
         </div>
       `;
@@ -373,14 +435,16 @@ document.addEventListener('DOMContentLoaded', () => {
           appendLog('&gt; We run highly optimized networks built for local resilience, bypassing corporate bloat.', true);
           appendLog('&gt; ⚡ PLEASE STAY IN TOUCH to receive priority node updates!', true);
         } else if (command === 'analysis') {
-          appendLog('&gt; activating data analytics service section. you can use close analysis to close the section', true);
+          appendLog('&gt; <span class="text-yellow-500">INITIALIZING SECURE LINK TO DATA LAB...</span>', true);
+          appendLog('&gt; <span class="text-slate-500">CONNECTING TO RHEIVADA CORE ANALYTICS ENGINE...</span>', true);
           setTimeout(() => {
+            appendLog('&gt; <span class="text-green-400">ACCESS GRANTED: UNLOCKING LAYER_02_EXT PORTAL.</span>', true);
             const section = document.getElementById('analytics-section');
             if (section) {
               section.classList.remove('hidden');
               section.scrollIntoView({ behavior: 'smooth' });
             }
-          }, 6000);
+          }, 1200);
         } else if (command === 'closeanalysis' || command === 'close analysis') {
           appendLog('&gt; deactivating data analytics service section...', true);
           const section = document.getElementById('analytics-section');
@@ -1357,4 +1421,27 @@ document.addEventListener('DOMContentLoaded', () => {
   updateMoeMetrics();
   fetchMeshSpecs();
   resetChassisSpecsDisplay();
+
+  /* 7. Onscroll Animations using IntersectionObserver */
+  const scrollElements = document.querySelectorAll('.animate-on-scroll');
+  if (scrollElements.length > 0) {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -8% 0px',
+      threshold: 0.05
+    };
+
+    const scrollObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    scrollElements.forEach(el => {
+      scrollObserver.observe(el);
+    });
+  }
 });

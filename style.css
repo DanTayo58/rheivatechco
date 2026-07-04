@@ -5,6 +5,7 @@ html {
   background-color: #020408;
   color: #cbd5e1;
   overflow-x: hidden;
+  font-size: 104.5%; /* Slightly larger font size for all devices */
 }
 
 /* Custom scrollbars matching Immersive UI */
@@ -57,4 +58,25 @@ html {
 }
 .grid-glow {
   animation: grid-glow 8s ease-in-out infinite;
+}
+
+/* Onscroll Animations */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
