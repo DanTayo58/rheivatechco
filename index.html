@@ -1,1447 +1,1634 @@
-/* script.js - Core dynamic interactions for Rheivatech landing page */
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rheivatech :: Sovereign Intelligence | Universal Infrastructure</title>
+    
+    <!-- logo2.png is strictly used for Favicon as requested -->
+    <link rel="icon" type="image/png" href="logo2.png" />
 
-/* =========================================================================
-   FOUNDERS COLLECTIVE REGISTRY
-   To add, edit, or remove founders, simply update this array of objects. 
-   The system will dynamically generate the cards, format the Member IDs, 
-   assign active states, and automatically adjust the carousel controls.
-   ========================================================================= */
-const FOUNDERS_REGISTRY = [
-  {
-    name: "Omotayo Oladapo Dan",
-    title: "Founder & Chief Architect",
-    bio: "Pioneering sovereign industrial-grade hardware, localized cognitive compilers, and independent solar communications grids across the African tech ecosystem.",
-    focus: "SYSTEM INTEGRATION",
-    status: "ACTIVE",
-    linkedinUrl: "https://www.linkedin.com/in/omotayo-oladapo-dan-placeholder",
-    imageUrl: "logo.png"
-  }
-];
+    <!-- External custom styles -->
+    <link rel="stylesheet" href="style.css" />
 
-/* =========================================================================
-   ERP SALES ANALYSIS PORTFOLIO (DATA SCIENCE SECTION)
-   To add more analysis screens/images, simply add objects to this array.
-   The system will dynamically render them in the unlocked "analysis" section.
-   ========================================================================= */
-const ANALYSIS_PORTFOLIO = [
-  {
-    image: "analysis_1.jpeg",
-    title: "Analysis 1: Sales & Buy-Sell Analytics Dashboard",
-    writeup: "Our flagship ERP analytics engine tracking wholesale purchase orders, high-frequency sales metrics, margin analysis, and inventory re-ordering trends in real-time."
-  },
-  {
-    image: "analysis_2.jpeg",
-    title: "Analysis 2: Intelligent Profit-Margin Tracking",
-    writeup: "Advanced margin forecasting and dynamic optimization engine. Detects supply gaps and computes pricing thresholds to secure sovereign merchant profit lines."
-  }
-];
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
-document.addEventListener('DOMContentLoaded', () => {
-  /* Render Founders Carousel Dynamically */
-  const carouselTrack = document.getElementById('carousel-track');
-  if (carouselTrack) {
-    carouselTrack.innerHTML = FOUNDERS_REGISTRY.map((founder, index) => {
-      const idNum = String(index + 1).padStart(2, '0');
-      const avatarSrc = founder.imageUrl || "logo.png";
-      const linkedinHref = founder.linkedinUrl || "www.linkedin.com/in/omotayo-oladapo-4699362a5";
-      
-      return `
-        <div class="w-full max-w-6xl border border-cyber-border rounded-xl p-10 md:p-16 bg-cyber-card flex-shrink-0 relative group overflow-hidden transition-all duration-300 hover:border-quantum-blue/40 mx-auto min-h-[460px] flex items-center">
-          <div class="absolute top-0 right-0 w-48 h-48 bg-radial from-quantum-blue/5 to-transparent pointer-events-none"></div>
-          
-          <div class="flex flex-col md:flex-row gap-12 items-center justify-between w-full">
-            <!-- Left Side: Typography -->
-            <div class="flex-1 text-left space-y-6">
-              <div>
-                <span class="font-mono text-[10px] text-quantum-blue font-bold tracking-[0.25em] block mb-3 uppercase">MEMBER_${idNum} | FOUNDING MEMBER</span>
-                <h3 class="font-sans font-bold text-3xl md:text-5xl text-white tracking-tight leading-none">${founder.name}</h3>
-                <p class="font-mono text-xs text-slate-500 uppercase tracking-[0.15em] mt-2">${founder.title}</p>
-              </div>
-              <div class="h-px bg-slate-800"></div>
-              
-              <p class="font-sans text-sm md:text-base text-slate-400 leading-relaxed max-w-2xl">
-                ${founder.bio}
-              </p>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Outfit"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+              mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+            },
+            colors: {
+              'cyber-dark': '#020408',
+              'cyber-card': 'rgba(15, 23, 42, 0.4)',
+              'quantum-blue': '#06b6d4',
+              'quantum-blue-glow': 'rgba(6, 182, 212, 0.15)',
+              'cyber-border': '#1e293b',
+              'text-muted': '#94a3b8',
+            }
+          }
+        }
+      }
+    </script>
+  </head>
+  <body class="relative min-h-screen bg-cyber-dark text-[#cbd5e1] font-sans selection:bg-quantum-blue/30 selection:text-white overflow-x-hidden">
 
-              <!-- Interactive LinkedIn Hover overlay action guide -->
-              <div class="pt-2">
-                <a href="${linkedinHref}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 font-mono text-xs font-bold text-quantum-blue hover:text-white transition-colors duration-200 uppercase tracking-widest">
-                  <i data-lucide="linkedin" class="w-4.5 h-4.5"></i>
-                  Connect on LinkedIn <span class="text-slate-500 font-normal">(Click or Hover)</span>
+    <!-- Immersive UI Mesh & Grid Backdrops -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+      <!-- Radial Mesh Gradient -->
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,#1e293b,transparent)] opacity-50"></div>
+      <!-- Micro-dot Grid Layer -->
+      <div class="absolute inset-0 cyber-grid opacity-100 grid-glow"></div>
+      <!-- Adaptive subtle color blooms -->
+      <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-radial from-quantum-blue-glow/10 to-transparent filter blur-3xl"></div>
+      <div class="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-radial from-quantum-blue-glow/10 to-transparent filter blur-3xl"></div>
+    </div>
+
+    <!-- Global Header -->
+    <header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent h-20">
+      <div class="max-w-7xl mx-auto h-full px-6 flex items-center justify-between">
+        
+        <!-- Logo / Brand (uses logo.png for content as requested) -->
+        <a id="logo-link" href="javascript:void(0)" class="flex items-center gap-3 group focus:outline-none relative">
+          <div class="relative flex items-center justify-center">
+            <div class="w-8 h-8 rounded-lg bg-[#020408] border border-quantum-blue/30 p-1 flex items-center justify-center transition-all duration-300 group-hover:border-quantum-blue relative z-10">
+              <img
+                src="logo.png"
+                alt="Rheivatech Logo"
+                referrerPolicy="no-referrer"
+                class="w-full h-full object-contain filter drop-shadow-[0_0_4px_rgba(6,182,212,0.6)] transition-transform duration-500 group-hover:scale-110"
+              />
+            </div>
+            <!-- Sliding robot head icon peek-a-boo, slides from underneath the logo revealing only half of it -->
+            <div id="robot-head" class="absolute left-0 top-1/2 -translate-y-1/2 w-6 h-6 z-0 flex items-center justify-center transition-all duration-500 ease-out transform translate-x-0 opacity-0 pointer-events-none">
+              <i data-lucide="bot" class="w-4 h-4 text-quantum-blue filter drop-shadow-[0_0_4px_rgba(6,182,212,0.8)]"></i>
+            </div>
+          </div>
+          <div class="flex flex-col relative z-10 ml-1">
+            <span class="text-sm font-sans font-bold tracking-[0.2em] text-white group-hover:text-quantum-blue transition-colors duration-300">RHEIVATECH</span>
+            <span class="text-[9px] uppercase tracking-widest text-quantum-blue/70 -mt-1 font-mono">Innovation Interface</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center gap-8">
+          <div class="flex items-center gap-6">
+            <a href="#manifesto" class="font-mono text-[11px] tracking-widest text-slate-400 hover:text-quantum-blue transition-colors duration-300 py-1">MANIFESTO</a>
+            
+            <!-- Interactive Phases Dropdown (Controlled via click in script.js) -->
+            <div class="relative py-1">
+              <button id="phases-dropdown-btn" class="flex items-center gap-1 font-mono text-[11px] tracking-widest text-slate-400 hover:text-quantum-blue transition-colors duration-300 focus:outline-none uppercase">
+                Phases <i data-lucide="chevron-down" class="w-3 h-3 transition-transform duration-300"></i>
+              </button>
+              <div id="phases-dropdown-menu" class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 rounded-lg border border-cyber-border bg-[#020408]/95 backdrop-blur-md shadow-2xl p-2 hidden z-50">
+                <div class="px-3 py-1.5 border-b border-slate-800/60 mb-1">
+                  <span class="text-[9px] text-slate-500 font-bold tracking-wider uppercase font-mono">System Migration Timeline</span>
+                </div>
+                <a href="#phases-section" class="flex items-center justify-between p-2 rounded hover:bg-quantum-blue/10 hover:text-white transition-colors group">
+                  <div class="flex flex-col text-left">
+                    <span class="text-[10px] font-bold text-quantum-blue uppercase tracking-wider font-mono">Phase 00: Sandbox</span>
+                    <span class="text-[8px] text-slate-400 font-mono">Active tools & statistical engines</span>
+                  </div>
+                  <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
+                </a>
+                <a href="#phase-01" class="flex items-center justify-between p-2 rounded hover:bg-quantum-blue/10 hover:text-white transition-colors group">
+                  <div class="flex flex-col text-left">
+                    <span class="text-[10px] font-bold text-slate-300 uppercase tracking-wider font-mono">Phase 01: Intelligence</span>
+                    <span class="text-[8px] text-slate-400 font-mono">Cognitive MoE offline compilers</span>
+                  </div>
+                  <span class="w-1.5 h-1.5 rounded-full bg-quantum-blue"></span>
+                </a>
+                <a href="#phase-02" class="flex items-center justify-between p-2 rounded hover:bg-quantum-blue/10 hover:text-white transition-colors group">
+                  <div class="flex flex-col text-left">
+                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider font-mono">Phase 02: Interface</span>
+                    <span class="text-[8px] text-slate-500 font-mono">Custom microelectronics & SoC</span>
+                  </div>
+                  <span class="w-1.5 h-1.5 rounded-full bg-slate-800"></span>
+                </a>
+                <a href="#phase-03" class="flex items-center justify-between p-2 rounded hover:bg-quantum-blue/10 hover:text-white transition-colors group">
+                  <div class="flex flex-col text-left">
+                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider font-mono">Phase 03: Mobility</span>
+                    <span class="text-[8px] text-slate-500 font-mono">Sovereign fleet autonomics</span>
+                  </div>
+                  <span class="w-1.5 h-1.5 rounded-full bg-slate-800"></span>
                 </a>
               </div>
-
-              <div class="font-mono text-[10px] text-slate-500 flex flex-wrap items-center gap-x-8 gap-y-2 uppercase pt-6 border-t border-slate-900/60">
-                <span>Focus Area: <span class="text-slate-300 font-bold">${founder.focus}</span></span>
-                <span>Status: <span class="text-green-400 font-bold">● ${founder.status}</span></span>
-              </div>
             </div>
 
-            <!-- Right Side: Image scaled up to exactly 2.5x of previous proportions -->
-            <div class="relative w-80 h-80 md:w-[440px] md:h-[440px] rounded-2xl overflow-hidden border border-slate-800/80 bg-slate-950/80 flex items-center justify-center p-8 group/avatar flex-shrink-0">
-              <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(6,182,212,0.1),transparent_70%)]"></div>
-              
-              <img 
-                src="${avatarSrc}" 
-                alt="${founder.name}" 
+            <a href="#vector" class="font-mono text-[11px] tracking-widest text-slate-400 hover:text-quantum-blue transition-colors duration-300 py-1">INFRASTRUCTURE</a>
+            <a href="#terminal-section" class="font-mono text-[11px] tracking-widest text-slate-400 hover:text-quantum-blue transition-colors duration-300 py-1">SYSTEMS</a>
+            <a href="#tech-stack" class="font-mono text-[11px] tracking-widest text-slate-400 hover:text-quantum-blue transition-colors duration-300 py-1">INTELLIGENCE</a>
+            <a href="#team-carousel" class="font-mono text-[11px] tracking-widest text-slate-400 hover:text-quantum-blue transition-colors duration-300 py-1">COLLECTIVE</a>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <div class="flex flex-col items-end">
+              <span class="text-[9px] text-slate-500 uppercase font-mono">Node Status</span>
+              <span class="text-[11px] text-green-400 font-mono">OPTIMAL | 0.04ms</span>
+            </div>
+            <div class="w-px h-8 bg-slate-800"></div>
+
+            <a
+              href="#join"
+              class="px-4 py-2 bg-slate-900 border border-slate-700 rounded text-[10px] uppercase tracking-widest text-[#cbd5e1] hover:text-white hover:border-slate-500 transition-all font-mono"
+            >
+              Access Login
+            </a>
+          </div>
+        </nav>
+
+        <!-- Mobile Toggle Button -->
+        <button
+          id="mobile-menu-toggle"
+          class="md:hidden flex items-center justify-center w-10 h-10 border border-cyber-border rounded bg-cyber-dark text-white hover:text-quantum-blue hover:border-quantum-blue/50 transition-all duration-300"
+        >
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+
+      </div>
+
+      <!-- Mobile Navigation Drawer -->
+      <div
+        id="mobile-menu"
+        class="hidden absolute top-20 left-0 w-full bg-[#020408]/95 backdrop-blur-lg border-b border-cyber-border py-8 px-6 flex flex-col gap-6 z-40 transition-all duration-300"
+      >
+        <a href="#manifesto" class="font-mono text-sm tracking-widest text-slate-300 hover:text-quantum-blue transition-all" onclick="toggleMobileMenu()">MANIFESTO</a>
+        <a href="#phases-section" class="font-mono text-sm tracking-widest text-slate-300 hover:text-quantum-blue transition-all" onclick="toggleMobileMenu()">SYSTEM PHASES</a>
+        <a href="#vector" class="font-mono text-sm tracking-widest text-slate-300 hover:text-quantum-blue transition-all" onclick="toggleMobileMenu()">INFRASTRUCTURE</a>
+        <a href="#terminal-section" class="font-mono text-sm tracking-widest text-slate-300 hover:text-quantum-blue transition-all" onclick="toggleMobileMenu()">SYSTEMS</a>
+        <a href="#tech-stack" class="font-mono text-sm tracking-widest text-slate-300 hover:text-quantum-blue transition-all" onclick="toggleMobileMenu()">INTELLIGENCE</a>
+        <a href="#team-carousel" class="font-mono text-sm tracking-widest text-slate-300 hover:text-quantum-blue transition-all" onclick="toggleMobileMenu()">COLLECTIVE</a>
+        
+        <div class="w-full h-px bg-slate-800 my-2"></div>
+        
+        <div class="flex items-center justify-between">
+          <div class="flex flex-col">
+            <span class="text-[9px] text-slate-500 uppercase font-mono">Node Status</span>
+            <span class="text-[11px] text-green-400 font-mono">OPTIMAL | 0.04ms</span>
+          </div>
+          <a
+            href="#join"
+            class="px-5 py-2.5 bg-slate-900 border border-slate-700 rounded text-xs uppercase tracking-widest text-[#cbd5e1] hover:text-white font-mono text-center"
+            onclick="toggleMobileMenu()"
+          >
+            Access Login
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Primary Landing Dashboard Layout -->
+    <main class="relative z-10">
+
+      <!-- 1. Manifesto / Hero Block -->
+      <section
+        id="manifesto"
+        class="relative min-h-screen py-24 md:py-32 flex flex-col items-center justify-center overflow-hidden px-6"
+      >
+        <div class="absolute inset-0 pointer-events-none cyber-grid opacity-30"></div>
+
+        <!-- Hero Content Wrapper -->
+        <div class="max-w-4xl mx-auto flex flex-col items-center text-center relative z-10 mt-10 md:mt-16">
+          
+          <!-- Glowing Logo Frame (uses logo.png for content as requested) -->
+          <div class="relative w-24 h-24 md:w-28 md:h-28 mb-8">
+            <span class="absolute inset-0 border border-quantum-blue/30 rounded-2xl animate-ping opacity-30"></span>
+            <span class="absolute -inset-2 border border-quantum-blue/10 rounded-3xl animate-pulse"></span>
+            
+            <div class="w-full h-full rounded-2xl border border-quantum-blue/30 p-4 bg-cyber-card backdrop-blur-sm flex items-center justify-center relative overflow-hidden shadow-[0_0_30px_rgba(6,182,212,0.15)] group">
+              <img
+                src="logo.png"
+                alt="Rheivatech Core Logo"
                 referrerPolicy="no-referrer"
-                class="w-60 h-60 md:w-[240px] md:h-[240px] object-contain filter drop-shadow-[0_0_12px_rgba(6,182,212,0.5)] transition-transform duration-500 group-hover/avatar:scale-110 z-10"
+                class="w-full h-full object-contain filter drop-shadow-[0_0_12px_rgba(6,182,212,0.6)]"
               />
-              
-              <!-- LinkedIn Link overlay specifically on image as well -->
-              <a 
-                href="${linkedinHref}" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                class="absolute inset-0 bg-[#020408]/90 backdrop-blur-sm flex flex-col items-center justify-center gap-3 opacity-0 group-hover/avatar:opacity-100 transition-all duration-300 cursor-pointer z-20"
-              >
-                <div class="w-12 h-12 rounded-full bg-quantum-blue-glow border border-quantum-blue flex items-center justify-center text-quantum-blue shadow-[0_0_20px_rgba(6,182,212,0.3)]">
-                  <i data-lucide="linkedin" class="w-5 h-5"></i>
-                </div>
-                <span class="font-mono text-[10px] text-quantum-blue font-bold tracking-widest uppercase text-center px-4">LinkedIn Portal</span>
-              </a>
+              <div class="absolute inset-0 bg-gradient-to-b from-transparent via-quantum-blue/5 to-transparent h-1/2 w-full laser-scan opacity-40"></div>
             </div>
           </div>
-        </div>
-      `;
-    }).join('');
-  }
 
-  /* Render ERP Analysis Portfolios Dynamically */
-  const portfolioContainer = document.getElementById('analytics-portfolio-container');
-  if (portfolioContainer) {
-    portfolioContainer.innerHTML = ANALYSIS_PORTFOLIO.map((item, index) => {
-      return `
-        <div class="border border-slate-900 rounded-xl p-6 bg-cyber-card/60 flex flex-col justify-between hover:border-yellow-500/30 transition-all duration-300 relative group overflow-hidden">
-          <div class="absolute inset-0 bg-radial from-yellow-500/2 to-transparent pointer-events-none"></div>
-          
-          <div class="space-y-4">
-            <!-- Image Frame -->
-            <div class="relative w-full aspect-video rounded-lg overflow-hidden border border-slate-900 bg-slate-950 flex items-center justify-center group-hover:border-yellow-500/20 transition-colors duration-300">
-              <img 
-                src="${item.image}" 
-                alt="${item.title}" 
-                referrerPolicy="no-referrer"
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div class="absolute inset-0 bg-[#020408]/65 backdrop-blur-[2px] opacity-100 group-hover:opacity-0 transition-opacity duration-300 flex flex-col items-center justify-center gap-2">
-                <div class="w-8 h-8 rounded-full border border-yellow-500/40 flex items-center justify-center bg-yellow-500/5 text-yellow-500">
-                  <i data-lucide="eye" class="w-4 h-4"></i>
-                </div>
-                <span class="font-mono text-[9px] text-yellow-500 font-bold uppercase tracking-widest px-2 py-0.5 border border-yellow-500/15 bg-yellow-500/5 rounded">Reveal ERP Interface</span>
+          <!-- System Initiation Tag -->
+          <div class="inline-flex items-center gap-2 bg-quantum-blue/5 border border-quantum-blue/20 px-3.5 py-1.5 rounded-full mb-8">
+            <span class="w-1.5 h-1.5 rounded-full bg-quantum-blue animate-pulse"></span>
+            <span class="font-mono text-[10px] uppercase tracking-[0.2em] text-quantum-blue font-bold">
+              [ CORE_SYSTEM_INIT ]
+            </span>
+          </div>
+
+          <!-- Primary Heading -->
+          <h1 class="font-sans font-bold text-4xl md:text-6xl tracking-tight leading-[1.08] text-white mb-8 max-w-3xl">
+            Sovereign Intelligence. <br />
+            <span class="text-gradient">Universal Infrastructure.</span>
+          </h1>
+
+          <!-- Manifesto text paragraphs -->
+          <div class="space-y-6 max-w-2xl text-left mb-12">
+            <p class="font-mono text-xs md:text-sm text-slate-400 leading-relaxed text-justify">
+              Rheivatech is a generational blueprint for continental self-reliance. We are rewriting the tech stack of Africa from the bedrock up. What begins as localized digital intelligence will evolve into physical hardware, secure telecommunications grids, ambient smart environments, and autonomous transit solutions built directly for our unique realities.
+            </p>
+            <p class="font-mono text-xs md:text-sm text-slate-400 leading-relaxed text-justify">
+              We reject the passive consumption of foreign architecture. Rheivatech is an uncompromising commitment to complete technology sovereignty—engineering high-availability software platforms and heavy industrial infrastructure designed to endure, empower, and outlive its creators.
+            </p>
+          </div>
+
+          <!-- Live Telemetry Scientific HUD -->
+          <div class="w-full max-w-2xl grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 border border-cyber-border/60 rounded-lg bg-cyber-card backdrop-blur-xs text-left">
+            <div class="p-2 border-r border-slate-800/60 last:border-0">
+              <div class="flex items-center gap-1.5 text-slate-500 text-[9px] font-bold tracking-wider mb-1">
+                <i data-lucide="globe" class="w-3 h-3 text-quantum-blue"></i>
+                SYSTEM_EPOCH
               </div>
+              <div id="hud-clock" class="font-mono text-[11px] text-white truncate font-medium">CALCULATING...</div>
+            </div>
+            <div class="p-2 border-r border-slate-800/60 sm:border-r last:border-0">
+              <div class="flex items-center gap-1.5 text-slate-500 text-[9px] font-bold tracking-wider mb-1">
+                <i data-lucide="radio" class="w-3 h-3 text-quantum-blue"></i>
+                ACTIVE_SENSORS
+              </div>
+              <div id="hud-nodes" class="font-mono text-[11px] text-white font-medium">148 NODES</div>
+            </div>
+            <div class="p-2 border-r border-slate-800/60 last:border-0">
+              <div class="flex items-center gap-1.5 text-slate-500 text-[9px] font-bold tracking-wider mb-1">
+                <i data-lucide="activity" class="w-3 h-3 text-quantum-blue"></i>
+                CPU_LOAD
+              </div>
+              <div id="hud-cpu" class="font-mono text-[11px] text-white font-medium">2.41%</div>
+            </div>
+            <div class="p-2 last:border-0">
+              <div class="flex items-center gap-1.5 text-slate-500 text-[9px] font-bold tracking-wider mb-1">
+                <i data-lucide="cpu" class="w-3 h-3 text-quantum-blue"></i>
+                VECTOR_STATUS
+              </div>
+              <div class="font-mono text-[11px] text-quantum-blue font-medium">PHASE_01 (LIVE)</div>
+            </div>
+          </div>
+
+          <!-- Down indicator -->
+          <div class="mt-16 w-full max-w-2xl border border-quantum-blue/20 hover:border-quantum-blue/50 rounded-xl p-6 bg-[#020408]/60 backdrop-blur-sm transition-all duration-300 group relative overflow-hidden shadow-[0_0_20px_rgba(6,182,212,0.05)] hover:shadow-[0_0_30px_rgba(6,182,212,0.1)] flex flex-col items-center gap-3 mx-auto">
+            <!-- Pulsing laser accent -->
+            <div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-quantum-blue to-transparent animate-pulse"></div>
+            
+            <div class="flex items-center gap-2 font-mono text-[10px] text-quantum-blue font-bold tracking-widest uppercase">
+              <i data-lucide="terminal" class="w-4 h-4 animate-pulse"></i>
+              Sovereign Command Console Available
             </div>
             
-            <div class="space-y-2">
-              <h4 class="font-sans font-bold text-lg text-white group-hover:text-yellow-500 transition-colors duration-200">
-                ${item.title}
-              </h4>
-              <p class="font-mono text-xs text-slate-400 leading-relaxed text-justify">
-                ${item.writeup}
+            <p class="font-sans text-xs md:text-sm text-slate-300 leading-relaxed text-center px-4 max-w-lg">
+              Check out the in page command line and use it to directly prompt information about us.
+            </p>
+            
+            <a href="#terminal-section" class="inline-flex items-center gap-2.5 font-mono text-xs font-bold text-white uppercase tracking-[0.15em] px-5 py-3 border border-slate-800 hover:border-quantum-blue rounded bg-slate-950 transition-all hover:bg-quantum-blue/15 shadow-[0_0_15px_rgba(6,182,212,0.02)]">
+              Click to Check Live Terminal Shell <i data-lucide="chevrons-down" class="w-4 h-4 animate-bounce"></i>
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 2. The Sovereign System (Earth, Technology, YOU) -->
+      <section id="vector" class="relative py-24 border-t border-cyber-border bg-cyber-dark/40 px-6 overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none cyber-grid opacity-20"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+          
+          <!-- Section Heading Block -->
+          <div class="max-w-3xl mb-16 text-left animate-on-scroll">
+            <span class="font-mono text-[10px] text-quantum-blue uppercase tracking-[0.2em] font-bold block mb-4">
+              [ LAYER_01 | THE_SOVEREIGN_SYSTEM ]
+            </span>
+            <h2 class="font-sans font-bold text-3xl md:text-5xl text-white tracking-tight mb-6 uppercase">
+              We are one with technology
+            </h2>
+            <p class="font-mono text-xs md:text-sm text-slate-400 leading-relaxed text-justify">
+              Our systems emulate the nativeness of the African ecosystem, bringing the edge of cost over civilization through passion, technicality, complex and dynamic intelligence, and highly integrated devices. Explore our core compartments below.
+            </p>
+          </div>
+
+          <!-- Pipeline Cards Grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12 animate-on-scroll">
+            
+            <!-- Compartment 1: Earth -->
+            <div
+              onclick="selectPhase(1)"
+              id="phase-card-1"
+              class="relative rounded-xl border p-8 bg-cyber-card cursor-pointer transition-all duration-300 overflow-hidden select-none border-quantum-blue shadow-[0_0_30px_rgba(6,182,212,0.08)]"
+            >
+              <div class="absolute top-0 right-0 w-32 h-32 bg-radial from-quantum-blue/5 to-transparent pointer-events-none"></div>
+              <div class="flex items-center justify-between mb-8">
+                <span class="font-mono text-[10px] text-quantum-blue font-bold tracking-widest">COMPARTMENT 01</span>
+                <div class="w-10 h-10 rounded border border-cyber-border flex items-center justify-center bg-cyber-dark/40 text-quantum-blue">
+                  <i data-lucide="globe-2" class="w-5 h-5"></i>
+                </div>
+              </div>
+              <h3 class="font-sans font-bold text-2xl text-white mb-2 uppercase">Earth</h3>
+              <p class="font-mono text-[10px] tracking-widest text-quantum-blue/80 uppercase mb-4">Natural Integration & Resilience</p>
+              <p class="font-mono text-xs text-slate-400 leading-relaxed">
+                Emulating the nativeness of the African ecosystem. Our systems run passive solar circuits with dual thermal convection sinks to sustain peak processing inside extreme climate profiles up to 65°C ambient.
               </p>
             </div>
+
+            <!-- Compartment 2: Technology -->
+            <div
+              onclick="selectPhase(2)"
+              id="phase-card-2"
+              class="relative rounded-xl border p-8 bg-cyber-card/60 cursor-pointer transition-all duration-300 overflow-hidden select-none border-cyber-border hover:border-quantum-blue/40"
+            >
+              <div class="absolute top-0 right-0 w-32 h-32 bg-radial from-quantum-blue/5 to-transparent pointer-events-none"></div>
+              <div class="flex items-center justify-between mb-8">
+                <span class="font-mono text-[10px] text-slate-500 font-bold tracking-widest">COMPARTMENT 02</span>
+                <div class="w-10 h-10 rounded border border-cyber-border flex items-center justify-center bg-cyber-dark/40 text-slate-500">
+                  <i data-lucide="cpu" class="w-5 h-5"></i>
+                </div>
+              </div>
+              <h3 class="font-sans font-bold text-2xl text-white mb-2 uppercase">Technology</h3>
+              <p class="font-mono text-[10px] tracking-widest text-slate-500 uppercase mb-4">Complex & Dynamic Intelligence</p>
+              <p class="font-mono text-xs text-slate-400 leading-relaxed">
+                The edge of cost over civilization. Engineering custom air-gapped silicon on low-power architectures, driving offline reasoning with compressed Mixture-of-Expert models trained on native regional vectors.
+              </p>
+            </div>
+
+            <!-- Compartment 3: YOU -->
+            <div
+              onclick="selectPhase(3)"
+              id="phase-card-3"
+              class="relative rounded-xl border p-8 bg-cyber-card/60 cursor-pointer transition-all duration-300 overflow-hidden select-none border-cyber-border hover:border-quantum-blue/40"
+            >
+              <div class="absolute top-0 right-0 w-32 h-32 bg-radial from-quantum-blue/5 to-transparent pointer-events-none"></div>
+              <div class="flex items-center justify-between mb-8">
+                <span class="font-mono text-[10px] text-slate-500 font-bold tracking-widest">COMPARTMENT 03</span>
+                <div class="w-10 h-10 rounded border border-cyber-border flex items-center justify-center bg-cyber-dark/40 text-slate-500">
+                  <i data-lucide="user-check" class="w-5 h-5"></i>
+                </div>
+              </div>
+              <h3 class="font-sans font-bold text-2xl text-white mb-2 uppercase">YOU</h3>
+              <p class="font-mono text-[10px] tracking-widest text-slate-500 uppercase mb-4">Highly Integrated Devices</p>
+              <p class="font-mono text-xs text-slate-400 leading-relaxed">
+                The human element. Merging technology into user-centric interfaces and responsive wear modules, offering unmatched data sovereignty where your thoughts and assets are never sent to foreign servers.
+              </p>
+            </div>
+
           </div>
+
+          <!-- Dynamic Panel metrics shown for selected phase -->
+          <div id="phase-specs" class="border border-cyber-border rounded-xl p-6 md:p-8 bg-cyber-card">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-cyber-border pb-6 mb-6">
+              <div>
+                <span id="spec-phase-num" class="text-[9px] font-mono text-quantum-blue uppercase tracking-widest block mb-1">COMPARTMENT 01 LOGISTICS</span>
+                <h4 id="spec-phase-title" class="font-sans font-bold text-xl text-white uppercase tracking-wider">EARTH SPECIFICATION</h4>
+              </div>
+              <div class="flex items-center gap-2 text-green-400 font-mono text-xs">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-green-400"></i>
+                <span>NATIVE SYSTEM HARMONIZED</span>
+              </div>
+            </div>
+
+            <div id="spec-metrics-grid" class="grid grid-cols-2 md:grid-cols-4 gap-6">
+              <div class="p-4 border border-slate-800/40 rounded bg-[#020408]/40">
+                <span class="text-[9px] text-slate-500 font-bold tracking-wider block mb-1">ECOSYSTEM_NATIVITY</span>
+                <span class="text-white font-mono text-sm font-medium">100% REGIONAL</span>
+              </div>
+              <div class="p-4 border border-slate-800/40 rounded bg-[#020408]/40">
+                <span class="text-[9px] text-slate-500 font-bold tracking-wider block mb-1">CLIMATE_RESILIENCE</span>
+                <span class="text-white font-mono text-sm font-medium">UP TO 65°C</span>
+              </div>
+              <div class="p-4 border border-slate-800/40 rounded bg-[#020408]/40">
+                <span class="text-[9px] text-slate-500 font-bold tracking-wider block mb-1">RESOURCE_OPTIMIZATION</span>
+                <span class="text-white font-mono text-sm font-medium">PASSIVE SOLAR</span>
+              </div>
+              <div class="p-4 border border-slate-800/40 rounded bg-[#020408]/40">
+                <span class="text-[9px] text-slate-500 font-bold tracking-wider block mb-1">CARBON_FOOTPRINT</span>
+                <span class="text-white font-mono text-sm font-medium">0.00 NET_ZERO</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 3. Terminal & Blueprint Deep Dives -->
+      <section id="terminal-section" class="relative py-24 px-6 border-t border-cyber-border bg-[#020408]/60 overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none cyber-grid opacity-15"></div>
+
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          <div class="mt-6 pt-3 border-t border-slate-900/60 flex justify-between items-center text-[10px] font-mono text-slate-500 uppercase">
-            <span>Module status: <span class="text-green-400 font-bold">● ONLINE</span></span>
-            <span class="font-bold">SPEC_0${index + 1}</span>
-          </div>
-        </div>
-      `;
-    }).join('');
-  }
-
-  /* 0. Phases click-to-toggle dropdown */
-  const phasesBtn = document.getElementById('phases-dropdown-btn');
-  const phasesMenu = document.getElementById('phases-dropdown-menu');
-  
-  if (phasesBtn && phasesMenu) {
-    phasesBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      phasesMenu.classList.toggle('hidden');
-      const chevron = phasesBtn.querySelector('i[data-lucide="chevron-down"]');
-      if (chevron) {
-        chevron.classList.toggle('rotate-180');
-      }
-    });
-
-    /* Close phases menu on clicking anywhere else on page */
-    document.addEventListener('click', (e) => {
-      if (!phasesBtn.contains(e.target) && !phasesMenu.contains(e.target)) {
-        phasesMenu.classList.add('hidden');
-        const chevron = phasesBtn.querySelector('i[data-lucide="chevron-down"]');
-        if (chevron) {
-          chevron.classList.remove('rotate-180');
-        }
-      }
-    });
-  }
-
-  /* 1. Initialize Lucide Icons */
-  if (window.lucide) {
-    window.lucide.createIcons();
-  }
-
-  /* Robot Head peek-a-boo loop (every 5 seconds, slides revealing half of it) */
-  const robotHead = document.getElementById('robot-head');
-  if (robotHead) {
-    setInterval(() => {
-      robotHead.classList.remove('translate-x-0', 'opacity-0');
-      robotHead.classList.add('translate-x-[22px]', 'opacity-100');
-      
-      /* Slide back after 1.8 seconds */
-      setTimeout(() => {
-        robotHead.classList.remove('translate-x-[22px]', 'opacity-100');
-        robotHead.classList.add('translate-x-0', 'opacity-0');
-      }, 1800);
-    }, 5000);
-  }
-
-  /* In-Page AI Modal Interactive Handlers */
-  const logoLink = document.getElementById('logo-link');
-  const aiModal = document.getElementById('ai-modal');
-  const closeModalBtn = document.getElementById('close-modal-btn');
-  const viewOtherBtn = document.getElementById('view-other-portfolio-btn');
-
-  if (logoLink && aiModal) {
-    logoLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      aiModal.classList.remove('hidden');
-    });
-  }
-
-  if (closeModalBtn && aiModal) {
-    closeModalBtn.addEventListener('click', () => {
-      aiModal.classList.add('hidden');
-    });
-
-    /* Close on outside overlay click */
-    aiModal.addEventListener('click', (e) => {
-      if (e.target === aiModal) {
-        aiModal.classList.add('hidden');
-      }
-    });
-  }
-
-  if (viewOtherBtn) {
-    viewOtherBtn.addEventListener('click', () => {
-      /* Turn button grey, update cursor and disable */
-      viewOtherBtn.classList.remove('text-slate-400', 'hover:text-slate-300', 'border-slate-800');
-      viewOtherBtn.classList.add('bg-slate-800/40', 'text-slate-600', 'border-slate-800/30', 'cursor-not-allowed');
-      viewOtherBtn.setAttribute('title', 'Coming Soon');
-      viewOtherBtn.setAttribute('disabled', 'true');
-      viewOtherBtn.innerHTML = `<i data-lucide="alert-octagon" class="w-3.5 h-3.5"></i> Coming Soon`;
-      if (window.lucide) {
-         window.lucide.createIcons();
-      }
-    });
-  }
-
-  /* 2. Dynamic Status Simulator (Real-time UTC clock & fluctuating network nodes) */
-  const hudClock = document.getElementById('hud-clock');
-  const hudNodes = document.getElementById('hud-nodes');
-  const hudCpu = document.getElementById('hud-cpu');
-
-  function startSimulators() {
-    /* Clock Ticker */
-    setInterval(() => {
-      const now = new Date();
-      const isoStr = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
-      if (hudClock) hudClock.textContent = isoStr;
-    }, 1000);
-
-    /* Nodes & CPU fluctuation */
-    let nodes = 148;
-    setInterval(() => {
-      const delta = Math.floor(Math.random() * 5) - 2;
-      nodes = Math.max(140, Math.min(160, nodes + delta));
-      if (hudNodes) hudNodes.textContent = `${nodes} NODES`;
-
-      const cpu = (1.5 + Math.random() * 2.5).toFixed(2);
-      if (hudCpu) hudCpu.textContent = `${cpu}%`;
-    }, 3000);
-  }
-  startSimulators();
-
-  /* 3. Mobile Menu Toggle */
-  const menu = document.getElementById('mobile-menu');
-  const mobileToggle = document.getElementById('mobile-menu-toggle');
-
-  function toggleMobileMenu() {
-    if (menu) {
-      if (menu.classList.contains('hidden')) {
-        menu.classList.remove('hidden');
-      } else {
-        menu.classList.add('hidden');
-      }
-    }
-  }
-
-  if (mobileToggle) {
-    mobileToggle.addEventListener('click', toggleMobileMenu);
-  }
-
-  /* Expose toggleMobileMenu to global window scope so onclick in HTML still works */
-  window.toggleMobileMenu = toggleMobileMenu;
-
-  /* 4. Header Scroll effect */
-  window.addEventListener('scroll', () => {
-    const header = document.getElementById('main-header');
-    if (header) {
-      if (window.scrollY > 50) {
-        header.classList.remove('bg-transparent', 'h-20');
-        header.classList.add('bg-[#020408]/90', 'backdrop-blur-md', 'border-b', 'border-cyber-border', 'h-16');
-      } else {
-        header.classList.remove('bg-[#020408]/90', 'backdrop-blur-md', 'border-b', 'border-cyber-border', 'h-16');
-        header.classList.add('bg-transparent', 'h-20');
-      }
-    }
-  });
-
-  /* 5. Pipeline Vectors Interactive Selection State */
-  const phaseData = {
-    1: {
-      tag: 'COMPARTMENT 01 LOGISTICS',
-      title: 'EARTH SPECIFICATION',
-      metrics: [
-        { label: 'ECOSYSTEM_NATIVITY', value: '100% REGIONAL' },
-        { label: 'CLIMATE_RESILIENCE', value: 'UP TO 65°C' },
-        { label: 'RESOURCE_OPTIMIZATION', value: 'PASSIVE SOLAR' },
-        { label: 'CARBON_FOOTPRINT', value: '0.00 NET_ZERO' }
-      ]
-    },
-    2: {
-      tag: 'COMPARTMENT 02 LOGISTICS',
-      title: 'TECHNOLOGY SPECIFICATION',
-      metrics: [
-        { label: 'COMPLEX_INTEGRATION', value: 'DYNAMIC MOE' },
-        { label: 'COST_VS_CIVILIZATION', value: 'OPTIMAL EDGE' },
-        { label: 'HARDWARE_BEDROCK', value: 'CUSTOM SILICON' },
-        { label: 'LOCAL_AUTONOMY', value: 'AIR-GAPPED' }
-      ]
-    },
-    3: {
-      tag: 'COMPARTMENT 03 LOGISTICS',
-      title: 'YOU SPECIFICATION',
-      metrics: [
-        { label: 'INTERACTION_PLANE', value: 'COGNITIVE SYMPHONY' },
-        { label: 'EMPOWERMENT_RATIO', value: 'INFINITE SCALING' },
-        { label: 'BIOMETRIC_RESONANCE', value: 'DYNAMIC MATCH' },
-        { label: 'USER_SOVEREIGNTY', value: '100% DECENTRALIZED' }
-      ]
-    }
-  };
-
-  function selectPhase(phaseId) {
-    /* Toggle selected cards look */
-    for (let i = 1; i <= 3; i++) {
-      const card = document.getElementById(`phase-card-${i}`);
-      if (!card) continue;
-      const label = card.querySelector('span');
-      const iconDiv = card.querySelector('div > div');
-
-      if (i === phaseId) {
-        card.className = "relative rounded-xl border p-8 bg-cyber-card cursor-pointer transition-all duration-300 overflow-hidden select-none border-quantum-blue shadow-[0_0_30px_rgba(6,182,212,0.08)]";
-        if (label) label.className = "font-mono text-[10px] text-quantum-blue font-bold tracking-widest";
-        if (iconDiv) iconDiv.className = "w-10 h-10 rounded border border-cyber-border flex items-center justify-center bg-cyber-dark/40 text-quantum-blue";
-      } else {
-        card.className = "relative rounded-xl border p-8 bg-cyber-card/60 cursor-pointer transition-all duration-300 overflow-hidden select-none border-cyber-border hover:border-quantum-blue/40";
-        if (label) label.className = "font-mono text-[10px] text-slate-500 font-bold tracking-widest";
-        if (iconDiv) iconDiv.className = "w-10 h-10 rounded border border-cyber-border flex items-center justify-center bg-cyber-dark/40 text-slate-500";
-      }
-    }
-
-    /* Update technical panel metrics */
-    const data = phaseData[phaseId];
-    if (data) {
-      const specPhaseNum = document.getElementById('spec-phase-num');
-      const specPhaseTitle = document.getElementById('spec-phase-title');
-      const grid = document.getElementById('spec-metrics-grid');
-
-      if (specPhaseNum) specPhaseNum.textContent = data.tag;
-      if (specPhaseTitle) specPhaseTitle.textContent = data.title;
-      if (grid) {
-        grid.innerHTML = data.metrics.map(m => `
-          <div class="p-4 border border-slate-800/40 rounded bg-[#020408]/40">
-            <span class="text-[9px] text-slate-500 font-bold tracking-wider block mb-1">${m.label}</span>
-            <span class="text-white font-mono text-sm font-medium">${m.value}</span>
-          </div>
-        `).join('');
-      }
-    }
-  }
-
-  /* Expose to window */
-  window.selectPhase = selectPhase;
-
-  /* 6. Interactive Terminal Simulation Console */
-  const terminalScreen = document.getElementById('terminal-screen');
-  function appendLog(line, isResponse = false) {
-    if (!terminalScreen) return;
-    const div = document.createElement('div');
-    if (isResponse) {
-      div.innerHTML = line;
-    } else {
-      div.innerHTML = `<span class="text-quantum-blue">r-tech_telemetry$</span> ${line}`;
-    }
-    terminalScreen.appendChild(div);
-    terminalScreen.scrollTop = terminalScreen.scrollHeight;
-  }
-
-  function runDiagnostic(type) {
-    if (type === 'scan') {
-      appendLog('SCAN_CHASSIS');
-      setTimeout(() => {
-        appendLog('<span class="text-slate-500">&gt; probing passive chassis sensors...</span>', true);
-        appendLog('<span class="text-green-400">&gt; SCAN SUCCESSFUL: Chassis core is secure. Core temp: 34.2C.</span>', true);
-      }, 400);
-    } else if (type === 'nodes') {
-      appendLog('DIAG_GRID');
-      setTimeout(() => {
-        appendLog('<span class="text-slate-500">&gt; pinging distributed regional network cells...</span>', true);
-        appendLog('&gt; CELL 01 (SOUTH): 100% | CELL 02 (EAST): 100% | CELL 03 (WEST): 98%', true);
-        appendLog('<span class="text-green-400">&gt; OVERALL GRID STATUS: OPTIMAL</span>', true);
-      }, 500);
-    } else if (type === 'protocols') {
-      appendLog('INIT_PROTOCOL');
-      setTimeout(() => {
-        appendLog('<span class="text-slate-500">&gt; compiling sovereign firmware boot loader...</span>', true);
-        appendLog('<span class="text-quantum-blue">&gt; SYSTEM COMPILATION: PHASE_01 STABLE. ready to link.</span>', true);
-      }, 450);
-    }
-  }
-
-  window.runDiagnostic = runDiagnostic;
-
-  function handleTerminalSubmit(event) {
-    if (event.key === 'Enter') {
-      const input = document.getElementById('terminal-input');
-      if (!input) return;
-      const rawCommand = input.value.trim();
-      const command = rawCommand.toLowerCase();
-      if (!command) return;
-
-      appendLog(rawCommand);
-      input.value = '';
-
-      setTimeout(() => {
-        if (command === 'help') {
-          appendLog('&gt; Available commands: <b>status</b>, <b>analysis</b>, <b>clear</b>, <b>vector</b>, <b>epoch</b>, <b>nodes</b>', true);
-        } else if (command === 'status') {
-          appendLog('&gt; [ STATUS REPORT: UNDER PRODUCTION ]', true);
-          appendLog('&gt; CURRENT COGNITIVE INFRASTRUCTURE: DEVELOPMENT PHASE', true);
-          appendLog('&gt; ASSET STATE: BOOTSTRAPPED | CAPITAL INDEX: CONSTRAINED', true);
-          appendLog('&gt; Rheivatech is built on extreme cost-efficiency and relentless technical passion.', true);
-          appendLog('&gt; We run highly optimized networks built for local resilience, bypassing corporate bloat.', true);
-          appendLog('&gt; ⚡ PLEASE STAY IN TOUCH to receive priority node updates!', true);
-        } else if (command === 'analysis') {
-          appendLog('&gt; <span class="text-yellow-500">INITIALIZING SECURE LINK TO DATA LAB...</span>', true);
-          appendLog('&gt; <span class="text-slate-500">CONNECTING TO RHEIVADA CORE ANALYTICS ENGINE...</span>', true);
-          setTimeout(() => {
-            appendLog('&gt; <span class="text-green-400">ACCESS GRANTED: UNLOCKING LAYER_02_EXT PORTAL.</span>', true);
-            const section = document.getElementById('analytics-section');
-            if (section) {
-              section.classList.remove('hidden');
-              section.scrollIntoView({ behavior: 'smooth' });
-            }
-          }, 1200);
-        } else if (command === 'closeanalysis' || command === 'close analysis') {
-          appendLog('&gt; deactivating data analytics service section...', true);
-          const section = document.getElementById('analytics-section');
-          if (section) {
-            section.classList.add('hidden');
-          }
-        } else if (command === 'clear') {
-          if (terminalScreen) terminalScreen.innerHTML = '';
-        } else if (command === 'vector') {
-          appendLog('&gt; Pipeline Active States:', true);
-          appendLog('&gt; Phase 01: local cognitive mixture-of-expert tuning', true);
-          appendLog('&gt; Phase 02: custom solar mesh communications network', true);
-          appendLog('&gt; Phase 03: custom chassis tuning with heavy autonomous mobility', true);
-        } else if (command === 'epoch') {
-          appendLog(`&gt; EPOCH TIME: ${new Date().toISOString()}`, true);
-        } else if (command === 'nodes') {
-          runDiagnostic('nodes');
-        } else {
-          appendLog(`&gt; Command not recognized: "${rawCommand}". Type "<b>help</b>" for options.`, true);
-        }
-      }, 200);
-    }
-  }
-
-  window.handleTerminalSubmit = handleTerminalSubmit;
-
-  /* 7. System Stack Tab-swaps */
-  const stackData = {
-    hardware: {
-      tag: '[ SPEC_INDEX | HARDWARE_FAB ]',
-      title: 'PHYSICAL ENDURANCE HARDWARE',
-      desc: 'Forging tactical electronics and heavy mechanical structures. We engineer custom microcontrollers, low-power system-on-chips (SoCs), military-spec wear structures, and heavy battery enclosures built to withstand regional thermal profiles.',
-      points: [
-        'TACTILE_CHASSIS | SOLID-CORE ENCLOSURES',
-        'SOLAR_THERMAL | PASSIVE CONVECTIVE COOLING',
-        'MODULAR_SOC | SWAPPABLE COMPUTATIONAL CORES'
-      ],
-      blueprint: 'R-CHASSIS_V4_CORE.3D',
-      blueprintStats: `
-        <div>DIMENSIONS: 340mm x 210mm x 45mm</div>
-        <div>THERMAL_TOLERANCE: -20C TO +65C</div>
-        <div>FABRICATION_ACCURACY: 0.02 Microns</div>
-      `
-    },
-    protocols: {
-      tag: '[ SPEC_INDEX | MESH_NETS ]',
-      title: 'DECENTRALIZED PROTOCOLS',
-      desc: 'Establishing peer-to-peer resilient wireless links. Our protocols operate over long-distance solar mesh channels, enabling reliable packet exchange entirely independent of standard internet trunk pipelines.',
-      points: [
-        'PEER_ROUTING | ZERO CENTRAL BACKBONE',
-        'AIR_GAPPED_FALLBACKS | OPTICAL LINK CHANNELS',
-        'REDUNDANT_SAT_MESH | GLOBAL SYNC MATRIX'
-      ],
-      blueprint: 'M-NET_TOPOLOGY_08.XML',
-      blueprintStats: `
-        <div>MAX_LINK_RANGE: 15km (AIR-TO-GROUND)</div>
-        <div>ENCRYPTION_STANDARD: SHA-512 SECURE</div>
-        <div>BACKHAUL_THROUGHPUT: 1.2 GBPS LINK</div>
-      `
-    },
-    intelligence: {
-      tag: '[ SPEC_INDEX | COGNITIVE_MOE ]',
-      title: 'LOCALIZED INTELLIGENCE KERNELS',
-      desc: 'Localized reasoning platforms optimized for high-capacity offline execution. We train models directly on dialect variances and continental context so no data has to travel over foreign clouds.',
-      points: [
-        'OFFLINE_MOE_COMPILERS | DIRECT EMBEDDINGS',
-        'DIALECT_TUNED_SAMPLERS | REGIONAL ALIGNMENT',
-        'TENSOR_STRETCHING | MEMORY-EFFICIENT WEIGHTS'
-      ],
-      blueprint: 'LLM_REASONING_ENGINE.BIN',
-      blueprintStats: `
-        <div>PARAMETER_SIZE: 70 Billion MOE</div>
-        <div>QUANTIZATION: 4-BIT INT EDGE CORES</div>
-        <div>DIALECT_COORDINATES: 18 REGIONAL VECTORS</div>
-      `
-    },
-    secure_grid: {
-      tag: '[ SPEC_INDEX | SEC_DEFENSE ]',
-      title: 'CONTINENTAL SOVEREIGN GRID',
-      desc: 'Full-spectrum resource tracking and smart automated grids. Monitoring ambient sensors, power cells, and regional network logs to guarantee permanent autonomy and uptime.',
-      points: [
-        'STABILITY_AUDITS | REALTIME ATTACK TRACE',
-        'GRID_SOVEREIGNTY | CONTINENTAL SANCTIONS INSULATION',
-        'AUTONOMOUS_LOAD_SINK | AMBIENT LOAD BALANCING'
-      ],
-      blueprint: 'SOVEREIGN_GRID_MATRIX.JSON',
-      blueprintStats: `
-        <div>TOTAL_ACTIVE_CELLS: 4,012 NODES</div>
-        <div>INTEGRITY_INDEX: 99.999% HEAL</div>
-        <div>ATTACK_ABSORBENCE: MULTI-TERABIT/SEC</div>
-      `
-    }
-  };
-
-  function selectCategory(catId) {
-    const categories = ['hardware', 'protocols', 'intelligence', 'secure_grid'];
-    categories.forEach(id => {
-      const btn = document.getElementById(`cat-btn-${id}`);
-      if (!btn) return;
-      if (id === catId) {
-        btn.className = "px-5 py-2.5 font-mono text-[11px] font-bold tracking-widest uppercase transition-all duration-300 rounded border border-quantum-blue text-quantum-blue bg-quantum-blue-glow";
-      } else {
-        btn.className = "px-5 py-2.5 font-mono text-[11px] font-bold tracking-widest uppercase transition-all duration-300 rounded border border-slate-800 text-slate-500 hover:border-slate-700 hover:text-slate-300";
-      }
-    });
-
-    const data = stackData[catId];
-    if (data) {
-      const stackTag = document.getElementById('stack-tag');
-      const stackTitle = document.getElementById('stack-title');
-      const stackDesc = document.getElementById('stack-description');
-      const pointsContainer = document.getElementById('stack-points');
-      const blueprintContent = document.getElementById('blueprint-content');
-      const blueprintStats = document.getElementById('blueprint-stats');
-
-      if (stackTag) stackTag.textContent = data.tag;
-      if (stackTitle) stackTitle.textContent = data.title;
-      if (stackDesc) stackDesc.textContent = data.desc;
-
-      if (pointsContainer) {
-        pointsContainer.innerHTML = data.points.map(pt => `
-          <div class="flex items-center gap-3">
-            <div class="w-1.5 h-1.5 rounded-full bg-quantum-blue"></div>
-            <span class="font-mono text-xs text-white">${pt}</span>
-          </div>
-        `).join('');
-      }
-
-      if (blueprintContent) blueprintContent.textContent = data.blueprint;
-      if (blueprintStats) blueprintStats.innerHTML = data.blueprintStats;
-    }
-  }
-
-  window.selectCategory = selectCategory;
-
-  /* 8. Leadership Carousel Slider */
-  let currentSlide = 0;
-  function slideCarousel(direction) {
-    const track = document.getElementById('carousel-track');
-    if (!track) return;
-    const items = track.children;
-    if (items.length === 0) return;
-    const gap = 24;
-    const itemWidth = items[0].getBoundingClientRect().width;
-    const totalWidthToScroll = itemWidth + gap;
-    const maxSlides = items.length - 1;
-
-    if (direction === 'next') {
-      currentSlide = currentSlide >= maxSlides ? 0 : currentSlide + 1;
-    } else {
-      currentSlide = currentSlide <= 0 ? maxSlides : currentSlide - 1;
-    }
-
-    track.style.transform = `translateX(-${currentSlide * totalWidthToScroll}px)`;
-  }
-
-  window.slideCarousel = slideCarousel;
-
-  /* 9. Mixture of Experts compiler interactive stats & formulas */
-  function updateMoeMetrics() {
-    const slider = document.getElementById('param-slider');
-    const quantSelect = document.getElementById('quant-select');
-    if (!slider || !quantSelect) return;
-
-    const P = parseInt(slider.value);
-    const Q = parseInt(quantSelect.value);
-
-    // Update displays for slider value & quantization type
-    const paramValDisp = document.getElementById('param-val');
-    const quantValDisp = document.getElementById('quant-val');
-    if (paramValDisp) paramValDisp.textContent = P + "B";
-    
-    let quantText = "4-BIT INT";
-    let compressionFactor = 4.0;
-    let bytePerParam = 0.5;
-    if (Q === 16) {
-      quantText = "16-BIT FLOAT";
-      compressionFactor = 1.0;
-      bytePerParam = 2.0;
-    } else if (Q === 8) {
-      quantText = "8-BIT INT";
-      compressionFactor = 2.0;
-      bytePerParam = 1.0;
-    } else if (Q === 4) {
-      quantText = "4-BIT INT";
-      compressionFactor = 4.0;
-      bytePerParam = 0.5;
-    } else if (Q === 2) {
-      quantText = "2-BIT TENSOR";
-      compressionFactor = 8.0;
-      bytePerParam = 0.25;
-    }
-    if (quantValDisp) quantValDisp.textContent = quantText;
-
-    // Calculate RAM and file size
-    const M = P * bytePerParam;
-    const estRam = document.getElementById('est-ram');
-    const estStorage = document.getElementById('est-storage');
-    const mFootprint = document.getElementById('m-footprint');
-    
-    if (estRam) estRam.textContent = M.toFixed(1) + " GB";
-    if (estStorage) estStorage.textContent = M.toFixed(1) + " GB";
-    if (mFootprint) mFootprint.textContent = M.toFixed(1) + " GB";
-
-    // Compression rates
-    const mCompression = document.getElementById('m-compression');
-    if (mCompression) mCompression.textContent = compressionFactor.toFixed(2) + " x";
-
-    // Latency approximation
-    const mLatency = document.getElementById('m-latency');
-    const computedLatency = Math.max(2, Math.round((M * 0.3) + 3));
-    if (mLatency) mLatency.textContent = computedLatency + " ms";
-
-    // Reasoning Accuracy formula
-    const mAccuracy = document.getElementById('m-accuracy');
-    let baseAccuracy = 98.5;
-    if (Q === 16) baseAccuracy = 99.8;
-    else if (Q === 8) baseAccuracy = 99.1;
-    else if (Q === 4) baseAccuracy = 96.8;
-    else if (Q === 2) baseAccuracy = 88.5;
-    
-    const paramRatio = (P - 8) / (120 - 8);
-    const actualAccuracy = baseAccuracy - (1.0 - paramRatio) * 5.0;
-    if (mAccuracy) mAccuracy.textContent = actualAccuracy.toFixed(1) + "%";
-
-    // Minimum hardware suite selection
-    const estHardware = document.getElementById('est-hardware');
-    if (estHardware) {
-      if (M <= 8) {
-        estHardware.textContent = "Ultra-Lightweight Edge (Raspberry Pi / Jetson Nano)";
-        estHardware.className = "text-green-400 font-bold";
-      } else if (M <= 16) {
-        estHardware.textContent = "Standard Smartphone / Entry-Level Laptop";
-        estHardware.className = "text-green-400 font-bold";
-      } else if (M <= 32) {
-        estHardware.textContent = "Developer Workstation / High-Performance PC";
-        estHardware.className = "text-quantum-blue font-bold";
-      } else if (M <= 64) {
-        estHardware.textContent = "Dedicated Developer PC / Dual-GPU Server Node";
-        estHardware.className = "text-yellow-400 font-bold";
-      } else {
-        estHardware.textContent = "Heavy Continental Infrastructure Node / Cloud AI Farm";
-        estHardware.className = "text-red-400 font-bold";
-      }
-    }
-
-    // Dynamic expert allocation visualization weights formula based on slider
-    const r1 = document.getElementById('e1-val');
-    const r2 = document.getElementById('e2-val');
-    const r3 = document.getElementById('e3-val');
-    const r4 = document.getElementById('e4-val');
-
-    const b1 = document.getElementById('e1-bar');
-    const b2 = document.getElementById('e2-bar');
-    const b3 = document.getElementById('e3-bar');
-    const b4 = document.getElementById('e4-bar');
-
-    const w1 = Math.max(15, Math.min(65, Math.round(40 + (P % 11) - (Q % 3))));
-    const w2 = Math.max(10, Math.min(45, Math.round(30 - (P % 7) + (Q % 4))));
-    const w3 = Math.max(5, Math.min(30, Math.round(20 + (P % 5))));
-    const w4 = Math.max(5, 100 - (w1 + w2 + w3));
-
-    if (r1) r1.textContent = w1 + "%";
-    if (r2) r2.textContent = w2 + "%";
-    if (r3) r3.textContent = w3 + "%";
-    if (r4) r4.textContent = w4 + "%";
-
-    if (b1) b1.style.width = w1 + "%";
-    if (b2) b2.style.width = w2 + "%";
-    if (b3) b3.style.width = w3 + "%";
-    if (b4) b4.style.width = w4 + "%";
-  }
-
-  function simulateMoeCompile() {
-    const btn = document.getElementById('moe-compile-btn');
-    const terminal = document.getElementById('moe-terminal');
-    const preloader = document.getElementById('moe-preloader');
-    const fillBox = document.getElementById('preloader-fill-box');
-    const eyeL = document.getElementById('preloader-eye-l');
-    const eyeR = document.getElementById('preloader-eye-r');
-    const statusText = document.getElementById('preloader-status-text');
-    const percentageDisp = document.getElementById('preloader-percentage');
-
-    if (!btn || !terminal) return;
-
-    btn.setAttribute('disabled', 'true');
-    btn.classList.add('opacity-50', 'cursor-not-allowed');
-
-    if (preloader) {
-      preloader.classList.remove('hidden');
-      setTimeout(() => {
-        preloader.classList.remove('opacity-0');
-        preloader.classList.add('opacity-100');
-      }, 50);
-    }
-
-    if (fillBox) fillBox.style.height = '0%';
-    if (eyeL) eyeL.classList.add('hidden');
-    if (eyeR) eyeR.classList.add('hidden');
-    if (statusText) statusText.textContent = "INITIALIZING EXPERT ROUTING MATRIX...";
-    if (percentageDisp) percentageDisp.textContent = "0%";
-
-    let pct = 0;
-    const progressInterval = setInterval(() => {
-      pct += 2;
-      if (pct > 100) pct = 100;
-
-      if (percentageDisp) percentageDisp.textContent = pct + "%";
-      if (fillBox) fillBox.style.height = pct + "%";
-
-      if (statusText) {
-        if (pct < 25) {
-          statusText.textContent = "MAPPING REGIONAL DIALECT VECTORS...";
-        } else if (pct < 50) {
-          statusText.textContent = "MAPPING EXPERT ROUTING MATRICES...";
-        } else if (pct < 75) {
-          statusText.textContent = "APPLYING INT-4 QUANTIZATION SCALING...";
-        } else if (pct < 100) {
-          statusText.textContent = "PROBING STANDALONE AIR-GAP BEDROCK...";
-        } else {
-          statusText.textContent = "COMPILATION PLOTTED! LINK ESTABLISHED.";
-        }
-      }
-
-      if (pct >= 100) {
-        clearInterval(progressInterval);
-        
-        if (eyeL) eyeL.classList.remove('hidden');
-        if (eyeR) eyeR.classList.remove('hidden');
-
-        setTimeout(() => {
-          if (preloader) {
-            preloader.classList.remove('opacity-100');
-            preloader.classList.add('opacity-0');
-            setTimeout(() => {
-              preloader.classList.add('hidden');
+          <!-- Left Column: Interactive Terminal -->
+          <div class="lg:col-span-7 animate-on-scroll">
+            <div class="relative border border-cyber-border rounded-lg bg-cyber-dark shadow-[0_20px_50px_rgba(0,0,0,0.6)] overflow-hidden">
               
-              terminal.innerHTML = '';
-              const logs = [
-                'INIT_COMPILER_SESSION: SUCCESSFUL',
-                'RESOLVING LOCALIZED LINGUISTIC EMBEDDING WEIGHTS...',
-                'MAPPING INTER-EXPERT ROUTING MATRIX...',
-                'QUANTIZING COEFFICIENTS FOR AIR-GAP EFFICIENCY...',
-                'VERIFYING CHASSIS-LEVEL COMPATIBILITY...',
-                'COMPILATION COMPLETED: SECURED AND READY FOR AUTONOMOUS DEPLOYMENT!'
-              ];
+              <!-- Terminal Header -->
+              <div class="bg-cyber-dark/80 px-5 py-3 border-b border-cyber-border flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-green-500"></span>
+                  <span class="ml-2 font-mono text-[9px] text-slate-500">R-TECH@SOVEREIGN_NODE:~</span>
+                </div>
+                <div class="flex items-center gap-1.5 font-mono text-[9px] text-quantum-blue">
+                  <span class="w-1.5 h-1.5 rounded-full bg-quantum-blue animate-ping"></span>
+                  <span>SESSION_SECURE</span>
+                </div>
+              </div>
 
-              let logIndex = 0;
-              function printNextLog() {
-                if (logIndex < logs.length) {
-                  const isSuccess = logs[logIndex].includes('COMPLETED') || logs[logIndex].includes('SUCCESSFUL');
-                  const colorClass = isSuccess ? 'text-green-400' : 'text-slate-400';
-                  terminal.innerHTML += `<div class="${colorClass}">&gt; ${logs[logIndex]}</div>`;
-                  terminal.scrollTop = terminal.scrollHeight;
-                  logIndex++;
-                  setTimeout(printNextLog, 300);
-                } else {
-                  btn.removeAttribute('disabled');
-                  btn.classList.remove('opacity-50', 'cursor-not-allowed');
-                }
-              }
-              printNextLog();
+              <!-- Terminal Output Display Box -->
+              <div id="terminal-screen" class="p-5 h-[280px] overflow-y-auto font-mono text-xs text-slate-300 space-y-2 leading-relaxed">
+                <div><span class="text-quantum-blue">r-tech_init:</span> booting Rheivatech continental telemetry...</div>
+                <div><span class="text-slate-500">Node initialized at Africa/Distributed Core [127.0.0.1]</span></div>
+                <div><span class="text-slate-500">Verifying secure pipeline structural integrity...</span></div>
+                <div><span class="text-green-400">STATUS: OPTIMAL. Complete Sovereignty Ensured.</span></div>
+                <div>Type '<span class="text-quantum-blue">help</span>' or tap triggers below to investigate system properties.</div>
+              </div>
 
-            }, 300);
-          }
-        }, 600);
-      }
-    }, 40);
-  }
+              <!-- Terminal Interactive Toolbar -->
+              <div class="bg-cyber-dark/80 p-4 border-t border-cyber-border flex flex-wrap gap-2 items-center justify-between">
+                <span class="font-mono text-[9px] text-slate-500 flex items-center gap-1">
+                  <i data-lucide="terminal" class="w-3 h-3 text-quantum-blue"></i>
+                  EXEC_TRIGGER:
+                </span>
+                <div class="flex gap-2 flex-wrap">
+                  <button onclick="runDiagnostic('scan')" class="text-[9px] px-2.5 py-1 rounded bg-[#020408] border border-slate-800 text-slate-300 hover:border-quantum-blue/50 hover:text-quantum-blue transition-all">SCAN_CHASSIS</button>
+                  <button onclick="runDiagnostic('nodes')" class="text-[9px] px-2.5 py-1 rounded bg-[#020408] border border-slate-800 text-slate-300 hover:border-quantum-blue/50 hover:text-quantum-blue transition-all">DIAG_GRID</button>
+                  <button onclick="runDiagnostic('protocols')" class="text-[9px] px-2.5 py-1 rounded bg-[#020408] border border-slate-800 text-slate-300 hover:border-quantum-blue/50 hover:text-quantum-blue transition-all">INIT_PROTOCOL</button>
+                </div>
+              </div>
 
-  /* PHASE 02: Solar Connection Directory Specs Retrieval */
-  let selectedMeshNodeId = 'lagos-ng';
-  let activeMeshMode = 'local';
-  let lastProbedData = null;
+              <!-- Terminal Input Box -->
+              <div class="bg-cyber-dark/95 border-t border-cyber-border p-3 flex items-center gap-3">
+                <span class="text-quantum-blue text-xs ml-2 font-bold">$</span>
+                <input
+                  type="text"
+                  id="terminal-input"
+                  placeholder="enter telemetry commands (e.g. status, clear, vector)..."
+                  class="bg-transparent text-white border-0 outline-none w-full text-xs font-mono placeholder:text-slate-600 focus:ring-0 focus:border-0"
+                  onkeydown="handleTerminalSubmit(event)"
+                />
+              </div>
 
-  async function detectUserLocation() {
-    return new Promise((resolve) => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          async (position) => {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
-            try {
-              const response = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}`);
-              if (response.ok) {
-                const data = await response.json();
-                const city = data.city || data.locality || data.principalSubdivision || "Unknown City";
-                const country = data.countryName || "Unknown Country";
-                resolve({
-                  lat: lat.toFixed(4),
-                  lon: lon.toFixed(4),
-                  region: `${city}, ${country}`,
-                  countryCode: data.countryCode || ""
-                });
-              } else {
-                resolve(fallbackIpLocation(lat, lon));
-              }
-            } catch (e) {
-              resolve(fallbackIpLocation(lat, lon));
-            }
-          },
-          async (err) => {
-            resolve(await getIpLocation());
-          },
-          { timeout: 8000 }
-        );
-      } else {
-        getIpLocation().then(resolve);
-      }
-    });
-  }
-
-  async function getIpLocation() {
-    try {
-      const response = await fetch('https://ipapi.co/json/');
-      if (response.ok) {
-        const data = await response.json();
-        return {
-          lat: Number(data.latitude || 0).toFixed(4),
-          lon: Number(data.longitude || 0).toFixed(4),
-          region: `${data.city || "Unknown City"}, ${data.country_name || "Unknown Country"}`,
-          countryCode: data.country_code || ""
-        };
-      }
-    } catch (e) {}
-    return {
-      lat: "6.5244",
-      lon: "3.3792",
-      region: "Lagos, Nigeria (Fallback Core)",
-      countryCode: "NG"
-    };
-  }
-
-  function fallbackIpLocation(lat, lon) {
-    return {
-      lat: lat.toFixed(4),
-      lon: lon.toFixed(4),
-      region: "Unknown Regional Coordinate",
-      countryCode: ""
-    };
-  }
-
-  window.triggerGeolocationProbe = async function() {
-    const display = document.getElementById('mesh-specs-display');
-    const btn = document.getElementById('mesh-fetch-btn');
-    const probeBtn = document.getElementById('probe-geo-btn');
-
-    if (!display) return;
-
-    if (btn) {
-      btn.setAttribute('disabled', 'true');
-      btn.innerHTML = `<i data-lucide="refresh-cw" class="w-3.5 h-3.5 animate-spin"></i> Probing Local Coords...`;
-    }
-    if (probeBtn) {
-      probeBtn.setAttribute('disabled', 'true');
-      probeBtn.innerHTML = `<i data-lucide="refresh-cw" class="w-3.5 h-3.5 animate-spin"></i> Querying Regional Nodes...`;
-    }
-
-    display.innerHTML = `
-      <div class="flex flex-col items-center justify-center py-6 gap-3 text-quantum-blue font-mono text-xs">
-        <div class="w-4 h-4 rounded-full border border-quantum-blue border-t-transparent animate-spin"></div>
-        <span class="animate-pulse tracking-widest uppercase text-[10px]">[ DECRYPTING GEOLOCATION SIGNAL CORES ]</span>
-      </div>
-    `;
-
-    if (window.lucide) window.lucide.createIcons();
-
-    const data = await detectUserLocation();
-    lastProbedData = data;
-
-    setTimeout(() => {
-      if (btn) {
-        btn.removeAttribute('disabled');
-        btn.innerHTML = `<i data-lucide="download" class="w-3.5 h-3.5"></i> Request Specifications Data`;
-      }
-      if (probeBtn) {
-        probeBtn.removeAttribute('disabled');
-        probeBtn.innerHTML = `<i data-lucide="crosshair" class="w-4 h-4"></i> Detect &amp; Probe Local Region Coords`;
-      }
-      
-      updateLocalMeshSpecsDisplay(data);
-      if (window.lucide) window.lucide.createIcons();
-    }, 1200);
-  };
-
-  function updateLocalMeshSpecsDisplay(data) {
-    const display = document.getElementById('mesh-specs-display');
-    if (!display) return;
-
-    const lat = parseFloat(data.lat);
-    const lon = parseFloat(data.lon);
-
-    const baseYield = Math.max(2.1, Math.min(6.3, 6.0 - Math.abs(lat) * 0.08));
-    let yieldRating = "Sub-optimal";
-    let yieldColor = "text-yellow-500";
-    if (baseYield >= 5.0) {
-      yieldRating = "Optimal Peak";
-      yieldColor = "text-green-400";
-    } else if (baseYield >= 4.0) {
-      yieldRating = "Optimal";
-      yieldColor = "text-quantum-blue";
-    } else if (baseYield >= 3.0) {
-      yieldRating = "Moderate";
-      yieldColor = "text-slate-300";
-    }
-    const solarStr = `${baseYield.toFixed(1)} kWh/m²/day (${yieldRating})`;
-
-    let availabilityStr = "EDGE AIR-GAP EMULATOR ACTIVE";
-    let availabilityColor = "text-yellow-400 font-bold";
-    if (data.countryCode === 'NG' || data.region.toLowerCase().includes('nigeria')) {
-      availabilityStr = "DIRECT METROPOLITAN HUB ONLINE (100% AVAILABLE)";
-      availabilityColor = "text-green-400 font-bold";
-    } else if (['ZA', 'KE', 'GH', 'EG', 'SN', 'DZ', 'MA', 'CI', 'UG', 'ET'].includes(data.countryCode)) {
-      availabilityStr = "REGIONAL SAT-MESH DEPLOYED (85% DIRECT LINE)";
-      availabilityColor = "text-quantum-blue font-bold";
-    } else {
-      availabilityStr = "TRANSCONTINENTAL TUNNEL ACTIVE (STABLE DEPLOYMENT)";
-      availabilityColor = "text-slate-300 font-bold";
-    }
-
-    const latencyVal = Math.max(10, Math.round(12 + Math.abs(lat - 6.5) * 3.5));
-
-    display.innerHTML = `
-      <div class="grid grid-cols-2 gap-4 text-xs font-mono">
-        <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
-          <span class="text-[9px] text-slate-500 font-bold block mb-1">PROBED REGION</span>
-          <span class="text-white font-medium">${data.region}</span>
-        </div>
-        <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
-          <span class="text-[9px] text-slate-500 font-bold block mb-1">COORDINATES</span>
-          <span class="text-white font-medium">${Math.abs(lat).toFixed(4)}° ${lat >= 0 ? 'N' : 'S'}, ${Math.abs(lon).toFixed(4)}° ${lon >= 0 ? 'E' : 'W'}</span>
-        </div>
-        <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
-          <span class="text-[9px] text-slate-500 font-bold block mb-1">SOLAR YIELD</span>
-          <span class="${yieldColor} font-bold">${solarStr}</span>
-        </div>
-        <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
-          <span class="text-[9px] text-slate-500 font-bold block mb-1">INFRASTRUCTURE AVAILABILITY</span>
-          <span class="${availabilityColor}">${availabilityStr}</span>
-        </div>
-      </div>
-      <div class="grid grid-cols-2 gap-4 pt-2 border-t border-slate-800/60 font-mono text-[9px] text-slate-500 uppercase">
-        <div>Transmitting latency: <span class="text-white font-bold">${latencyVal}ms</span></div>
-        <div>Mesh coordination: <span class="text-green-400 font-bold">ESTABLISHED DIRECT PEER</span></div>
-      </div>
-    `;
-  }
-
-  function resetLocalMeshSpecsDisplay() {
-    const display = document.getElementById('mesh-specs-display');
-    if (!display) return;
-    display.innerHTML = `
-      <div class="grid grid-cols-2 gap-4 text-xs font-mono">
-        <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
-          <span class="text-[9px] text-slate-500 font-bold block mb-1">PROBED REGION</span>
-          <span class="text-slate-500 font-mono italic">[AWAITING PROBE]</span>
-        </div>
-        <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
-          <span class="text-[9px] text-slate-500 font-bold block mb-1">COORDINATES</span>
-          <span class="text-slate-500 font-mono italic">[LAT: -- / LON: --]</span>
-        </div>
-        <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
-          <span class="text-[9px] text-slate-500 font-bold block mb-1">SOLAR YIELD</span>
-          <span class="text-slate-500 font-mono italic">[AWAITING SENSOR]</span>
-        </div>
-        <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
-          <span class="text-[9px] text-slate-500 font-bold block mb-1">HARDWARE AVAILABILITY</span>
-          <span class="text-slate-500 font-mono italic">[AWAITING LINK]</span>
-        </div>
-      </div>
-      <div class="grid grid-cols-2 gap-4 pt-2 border-t border-slate-800/60 font-mono text-[9px] text-slate-500 uppercase">
-        <div>Transmitting latency: <span class="text-slate-500">-- ms</span></div>
-        <div>Mesh coordination: <span class="text-slate-500">OFFLINE</span></div>
-      </div>
-    `;
-  }
-
-  function selectMeshMode(mode) {
-    activeMeshMode = mode;
-    const btnLocal = document.getElementById('mode-btn-local');
-    const btnGlobal = document.getElementById('mode-btn-global');
-    const localContainer = document.getElementById('local-nodes-container');
-    const globalContainer = document.getElementById('global-nodes-container');
-    const nodeSelectionTitle = document.getElementById('node-selection-title');
-
-    if (mode === 'local') {
-      if (btnLocal) btnLocal.className = "py-2 font-mono text-[10px] font-bold border border-quantum-blue text-quantum-blue bg-quantum-blue-glow rounded transition-all uppercase flex items-center justify-center gap-1.5";
-      if (btnGlobal) btnGlobal.className = "py-2 font-mono text-[10px] font-bold border border-slate-800 text-slate-500 hover:border-slate-700 hover:text-slate-300 rounded transition-all uppercase flex items-center justify-center gap-1.5 bg-[#020408]/40";
-      if (localContainer) localContainer.classList.remove('hidden');
-      if (globalContainer) globalContainer.classList.add('hidden');
-      if (nodeSelectionTitle) nodeSelectionTitle.textContent = "Sovereign Local Coordinate Signal Mapping:";
-      
-      if (lastProbedData) {
-        updateLocalMeshSpecsDisplay(lastProbedData);
-      } else {
-        resetLocalMeshSpecsDisplay();
-      }
-    } else {
-      if (btnLocal) btnLocal.className = "py-2 font-mono text-[10px] font-bold border border-slate-800 text-slate-500 hover:border-slate-700 hover:text-slate-300 rounded transition-all uppercase flex items-center justify-center gap-1.5 bg-[#020408]/40";
-      if (btnGlobal) btnGlobal.className = "py-2 font-mono text-[10px] font-bold border border-quantum-blue text-quantum-blue bg-quantum-blue-glow rounded transition-all uppercase flex items-center justify-center gap-1.5";
-      if (localContainer) localContainer.classList.add('hidden');
-      if (globalContainer) globalContainer.classList.remove('hidden');
-      if (nodeSelectionTitle) nodeSelectionTitle.textContent = "Select Nigerian Core Headquarters Node:";
-      selectMeshNode('lagos-ng');
-    }
-  }
-
-  function selectMeshNode(nodeId) {
-    selectedMeshNodeId = nodeId;
-    const allNodes = ['lagos-ng', 'abuja-ng', 'ph-ng', 'kano-ng'];
-    allNodes.forEach(id => {
-      const btn = document.getElementById(`node-${id}`);
-      if (!btn) return;
-      if (id === nodeId) {
-        btn.className = "px-3 py-2 font-mono text-[9px] font-bold border border-quantum-blue text-quantum-blue bg-quantum-blue-glow rounded transition-all uppercase";
-      } else {
-        btn.className = "px-3 py-2 font-mono text-[9px] font-bold border border-slate-800 text-slate-500 hover:border-slate-700 hover:text-slate-300 rounded transition-all uppercase bg-[#020408]/40";
-      }
-    });
-
-    fetchMeshSpecs();
-  }
-
-  function fetchMeshSpecs() {
-    const display = document.getElementById('mesh-specs-display');
-    const btn = document.getElementById('mesh-fetch-btn');
-    if (!display) return;
-
-    if (activeMeshMode === 'local') {
-      if (lastProbedData) {
-        updateLocalMeshSpecsDisplay(lastProbedData);
-      } else {
-        triggerGeolocationProbe();
-      }
-      return;
-    }
-
-    if (btn) {
-      btn.setAttribute('disabled', 'true');
-      btn.innerHTML = `<i data-lucide="refresh-cw" class="w-3.5 h-3.5 animate-spin"></i> Retrieving Hub specs...`;
-      if (window.lucide) window.lucide.createIcons();
-    }
-
-    display.innerHTML = `
-      <div class="flex items-center justify-center py-6 gap-2 text-quantum-blue font-mono text-xs">
-        <div class="w-3.5 h-3.5 rounded-full border border-quantum-blue border-t-transparent animate-spin"></div>
-        <span>CONNECTING TO NIGERIAN CORE SERVER...</span>
-      </div>
-    `;
-
-    setTimeout(() => {
-      if (btn) {
-        btn.removeAttribute('disabled');
-        btn.innerHTML = `<i data-lucide="download" class="w-3.5 h-3.5"></i> Request Specifications Data`;
-        if (window.lucide) window.lucide.createIcons();
-      }
-
-      let region = "Lagos, Nigeria";
-      let coords = "6.5244° N, 3.3792° E";
-      let solar = "5.6 kWh/m²/day (Optimal Peak)";
-      let health = "99.9% Core integrity (Primary Root)";
-      let latency = "4.5ms";
-
-      if (selectedMeshNodeId === 'abuja-ng') {
-        region = "Abuja, Nigeria";
-        coords = "9.0765° N, 7.3986° E";
-        solar = "5.9 kWh/m²/day (Optimal Peak)";
-        health = "99.8% Sync integrity (Secondary Core)";
-        latency = "8.2ms";
-      } else if (selectedMeshNodeId === 'ph-ng') {
-        region = "Port Harcourt, Nigeria";
-        coords = "4.8156° N, 7.0498° E";
-        solar = "4.8 kWh/m²/day (Optimal Coastal)";
-        health = "99.7% Base integrity (Coastal Node)";
-        latency = "9.1ms";
-      } else if (selectedMeshNodeId === 'kano-ng') {
-        region = "Kano, Nigeria";
-        coords = "12.0022° N, 8.5920° E";
-        solar = "6.2 kWh/m²/day (Maximum Peak)";
-        health = "99.9% Envelope integrity (Sahelian Hub)";
-        latency = "11.8ms";
-      }
-
-      display.innerHTML = `
-        <div class="grid grid-cols-2 gap-4 text-xs font-mono">
-          <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
-            <span class="text-[9px] text-slate-500 font-bold block mb-1">SELECTED NIGERIAN HUB</span>
-            <span class="text-white font-medium">${region}</span>
+            </div>
           </div>
-          <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
-            <span class="text-[9px] text-slate-500 font-bold block mb-1">COORDINATES</span>
-            <span class="text-white font-medium">${coords}</span>
+
+          <!-- Right Column: Interactive Description -->
+          <div class="lg:col-span-5 text-left animate-on-scroll">
+            <span class="font-mono text-[10px] text-quantum-blue uppercase tracking-[0.2em] font-bold block mb-4">
+              [ LAYER_02 | SYSTEM_SANDBOX ]
+            </span>
+            <h2 class="font-sans font-bold text-3xl md:text-5xl text-white tracking-tight mb-6">
+              Sovereignty Sandbox
+            </h2>
+            <p class="font-mono text-xs md:text-sm text-slate-400 leading-relaxed mb-6 text-justify">
+              Our interactive sovereign environment lets you probe active hardware and software telemetry kernels directly from your console. Verify node connections, check physical diagnostics, and review active secure routing matrices across regional nodes.
+            </p>
+            <div class="space-y-4">
+              <div class="flex items-start gap-3">
+                <div class="w-5 h-5 rounded bg-quantum-blue/10 border border-quantum-blue/30 flex items-center justify-center text-quantum-blue mt-0.5">
+                  <i data-lucide="shield" class="w-3.5 h-3.5"></i>
+                </div>
+                <div>
+                  <h4 class="font-sans font-bold text-sm text-white">Encrypted Handshakes</h4>
+                  <p class="font-mono text-xs text-slate-500">Multi-point distributed telemetry logs secured via post-quantum cryptography layers.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="w-5 h-5 rounded bg-quantum-blue/10 border border-quantum-blue/30 flex items-center justify-center text-quantum-blue mt-0.5">
+                  <i data-lucide="cpu" class="w-3.5 h-3.5"></i>
+                </div>
+                <div>
+                  <h4 class="font-sans font-bold text-sm text-white">Independent Edge Processing</h4>
+                  <p class="font-mono text-xs text-slate-500">Decentralized firmware routines designed to run continuously during massive network disconnects.</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
-            <span class="text-[9px] text-slate-500 font-bold block mb-1">SOLAR RADIANCE</span>
-            <span class="text-quantum-blue font-bold">${solar}</span>
+
+        </div>
+      </section>
+
+      <!-- 3.5 Hidden Data Analytics & Science Section -->
+      <section id="analytics-section" class="hidden transition-all duration-700 ease-in-out py-24 px-6 border-t border-cyber-border bg-[#020408]/80 overflow-hidden relative">
+        <div class="absolute inset-0 pointer-events-none cyber-grid opacity-15"></div>
+        <div class="absolute top-1/2 right-10 w-96 h-96 bg-radial from-yellow-500/5 to-transparent pointer-events-none filter blur-2xl"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10 text-left">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div class="max-w-3xl">
+              <span class="font-mono text-[10px] text-yellow-500 uppercase tracking-[0.2em] font-bold block mb-4">
+                [ LAYER_02_EXT | DATA_SCIENCE_PORTAL ]
+              </span>
+              <div class="flex flex-wrap items-center gap-3">
+                <h2 class="font-sans font-bold text-3xl md:text-5xl text-white tracking-tight uppercase">
+                  Rheivada Analytics Hub
+                </h2>
+                <span class="px-2.5 py-0.5 rounded text-[8px] font-mono font-bold tracking-widest text-yellow-500 border border-yellow-500/30 bg-yellow-500/5 uppercase">
+                  ● ACTIVE DATA SCIENCE LAB
+                </span>
+              </div>
+              <p class="font-mono text-xs md:text-sm text-slate-400 leading-relaxed mt-4">
+                We engineer localized, robust analytical engines that turn offline and online datasets into highly polished intelligence reports. We specialize in custom predictive modeling, regional pattern extraction, and private database reporting.
+              </p>
+            </div>
+            <button onclick="closeAnalyticsSection()" class="px-4 py-2 border border-slate-800 hover:border-red-500/40 text-slate-400 hover:text-red-400 font-mono text-[10px] font-bold tracking-widest uppercase rounded transition-all flex items-center gap-1.5 bg-[#020408]/40">
+              <i data-lucide="x" class="w-3.5 h-3.5"></i> Close Analysis
+            </button>
           </div>
-          <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
-            <span class="text-[9px] text-slate-500 font-bold block mb-1">SOVEREIGN HARDWARE DEPLOYED</span>
-            <span class="text-green-400 font-bold">${health}</span>
+
+          <!-- Services Grid & Simulated Chart -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            <!-- Services Checklist -->
+            <div class="lg:col-span-5 space-y-4 flex flex-col justify-between">
+              <div class="p-5 border border-slate-900 rounded bg-[#020408]/60">
+                <h4 class="font-sans font-bold text-sm text-white mb-2 flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span>
+                  Predictive Modeling & Trend Extraction
+                </h4>
+                <p class="font-mono text-xs text-slate-500">Training specialized regional algorithms for agriculture, commerce, and bandwidth capacity trends.</p>
+              </div>
+              <div class="p-5 border border-slate-900 rounded bg-[#020408]/60">
+                <h4 class="font-sans font-bold text-sm text-white mb-2 flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span>
+                  Dialect & Regional Text Mining
+                </h4>
+                <p class="font-mono text-xs text-slate-500">Mining localized conversations and communication patterns without relaying raw customer data to third-party APIs.</p>
+              </div>
+              <div class="p-5 border border-slate-900 rounded bg-[#020408]/60">
+                <h4 class="font-sans font-bold text-sm text-white mb-2 flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span>
+                  Sovereign Custom Reports Generation
+                </h4>
+                <p class="font-mono text-xs text-slate-500">Automating high-fidelity reports tailored directly to regional regulations and independent logistics standards.</p>
+              </div>
+            </div>
+
+            <!-- Simulated Dashboard Panel -->
+            <div class="lg:col-span-7">
+              <div class="relative border border-yellow-500/20 rounded-xl bg-cyber-card p-6 sm:p-8 flex flex-col justify-between h-full shadow-[0_20px_40px_rgba(0,0,0,0.4)]">
+                <div class="flex items-center justify-between mb-6">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-yellow-500 animate-pulse"></span>
+                    <span class="font-mono text-[10px] text-yellow-500 font-bold tracking-widest uppercase">RHEIVADA MODEL RUNNER v1.0</span>
+                  </div>
+                  <span class="font-mono text-[9px] text-slate-500 font-bold">STATUS: DEMO_LAB_STANDALONE</span>
+                </div>
+
+                <!-- Simulation Interactive Chart -->
+                <div class="bg-[#020408] rounded border border-slate-900 p-6 flex-1 flex flex-col justify-between mb-6">
+                  <div>
+                    <span class="text-[9px] text-slate-500 font-bold block mb-3 uppercase tracking-wider">PROJECTED YIELD TREND (REGIONAL INTENSITY INDEX)</span>
+                    
+                    <!-- Beautiful Custom CSS Bar/Line Chart representation -->
+                    <div class="h-32 flex items-end gap-3 px-2">
+                      <div class="flex-1 flex flex-col items-center h-full justify-end">
+                        <div class="w-full bg-yellow-500/20 hover:bg-yellow-500/40 border-t border-yellow-500/60 rounded-t transition-all duration-500" style="height: 45%;"></div>
+                        <span class="font-mono text-[8px] text-slate-600 mt-1">JAN</span>
+                      </div>
+                      <div class="flex-1 flex flex-col items-center h-full justify-end">
+                        <div class="w-full bg-yellow-500/20 hover:bg-yellow-500/40 border-t border-yellow-500/60 rounded-t transition-all duration-500" style="height: 60%;"></div>
+                        <span class="font-mono text-[8px] text-slate-600 mt-1">FEB</span>
+                      </div>
+                      <div class="flex-1 flex flex-col items-center h-full justify-end">
+                        <div class="w-full bg-yellow-500/30 hover:bg-yellow-500/50 border-t border-yellow-500/80 rounded-t transition-all duration-500" style="height: 85%;"></div>
+                        <span class="font-mono text-[8px] text-slate-600 mt-1">MAR</span>
+                      </div>
+                      <div class="flex-1 flex flex-col items-center h-full justify-end">
+                        <div class="w-full bg-yellow-500/20 hover:bg-yellow-500/40 border-t border-yellow-500/60 rounded-t transition-all duration-500" style="height: 50%;"></div>
+                        <span class="font-mono text-[8px] text-slate-600 mt-1">APR</span>
+                      </div>
+                      <div class="flex-1 flex flex-col items-center h-full justify-end">
+                        <div class="w-full bg-yellow-500/40 hover:bg-yellow-500/60 border-t border-yellow-500 rounded-t transition-all duration-500 animate-pulse" style="height: 95%;"></div>
+                        <span class="font-mono text-[8px] text-yellow-500 mt-1 font-bold">MAY*</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex justify-between items-center text-[10px] font-mono text-slate-400 mt-4 pt-4 border-t border-slate-900">
+                    <span>Active Algorithm: <span class="text-white font-bold">M-MARKOV_CHAIN_GRID</span></span>
+                    <span>Confidence Coefficient: <span class="text-green-400 font-bold">94.8%</span></span>
+                  </div>
+                </div>
+
+                <div class="font-mono text-[9px] text-slate-500 text-justify uppercase leading-relaxed">
+                  ⚠️ This lab environment allows testing our pattern synthesis models. You can close this portal using the button above or by typing <span class="text-white font-bold">close analysis</span> into the sovereignty console.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic ERP Portfolio Showcase -->
+          <div class="mt-16 pt-12 border-t border-slate-900">
+            <div class="max-w-3xl mb-8">
+              <span class="font-mono text-[10px] text-yellow-500 uppercase tracking-[0.2em] font-bold block mb-2">
+                [ LAYER_02_EXT_SHOWCASE | ERP_PORTFOLIO_MODULES ]
+              </span>
+              <h3 class="font-sans font-bold text-2xl md:text-3xl text-white tracking-tight uppercase">
+                Enterprise Buy &amp; Sell Management App (ERP)
+              </h3>
+              <p class="font-sans text-xs md:text-sm text-slate-400 mt-2 leading-relaxed">
+                This section showcases our high-performance **ERP Sales Analysis Tool**, designed specifically for businesses engaged in high-velocity buying and selling transactions. The architecture seamlessly integrates real-time buy/sell matching with intelligent profit-margin forecasting.
+              </p>
+              <div class="mt-4 inline-flex items-center gap-2 bg-yellow-500/5 border border-yellow-500/20 px-3.5 py-1.5 rounded-lg">
+                <span class="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse"></span>
+                <span class="font-mono text-[9px] uppercase tracking-[0.15em] text-yellow-500">
+                  DEVELOPER PROTOCOL: Add additional slides by appending objects to the <code class="text-white font-bold">ANALYSIS_PORTFOLIO</code> array inside your local <code class="text-white font-bold">script.js</code>.
+                </span>
+              </div>
+            </div>
+
+            <!-- Dynamic Grid rendered from script.js -->
+            <div id="analytics-portfolio-container" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <!-- Dynamically populated from script.js -->
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 4. System Stack Grid -->
+      <section id="tech-stack" class="relative py-24 px-6 border-t border-cyber-border bg-cyber-dark/40 overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none cyber-grid opacity-15"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10 text-left">
+          
+          <!-- Header Block -->
+          <div class="max-w-3xl mb-16 animate-on-scroll">
+            <span class="font-mono text-[10px] text-quantum-blue uppercase tracking-[0.2em] font-bold block mb-4">
+              [ LAYER_03 | SOVEREIGN_COMPONENTS ]
+            </span>
+            <div class="flex flex-wrap items-center gap-3 mb-6">
+              <h2 class="font-sans font-bold text-3xl md:text-5xl text-white tracking-tight">
+                Uncompromising Architecture
+              </h2>
+              <span class="px-2.5 py-1 rounded text-[9px] font-mono font-bold tracking-widest text-yellow-500 border border-yellow-500/30 bg-yellow-500/10 uppercase inline-block">
+                ● FUTURE DESIGN VISION
+              </span>
+            </div>
+            <p class="font-mono text-xs md:text-sm text-slate-400 leading-relaxed mb-4">
+              We operate across the complete computational spectrum. From building offline AI compilers to fabricating robust physical chassis, each architectural segment is designed for extreme endurance and localization.
+            </p>
+            <p class="font-mono text-[11px] text-yellow-500/80 italic leading-relaxed">
+              *(Note: The technical designs below represent our long-term hardware and software vision—a futuristic architectural blueprint we are actively working to materialize.)*
+            </p>
+          </div>
+
+          <!-- Dynamic Stack Navigation -->
+          <div class="flex flex-wrap gap-2 border-b border-cyber-border pb-6 mb-12 animate-on-scroll">
+            <button onclick="selectCategory('hardware')" id="cat-btn-hardware" class="px-5 py-2.5 font-mono text-[11px] font-bold tracking-widest uppercase transition-all duration-300 rounded border border-quantum-blue text-quantum-blue bg-quantum-blue-glow">
+              HARDWARE
+            </button>
+            <button onclick="selectCategory('protocols')" id="cat-btn-protocols" class="px-5 py-2.5 font-mono text-[11px] font-bold tracking-widest uppercase transition-all duration-300 rounded border border-slate-800 text-slate-500 hover:border-slate-700 hover:text-slate-300">
+              PROTOCOLS
+            </button>
+            <button onclick="selectCategory('intelligence')" id="cat-btn-intelligence" class="px-5 py-2.5 font-mono text-[11px] font-bold tracking-widest uppercase transition-all duration-300 rounded border border-slate-800 text-slate-500 hover:border-slate-700 hover:text-slate-300">
+              INTELLIGENCE
+            </button>
+            <button onclick="selectCategory('secure_grid')" id="cat-btn-secure_grid" class="px-5 py-2.5 font-mono text-[11px] font-bold tracking-widest uppercase transition-all duration-300 rounded border border-slate-800 text-slate-500 hover:border-slate-700 hover:text-slate-300">
+              SECURE GRID
+            </button>
+          </div>
+
+          <!-- Dynamic Category Content -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center animate-on-scroll">
+            
+            <!-- Category Specs Info (Left) -->
+            <div id="stack-info-col" class="lg:col-span-5 space-y-6">
+              <span id="stack-tag" class="text-[9px] font-mono text-quantum-blue uppercase tracking-widest block font-bold">[ SPEC_INDEX | HARDWARE_FAB ]</span>
+              <h3 id="stack-title" class="font-sans font-bold text-2xl md:text-3xl text-white tracking-tight uppercase">PHYSICAL ENDURANCE HARDWARE</h3>
+              <p id="stack-description" class="font-mono text-xs md:text-sm text-slate-400 leading-relaxed text-justify">
+                Forging tactical electronics and heavy mechanical structures. We engineer custom microcontrollers, low-power system-on-chips (SoCs), military-spec wear structures, and heavy battery enclosures built to withstand regional thermal profiles.
+              </p>
+              
+              <div id="stack-points" class="space-y-4 pt-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-1.5 h-1.5 rounded-full bg-quantum-blue"></div>
+                  <span class="font-mono text-xs text-white">TACTILE_CHASSIS | SOLID-CORE ENCLOSURES</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-1.5 h-1.5 rounded-full bg-quantum-blue"></div>
+                  <span class="font-mono text-xs text-white">SOLAR_THERMAL | PASSIVE CONVECTIVE COOLING</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="w-1.5 h-1.5 rounded-full bg-quantum-blue"></div>
+                  <span class="font-mono text-xs text-white">MODULAR_SOC | SWAPPABLE COMPUTATIONAL CORES</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Interactive Blueprint Scanner (Right) -->
+            <div class="lg:col-span-7">
+              <div class="relative rounded-xl border border-cyber-border bg-cyber-card/60 backdrop-blur-sm p-6 overflow-hidden">
+                <div class="relative h-60 w-full rounded-lg border border-cyber-border bg-[#020408]/80 flex items-center justify-center overflow-hidden">
+                  
+                  <div class="absolute inset-0 cyber-grid opacity-15 pointer-events-none"></div>
+                  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-quantum-blue/10 to-transparent h-1/2 w-full laser-scan pointer-events-none"></div>
+
+                  <!-- Blueprint Line Overlay -->
+                  <div class="text-center relative z-10 px-6">
+                    <p class="font-mono text-[9px] text-slate-500 uppercase tracking-widest mb-2">[ CAD_SCHEMATIC_VIEWPORT ]</p>
+                    <div id="blueprint-content" class="text-quantum-blue text-lg font-bold tracking-widest animate-pulse font-sans">
+                      R-CHASSIS_V4_CORE.3D
+                    </div>
+                    <div id="blueprint-stats" class="mt-4 font-mono text-[10px] text-slate-400 space-y-1">
+                      <div>DIMENSIONS: 340mm x 210mm x 45mm</div>
+                      <div>THERMAL_TOLERANCE: -20C TO +65C</div>
+                      <div>FABRICATION_ACCURACY: 0.02 Microns</div>
+                    </div>
+                  </div>
+
+                  <!-- Scientific Crosshairs -->
+                  <div class="absolute top-4 left-4 w-4 h-4 border-t border-l border-quantum-blue/30"></div>
+                  <div class="absolute top-4 right-4 w-4 h-4 border-t border-r border-quantum-blue/30"></div>
+                  <div class="absolute bottom-4 left-4 w-4 h-4 border-b border-l border-quantum-blue/30"></div>
+                  <div class="absolute bottom-4 right-4 w-4 h-4 border-b border-r border-quantum-blue/30"></div>
+                </div>
+
+                <div class="mt-4 flex items-center justify-between font-mono text-[9px] text-slate-500 uppercase">
+                  <span>SCALE: 1:0.15 VECTOR MODEL</span>
+                  <span class="text-quantum-blue">SCAN_STATUS: STABLE</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 5. Team Collective Radar Slider -->
+      <section id="team-carousel" class="relative py-24 px-6 border-t border-cyber-border bg-[#020408]/60 overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none cyber-grid opacity-15"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10 text-left">
+          
+          <!-- Section Header and navigation buttons in header -->
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 animate-on-scroll">
+            <div class="max-w-3xl">
+              <span class="font-mono text-[10px] text-quantum-blue uppercase tracking-[0.2em] font-bold block mb-4">
+                [ LAYER_04 | INTELLECT_POOL ]
+              </span>
+              <h2 class="font-sans font-bold text-3xl md:text-5xl text-white tracking-tight mb-6">
+                Founding Collective
+              </h2>
+              <p class="font-mono text-xs md:text-sm text-slate-400 leading-relaxed">
+                Architected by a specialized collective of African hardware engineering specialists, localized language model designers, sovereign grid researchers, and manufacturing pioneers.
+              </p>
+            </div>
+            
+            <!-- Carousel Navigation Buttons -->
+            <div class="flex gap-3">
+              <button onclick="slideCarousel('prev')" class="w-12 h-12 rounded border border-cyber-border flex items-center justify-center text-slate-400 hover:text-quantum-blue hover:border-quantum-blue/50 transition-all bg-[#020408]/40">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+              </button>
+              <button onclick="slideCarousel('next')" class="w-12 h-12 rounded border border-cyber-border flex items-center justify-center text-slate-400 hover:text-quantum-blue hover:border-quantum-blue/50 transition-all bg-[#020408]/40">
+                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Slider Container -->
+          <div class="overflow-hidden relative w-full pb-4 animate-on-scroll">
+            <div id="carousel-track" class="flex gap-6 transition-transform duration-500 ease-out" style="transform: translateX(0px);">
+              <!-- Rendered Dynamically via script.js -->
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 5.5 Sovereign Phases & Portfolio Roadmap -->
+      <section id="phases-section" class="relative py-24 px-6 border-t border-cyber-border bg-cyber-dark/40 overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none cyber-grid opacity-15"></div>
+        <div class="absolute top-0 left-1/4 w-[300px] h-[300px] bg-radial from-quantum-blue/5 to-transparent pointer-events-none filter blur-2xl"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10 text-left">
+          
+          <!-- Section Header -->
+          <div class="max-w-3xl mb-16">
+            <span class="font-mono text-[10px] text-quantum-blue uppercase tracking-[0.2em] font-bold block mb-4">
+              [ LAYER_05 | MIGRATION_PIPELINE ]
+            </span>
+            <h2 class="font-sans font-bold text-3xl md:text-5xl text-white tracking-tight mb-6">
+              Sovereign Evolution Roadmap
+            </h2>
+            <p class="font-mono text-xs md:text-sm text-slate-400 leading-relaxed">
+              Tracking our development milestones across physical, cognitive, and network planes. Toggle through our active and conceptual phases below to inspect the deployed nodes.
+            </p>
+          </div>
+
+          <!-- Timeline Layout -->
+          <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            
+            <!-- Phase 00 (Start Phase) -->
+            <div class="border border-quantum-blue/30 rounded-xl p-6 bg-[#020408]/60 backdrop-blur-sm relative group overflow-hidden transition-all duration-300 hover:border-quantum-blue hover:shadow-[0_0_30px_rgba(6,182,212,0.06)] flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="font-mono text-[9px] text-quantum-blue font-bold tracking-widest uppercase">[ PHASE 00 ]</span>
+                  <span class="px-2 py-0.5 rounded text-[8px] font-mono font-bold tracking-widest text-green-400 border border-green-400/20 bg-green-400/5 animate-pulse uppercase">● LIVE ENGINE</span>
+                </div>
+                <h3 class="font-sans font-bold text-lg text-white mb-2 uppercase">Sandbox & Portfolio</h3>
+                <p class="font-mono text-xs text-slate-400 leading-relaxed mb-6">
+                  Our current sandbox of active, distributed tools powering sovereign data computations and modeling workflows across regional nodes.
+                </p>
+
+                <!-- Active Portfolio Instances -->
+                <div class="space-y-4">
+                  <div class="border border-cyber-border/80 rounded-lg p-4 bg-cyber-dark/40 hover:border-quantum-blue/40 transition-all cursor-pointer" onclick="document.getElementById('logo-link').click()">
+                    <div class="flex items-center justify-between mb-1">
+                      <span class="font-sans font-bold text-xs text-white">RheivaAI</span>
+                      <span class="font-mono text-[8px] text-quantum-blue font-bold tracking-wider">[ SOVEREIGN LLM ]</span>
+                    </div>
+                    <p class="font-mono text-[10px] text-slate-500 leading-normal">
+                      Conversational reasoning engine built to operate air-gapped on lightweight chips.
+                    </p>
+                  </div>
+
+                  <div class="border border-cyber-border/80 rounded-lg p-4 bg-cyber-dark/40 hover:border-quantum-blue/40 transition-all">
+                    <div class="flex items-center justify-between mb-1">
+                      <span class="font-sans font-bold text-xs text-white">Rheiva Stats</span>
+                      <span class="font-mono text-[8px] text-quantum-blue font-bold tracking-wider">[ DATA SCIENCE ]</span>
+                    </div>
+                    <p class="font-mono text-[10px] text-slate-500 leading-normal">
+                      High-throughput data science & analytics module for regional statistical indexing.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-slate-800/60 flex items-center justify-between font-mono text-[9px] text-slate-500 uppercase">
+                <span>Active Nodes: 140+</span>
+                <span class="text-green-400">100% SECURE</span>
+              </div>
+            </div>
+
+            <!-- Phase 01 -->
+            <div class="border border-cyber-border rounded-xl p-6 bg-[#020408]/20 backdrop-blur-sm relative group overflow-hidden transition-all duration-300 hover:border-quantum-blue/40 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="font-mono text-[9px] text-slate-500 font-bold tracking-widest uppercase">[ PHASE 01 ]</span>
+                  <span class="px-2 py-0.5 rounded text-[8px] font-mono font-bold tracking-widest text-quantum-blue border border-quantum-blue/20 bg-quantum-blue/5 uppercase">DEPLOYED</span>
+                </div>
+                <h3 class="font-sans font-bold text-lg text-white mb-2 uppercase">Intelligence Spec</h3>
+                <p class="font-mono text-xs text-slate-400 leading-relaxed mb-6">
+                  Compiling heavy offline AI clusters and Mixture-of-Expert reasoning models trained specifically on dialect variations.
+                </p>
+
+                <div class="space-y-2 font-mono text-[10px] text-slate-500">
+                  <div class="flex items-center gap-2">
+                    <div class="w-1 h-1 rounded-full bg-quantum-blue"></div>
+                    <span>Dialect Compilation Layer</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <div class="w-1 h-1 rounded-full bg-quantum-blue"></div>
+                    <span>70B Local Compiler Core</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <div class="w-1 h-1 rounded-full bg-quantum-blue"></div>
+                    <span>Zero Data Cloud Leak</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-slate-800/60 flex items-center justify-between font-mono text-[9px] text-slate-500 uppercase">
+                <span>Active State: Active</span>
+                <span class="text-quantum-blue">STABLE RUN</span>
+              </div>
+            </div>
+
+            <!-- Phase 02 -->
+            <div class="border border-cyber-border rounded-xl p-6 bg-[#020408]/20 backdrop-blur-sm relative group overflow-hidden transition-all duration-300 hover:border-quantum-blue/40 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="font-mono text-[9px] text-slate-500 font-bold tracking-widest uppercase">[ PHASE 02 ]</span>
+                  <span class="px-2 py-0.5 rounded text-[8px] font-mono font-bold tracking-widest text-slate-500 border border-slate-800 bg-[#020408]/40 uppercase">PLANNED</span>
+                </div>
+                <h3 class="font-sans font-bold text-lg text-white mb-2 uppercase">Interface Spec</h3>
+                <p class="font-mono text-xs text-slate-400 leading-relaxed mb-6">
+                  Establishing the physical vessels. Fabricating custom low-power system-on-chips (SoCs) and solid-core wear enclosures.
+                </p>
+
+                <div class="space-y-2 font-mono text-[10px] text-slate-500">
+                  <div class="flex items-center gap-2">
+                    <div class="w-1 h-1 rounded-full bg-slate-700"></div>
+                    <span>8nm Semiconductor Blueprint</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <div class="w-1 h-1 rounded-full bg-slate-700"></div>
+                    <span>Long-range solar microwave mesh</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <div class="w-1 h-1 rounded-full bg-slate-700"></div>
+                    <span>72-Hour Ambient thermal backup</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-slate-800/60 flex items-center justify-between font-mono text-[9px] text-slate-500 uppercase">
+                <span>Timeline: H1 2027</span>
+                <span>READYING DESIGN</span>
+              </div>
+            </div>
+
+            <!-- Phase 03 -->
+            <div class="border border-cyber-border rounded-xl p-6 bg-[#020408]/20 backdrop-blur-sm relative group overflow-hidden transition-all duration-300 hover:border-quantum-blue/40 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="font-mono text-[9px] text-slate-500 font-bold tracking-widest uppercase">[ PHASE 03 ]</span>
+                  <span class="px-2 py-0.5 rounded text-[8px] font-mono font-bold tracking-widest text-slate-500 border border-slate-800 bg-[#020408]/40 uppercase">CONCEPTUAL</span>
+                </div>
+                <h3 class="font-sans font-bold text-lg text-white mb-2 uppercase">Mobility Spec</h3>
+                <p class="font-mono text-xs text-slate-400 leading-relaxed mb-6">
+                  Integrating high-torque heavy automobile chassis with stage-4 local autonomy and solid-state LIDAR grids.
+                </p>
+
+                <div class="space-y-2 font-mono text-[10px] text-slate-500">
+                  <div class="flex items-center gap-2">
+                    <div class="w-1 h-1 rounded-full bg-slate-700"></div>
+                    <span>0.21 drag aerodynamic frame</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <div class="w-1 h-1 rounded-full bg-slate-700"></div>
+                    <span>Sovereign fleet telemetry</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <div class="w-1 h-1 rounded-full bg-slate-700"></div>
+                    <span>All-wheel hub traction grid</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-slate-800/60 flex items-center justify-between font-mono text-[9px] text-slate-500 uppercase">
+                <span>Timeline: H2 2027</span>
+                <span>INITIAL RESEARCH</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      </section>
+
+      <!-- PHASE 01 DETAILED SECTION -->
+      <section id="phase-01" class="relative py-24 px-6 border-t border-cyber-border bg-[#020408] overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none cyber-grid opacity-10"></div>
+        <div class="absolute top-1/2 right-1/4 w-[350px] h-[350px] bg-radial from-quantum-blue/5 to-transparent pointer-events-none filter blur-2xl"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <!-- Text Specifications -->
+          <div class="lg:col-span-5 text-left">
+            <span class="font-mono text-[10px] text-quantum-blue uppercase tracking-[0.2em] font-bold block mb-4">
+              [ TIMELINE_PHASE_01 | COMPILER_PLANE ]
+            </span>
+            <span class="px-2.5 py-1 rounded text-[9px] font-mono font-bold tracking-widest text-quantum-blue border border-quantum-blue/20 bg-quantum-blue/5 uppercase mb-6 inline-block">
+              ● DEPLOYED STATUS: OPERATIONAL
+            </span>
+            <h2 class="font-sans font-bold text-3xl md:text-4xl text-white tracking-tight mb-6 uppercase">
+              Phase 01 | Cognitive MoE Intelligence
+            </h2>
+            <p class="font-mono text-xs md:text-sm text-slate-400 leading-relaxed mb-6">
+              Our cognitive framework is founded on offline Mixture-of-Experts (MoE) topologies, compiled directly for secure local infrastructure. By distributing specialized subnetworks, we run complex reasoning pipelines without cloud dependencies.
+            </p>
+            
+            <div class="space-y-4 font-mono text-xs text-slate-500 mb-8">
+              <div class="p-3 border border-slate-900 rounded bg-[#020408]/60">
+                <span class="text-white block font-bold mb-1">COGNITIVE COMPRESSION KEY</span>
+                Sovereign dialect compilation incorporates 18 regional vectors, tuning local language weights to native colloquialism patterns.
+              </div>
+              <div class="p-3 border border-slate-900 rounded bg-[#020408]/60">
+                <span class="text-white block font-bold mb-1">ZERO DATA SANCTION RISK</span>
+                Because weights are compressed to 4-bit INT representations, models compile directly on standard custom silicon with zero external internet pings.
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive MOE Compiler Widget -->
+          <div class="lg:col-span-7">
+            <div class="relative border border-quantum-blue/20 rounded-xl bg-cyber-card p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden">
+              <!-- Grid accent lines -->
+              <div class="absolute top-0 right-0 w-16 h-16 border-t border-r border-quantum-blue/20 pointer-events-none"></div>
+              <div class="absolute bottom-0 left-0 w-16 h-16 border-b border-l border-quantum-blue/20 pointer-events-none"></div>
+
+              <!-- SVG Robot Head battery-style filling preloader overlay -->
+              <div id="moe-preloader" class="absolute inset-0 bg-[#020408]/95 backdrop-blur-sm flex flex-col items-center justify-center gap-4 z-40 hidden opacity-0 transition-all duration-300 rounded-xl">
+                <!-- Outer Robot Head shape -->
+                <div class="relative w-28 h-28 flex items-center justify-center">
+                  <!-- SVG base outlined robot head -->
+                  <svg class="w-full h-full text-slate-800 stroke-current fill-none stroke-2" viewBox="0 0 100 100">
+                    <!-- Head Box -->
+                    <rect x="25" y="25" width="50" height="46" rx="8" />
+                    <!-- Neck -->
+                    <rect x="42" y="71" width="16" height="8" />
+                    <!-- Antenna -->
+                    <line x1="50" y1="25" x2="50" y2="10" />
+                    <circle cx="50" cy="10" r="4" class="fill-current text-slate-800" />
+                    <!-- Ears -->
+                    <rect x="19" y="40" width="6" height="16" rx="2" />
+                    <rect x="75" y="40" width="6" height="16" rx="2" />
+                  </svg>
+                  
+                  <!-- Inside filling layer representing the battery-like charging effect -->
+                  <div class="absolute bottom-[29px] left-[27px] right-[27px] bg-gradient-to-t from-quantum-blue/20 via-quantum-blue/40 to-quantum-blue overflow-hidden transition-all duration-100 ease-out flex items-center justify-center rounded-[4px]" style="height: 0%;" id="preloader-fill-box">
+                    <div class="absolute inset-0 bg-[linear-gradient(45deg,rgba(255,255,255,0.15)_25%,transparent_25%,transparent_50%,rgba(255,255,255,0.15)_50%,rgba(255,255,255,0.15)_75%,transparent_75%,transparent)] bg-[length:12px_12px] animate-[pulse_1s_infinite]"></div>
+                  </div>
+                  
+                  <!-- Glowing Cyan Eyes overlay once full -->
+                  <div class="absolute top-[42px] left-[35px] w-3 h-3 rounded-full bg-quantum-blue border-2 border-white hidden animate-ping" id="preloader-eye-l"></div>
+                  <div class="absolute top-[42px] right-[35px] w-3 h-3 rounded-full bg-quantum-blue border-2 border-white hidden animate-ping" id="preloader-eye-r"></div>
+                </div>
+                
+                <span class="font-mono text-[10px] text-quantum-blue font-bold tracking-widest uppercase animate-pulse" id="preloader-status-text">INITIALIZING MOE COMPILER...</span>
+                <span class="font-mono text-lg text-white font-bold" id="preloader-percentage">0%</span>
+              </div>
+
+              <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-2">
+                  <div class="w-2.5 h-2.5 rounded-full bg-quantum-blue animate-pulse"></div>
+                  <span class="font-mono text-[10px] text-quantum-blue font-bold tracking-widest uppercase">INTERACTIVE WEIGHT COMPILER</span>
+                </div>
+                <span class="font-mono text-[9px] text-slate-500 font-bold">DEVICE: LOCAL_HOST_CORE</span>
+              </div>
+
+              <!-- Simulator Controls -->
+              <div class="space-y-6 mb-6">
+                <div>
+                  <div class="flex justify-between font-mono text-[10px] text-slate-400 mb-2">
+                    <span>1. BASE PARAMETER SCALE (Billion)</span>
+                    <span id="param-val" class="text-white font-bold">70B</span>
+                  </div>
+                  <input id="param-slider" type="range" min="8" max="120" value="70" class="w-full accent-quantum-blue bg-slate-900" oninput="updateMoeMetrics()"/>
+                  <div class="flex justify-between font-mono text-[8px] text-slate-600 mt-1">
+                    <span>8B (EDGE LITE)</span>
+                    <span>120B (CONTINENTAL)</span>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex justify-between font-mono text-[10px] text-slate-400 mb-2">
+                    <span>2. WEIGHT QUANTIZATION</span>
+                    <span id="quant-val" class="text-white font-bold">4-BIT INT</span>
+                  </div>
+                  <select id="quant-select" class="w-full bg-[#020408] border border-slate-800 rounded px-3 py-2 font-mono text-xs text-slate-300 focus:outline-none focus:border-quantum-blue" onchange="updateMoeMetrics()">
+                    <option value="16">16-BIT FLOAT (UNCOMPRESSED)</option>
+                    <option value="8">8-BIT INT (STANDARD)</option>
+                    <option value="4" selected>4-BIT INT (HIGH EFFICIENCY)</option>
+                    <option value="2">2-BIT TENSOR (EXTREME SQUEEZE)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Dynamic Computer Resource Approximation -->
+              <div class="p-4 border border-slate-900 rounded bg-[#020408]/80 mb-6 text-left">
+                <span class="font-mono text-[9px] text-quantum-blue font-bold tracking-widest block mb-2 uppercase">💻 DYNAMIC COMPUTER COMPATIBILITY ESTIMATE</span>
+                <div class="grid grid-cols-2 gap-4 text-[10px] font-mono">
+                  <div>
+                    <span class="text-slate-500 block">ESTIMATED RAM NEEDED</span>
+                    <span id="est-ram" class="text-white font-bold">35.0 GB</span>
+                  </div>
+                  <div>
+                    <span class="text-slate-500 block">LOCAL FILE SIZE (DISK)</span>
+                    <span id="est-storage" class="text-white font-bold">35.0 GB</span>
+                  </div>
+                  <div class="col-span-2 border-t border-slate-800/60 pt-2">
+                    <span class="text-slate-500 block">MINIMUM HARDWARE SUITE</span>
+                    <span id="est-hardware" class="text-green-400 font-bold">Standard Workstation / Dedicated Developer PC</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Compile trigger action -->
+              <button id="moe-compile-btn" class="w-full py-2.5 bg-quantum-blue-glow border border-quantum-blue/50 hover:border-quantum-blue text-quantum-blue font-mono text-[10px] font-bold tracking-widest uppercase rounded transition-all flex items-center justify-center gap-2 mb-6 shadow-[0_0_15px_rgba(6,182,212,0.1)]" onclick="simulateMoeCompile()">
+                <i data-lucide="cpu" class="w-3.5 h-3.5"></i>
+                Initiate Weight Pruning & Compile
+              </button>
+
+              <!-- Simulated Terminal Console Output -->
+              <div id="moe-terminal" class="bg-[#020408] rounded border border-slate-900 p-4 h-32 font-mono text-[10px] text-slate-400 overflow-y-auto mb-6 text-left">
+                <div class="text-slate-600">&gt; ready for localized MoE compilation parameters...</div>
+              </div>
+
+              <!-- Output Metrics Grid -->
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
+                  <span class="text-[8px] text-slate-500 font-bold block mb-1">MEMORY FOOTPRINT</span>
+                  <span id="m-footprint" class="text-white font-mono text-xs font-bold">35.0 GB</span>
+                </div>
+                <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
+                  <span class="text-[8px] text-slate-500 font-bold block mb-1">COMPRESSION RATE</span>
+                  <span id="m-compression" class="text-white font-mono text-xs font-bold">4.00 x</span>
+                </div>
+                <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
+                  <span class="text-[8px] text-slate-500 font-bold block mb-1">LATENCY EXP</span>
+                  <span id="m-latency" class="text-quantum-blue font-mono text-xs font-bold">12 ms</span>
+                </div>
+                <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
+                  <span class="text-[8px] text-slate-500 font-bold block mb-1">REASONING ACCURACY</span>
+                  <span id="m-accuracy" class="text-green-400 font-mono text-xs font-bold">96.8%</span>
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
-        <div class="grid grid-cols-2 gap-4 pt-2 border-t border-slate-800/60 font-mono text-[9px] text-slate-500 uppercase">
-          <div>Transmitting latency: <span class="text-white font-bold">${latency}</span></div>
-          <div>Mesh coordination: <span class="text-green-400 font-bold">STABLE PEER LINK</span></div>
+      </section>
+
+      <!-- PHASE 02 DETAILED SECTION -->
+      <section id="phase-02" class="relative py-24 px-6 border-t border-cyber-border bg-cyber-dark/60 overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none cyber-grid opacity-15"></div>
+        <div class="absolute bottom-0 right-0 w-[300px] h-[300px] bg-radial from-quantum-blue/5 to-transparent pointer-events-none filter blur-2xl"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Interactive Solar Mesh Connection optimizer -->
+          <div class="lg:col-span-7 order-2 lg:order-1">
+            <div class="relative border border-cyber-border rounded-xl bg-cyber-card p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+              
+              <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-2">
+                  <div class="w-2.5 h-2.5 rounded-full bg-quantum-blue animate-pulse"></div>
+                  <span class="font-mono text-[10px] text-quantum-blue font-bold tracking-widest uppercase">Zone-Independent Architecture</span>
+                </div>
+                <span class="font-mono text-[9px] text-slate-500 font-bold">STATE_OF_THE_ART: INNEPT_TECH</span>
+              </div>
+
+              <!-- Mode Tabs Selector -->
+              <div class="grid grid-cols-2 gap-2 mb-6 border-b border-slate-800 pb-4">
+                <button onclick="selectMeshMode('local')" id="mode-btn-local" class="py-2 font-mono text-[10px] font-bold border border-quantum-blue text-quantum-blue bg-quantum-blue-glow rounded transition-all uppercase flex items-center justify-center gap-1.5">
+                  <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> LOCAL MODE
+                </button>
+                <button onclick="selectMeshMode('global')" id="mode-btn-global" class="py-2 font-mono text-[10px] font-bold border border-slate-800 text-slate-500 hover:border-slate-700 hover:text-slate-300 rounded transition-all uppercase flex items-center justify-center gap-1.5 bg-[#020408]/40">
+                  <i data-lucide="globe" class="w-3.5 h-3.5"></i> GLOBAL MODE
+                </button>
+              </div>
+
+              <!-- Node Selection Toggles -->
+              <p id="node-selection-title" class="font-mono text-[10px] text-slate-400 mb-3 text-left uppercase">Sovereign Local Coordinate Signal Mapping:</p>
+              
+              <!-- Local Mode Nodes container (Interactive Geolocation Probe) -->
+              <div id="local-nodes-container" class="grid grid-cols-1 gap-2 mb-6">
+                <button onclick="triggerGeolocationProbe()" id="probe-geo-btn" class="w-full py-3 px-4 font-mono text-[10px] font-bold border border-quantum-blue/40 text-quantum-blue hover:text-white hover:bg-quantum-blue/10 bg-[#020408]/60 hover:border-quantum-blue rounded transition-all uppercase flex items-center justify-center gap-2">
+                  <i data-lucide="crosshair" class="w-4 h-4 animate-pulse"></i> Detect &amp; Probe Local Region Coords
+                </button>
+              </div>
+
+              <!-- Global Mode Nodes container (Nigeria-specific hubs) -->
+              <div id="global-nodes-container" class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6 hidden">
+                <button onclick="selectMeshNode('lagos-ng')" id="node-lagos-ng" class="px-3 py-2 font-mono text-[9px] font-bold border border-quantum-blue text-quantum-blue bg-quantum-blue-glow rounded transition-all uppercase">
+                  Lagos Hub
+                </button>
+                <button onclick="selectMeshNode('abuja-ng')" id="node-abuja-ng" class="px-3 py-2 font-mono text-[9px] font-bold border border-slate-800 text-slate-500 hover:border-slate-700 hover:text-slate-300 rounded transition-all uppercase bg-[#020408]/40">
+                  Abuja Link
+                </button>
+                <button onclick="selectMeshNode('ph-ng')" id="node-ph-ng" class="px-3 py-2 font-mono text-[9px] font-bold border border-slate-800 text-slate-500 hover:border-slate-700 hover:text-slate-300 rounded transition-all uppercase bg-[#020408]/40">
+                  P.H. Terminal
+                </button>
+                <button onclick="selectMeshNode('kano-ng')" id="node-kano-ng" class="px-3 py-2 font-mono text-[9px] font-bold border border-slate-800 text-slate-500 hover:border-slate-700 hover:text-slate-300 rounded transition-all uppercase bg-[#020408]/40">
+                  Kano Node
+                </button>
+              </div>
+
+              <!-- Dynamic Calibration Readouts (Fetched cleanly) -->
+              <div id="mesh-specs-display" class="space-y-4 border border-slate-900 rounded p-4 bg-[#020408]/60 text-left font-mono text-xs mb-6 min-h-[140px] flex flex-col justify-center">
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
+                    <span class="text-[9px] text-slate-500 font-bold block mb-1">PROBED REGION</span>
+                    <span class="text-slate-500 font-mono italic">[AWAITING PROBE]</span>
+                  </div>
+                  <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
+                    <span class="text-[9px] text-slate-500 font-bold block mb-1">COORDINATES</span>
+                    <span class="text-slate-500 font-mono italic">[LAT: -- / LON: --]</span>
+                  </div>
+                  <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
+                    <span class="text-[9px] text-slate-500 font-bold block mb-1">SOLAR YIELD</span>
+                    <span class="text-slate-500 font-mono italic">[AWAITING SENSOR]</span>
+                  </div>
+                  <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
+                    <span class="text-[9px] text-slate-500 font-bold block mb-1">HARDWARE AVAILABILITY</span>
+                    <span class="text-slate-500 font-mono italic">[AWAITING LINK]</span>
+                  </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 pt-2 border-t border-slate-800/60 font-mono text-[9px] text-slate-500 uppercase">
+                  <div>Transmitting latency: <span class="text-slate-500">-- ms</span></div>
+                  <div>Mesh coordination: <span class="text-slate-500">OFFLINE</span></div>
+                </div>
+              </div>
+
+              <!-- Action Button to Request Specs -->
+              <button onclick="fetchMeshSpecs()" id="mesh-fetch-btn" class="w-full py-2.5 bg-slate-950 hover:bg-slate-900 text-quantum-blue hover:text-white border border-slate-800 hover:border-quantum-blue/50 rounded text-[10px] uppercase tracking-widest transition-all font-mono flex items-center justify-center gap-2">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i> Request Specifications Data
+              </button>
+
+            </div>
+          </div>
+
+          <!-- Text Specifications -->
+          <div class="lg:col-span-5 text-left order-1 lg:order-2">
+            <span class="font-mono text-[10px] text-quantum-blue uppercase tracking-[0.2em] font-bold block mb-4">
+              [ TIMELINE_PHASE_02 | HARDWARE_PLANE ]
+            </span>
+            <span class="px-2.5 py-1 rounded text-[9px] font-mono font-bold tracking-widest text-slate-500 border border-slate-800 bg-[#020408]/40 uppercase mb-6 inline-block">
+              ● DEPLOYED STATUS: IN DEVELOPMENT
+            </span>
+            <h2 class="font-sans font-bold text-3xl md:text-4xl text-white tracking-tight mb-6 uppercase">
+              Phase 02 | Custom Architecture & Zone-Independent Technology
+            </h2>
+            <p class="font-mono text-xs md:text-sm text-slate-400 leading-relaxed mb-6">
+              Establishing physical independent vessels. We are designing low-power system-on-chips (SoCs) fabricated on customized 8nm nodes and convective-cooled chassis to resist heavy extreme climate profiles.
+            </p>
+
+            <div class="space-y-4 font-mono text-xs text-slate-500">
+              <div class="p-3 border border-slate-900 rounded bg-[#020408]/60">
+                <span class="text-white block font-bold mb-1">SOVEREIGN AIR-GAPPED LINK</span>
+                Deploying long-distance solar microwave communication channels, avoiding commercial trunklines and foreign network monitoring pipelines.
+              </div>
+              <div class="p-3 border border-slate-900 rounded bg-[#020408]/60">
+                <span class="text-white block font-bold mb-1">CONVECTIVE CHASSIS LIFE</span>
+                No air conditioner required. Mechanical enclosures use dual thermal convection sinks to run at peak capacity up to 65C ambient temperatures.
+              </div>
+            </div>
+          </div>
+
         </div>
-      `;
-    }, 400);
-  }
+      </section>
 
-  /* PHASE 03: Chassis Aero-Tuning Specs Retrieval & Automatic Switcher */
-  let selectedChassisProfileId = 'slim';
-  let isChassisBlueprintOpen = false;
+      <!-- PHASE 03 DETAILED SECTION -->
+      <section id="phase-03" class="relative py-24 px-6 border-t border-cyber-border bg-[#020408] overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none cyber-grid opacity-10"></div>
+        <div class="absolute top-1/4 left-1/4 w-[350px] h-[350px] bg-radial from-quantum-blue/5 to-transparent pointer-events-none filter blur-2xl"></div>
 
-  function selectChassisProfile(profileId, isAuto = false) {
-    if (!isAuto) {
-      if (window.chassisAutoCycleInterval) {
-        clearInterval(window.chassisAutoCycleInterval);
-        window.chassisAutoCycleInterval = null;
-      }
-    }
+        <div class="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <!-- Text Specifications -->
+          <div class="lg:col-span-5 text-left animate-on-scroll">
+            <span class="font-mono text-[10px] text-quantum-blue uppercase tracking-[0.2em] font-bold block mb-4">
+              [ TIMELINE_PHASE_03 | MOBILITY_PLANE ]
+            </span>
+            <span class="px-2.5 py-1 rounded text-[9px] font-mono font-bold tracking-widest text-slate-500 border border-slate-800 bg-[#020408]/40 uppercase mb-6 inline-block">
+              ● DEPLOYED STATUS: CONCEPTUAL RESEARCH
+            </span>
+            <h2 class="font-sans font-bold text-3xl md:text-4xl text-white tracking-tight mb-6 uppercase">
+              Phase 03 | Autonomous Heavy Mobility
+            </h2>
+            <p class="font-mono text-xs md:text-sm text-slate-400 leading-relaxed mb-6">
+              Our ultimate objective scales sovereign physical autonomy. We are modeling high-torque heavy-duty vehicular chassis with fully integrated localized Stage-4 autonomous systems and solid-state LIDAR grids.
+            </p>
 
-    selectedChassisProfileId = profileId;
-    const profiles = ['slim', 'reinforced', 'heavy'];
-    profiles.forEach(id => {
-      const btn = document.getElementById(`chassis-${id}`);
-      if (!btn) return;
-      if (id === profileId) {
-        btn.className = "px-4 py-3 font-mono text-[9px] font-bold border border-quantum-blue text-quantum-blue bg-quantum-blue-glow rounded transition-all uppercase flex flex-col items-center";
-      } else {
-        btn.className = "px-4 py-3 font-mono text-[9px] font-bold border border-slate-800 text-slate-500 hover:border-slate-700 hover:text-slate-300 rounded transition-all uppercase flex flex-col items-center";
-      }
-    });
+            <div class="space-y-4 font-mono text-xs text-slate-500 mb-8">
+              <div class="p-3 border border-slate-900 rounded bg-[#020408]/60">
+                <span class="text-white block font-bold mb-1">AERODYNAMIC PROFILE</span>
+                Optimizing aerodynamic coefficients down to 0.21 Drag rating to protect localized power cells and extend tactical range up to 1,200km.
+              </div>
+              <div class="p-3 border border-slate-900 rounded bg-[#020408]/60">
+                <span class="text-white block font-bold mb-1">LOCALIZED LIDAR INTELLIGENCE</span>
+                Collision telemetry remains internal to the vehicle. Real-time pathplanning and tracking avoid transmitting raw sensor vectors to external clouds.
+              </div>
+            </div>
+          </div>
 
-    const ascii = document.getElementById('chassis-ascii');
-    if (profileId === 'slim') {
-      if (ascii) {
-        ascii.innerHTML = `
+          <!-- Interactive Aero Configurator Widget -->
+          <div class="lg:col-span-7 animate-on-scroll">
+            <div class="relative border border-quantum-blue/20 rounded-xl bg-cyber-card p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+              
+              <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-2">
+                  <div class="w-2.5 h-2.5 rounded-full bg-quantum-blue animate-pulse"></div>
+                  <span class="font-mono text-[10px] text-quantum-blue font-bold tracking-widest uppercase">Chassis Aero-Tuning Simulator</span>
+                </div>
+                <span class="font-mono text-[9px] text-slate-500 font-bold">FLUID_DYNAMICS: LIVE_3D</span>
+              </div>
+
+              <!-- Mode Selection Buttons -->
+              <p class="font-mono text-[10px] text-slate-400 mb-3 text-left uppercase">Select Aero-dynamic Structural Frame Config:</p>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+                <button onclick="selectChassisProfile('slim')" id="chassis-slim" class="px-4 py-3 font-mono text-[9px] font-bold border border-quantum-blue text-quantum-blue bg-quantum-blue-glow rounded transition-all uppercase flex flex-col items-center">
+                  <span class="text-[11px] text-white">Slimline Utility</span>
+                  <span class="text-[8px] text-slate-400 font-normal mt-0.5">High range, low drag</span>
+                </button>
+                <button onclick="selectChassisProfile('reinforced')" id="chassis-reinforced" class="px-4 py-3 font-mono text-[9px] font-bold border border-slate-800 text-slate-500 hover:border-slate-700 hover:text-slate-300 rounded transition-all uppercase flex flex-col items-center">
+                  <span class="text-[11px] text-white">Reinforced Cargo</span>
+                  <span class="text-[8px] text-slate-400 font-normal mt-0.5">High defense, balanced</span>
+                </button>
+                <button onclick="selectChassisProfile('heavy')" id="chassis-heavy" class="px-4 py-3 font-mono text-[9px] font-bold border border-slate-800 text-slate-500 hover:border-slate-700 hover:text-slate-300 rounded transition-all uppercase flex flex-col items-center">
+                  <span class="text-[11px] text-white">Heavy Transport</span>
+                  <span class="text-[8px] text-slate-400 font-normal mt-0.5">Extreme payload capacity</span>
+                </button>
+              </div>
+
+              <!-- Animated ASCII Chassis Representation -->
+              <div class="bg-[#020408] rounded border border-slate-900 p-4 h-36 font-mono text-xs text-quantum-blue text-center flex flex-col justify-center items-center mb-6 overflow-hidden">
+                <pre id="chassis-ascii" class="leading-tight text-quantum-blue filter drop-shadow-[0_0_2px_rgba(6,182,212,0.4)]">
       ___...---...___
-  ======================\\__
-   O - O            O - O  \\
+  ======================\__
+   O - O            O - O  \
   --------------------------
-        `;
-      }
-    } else if (profileId === 'reinforced') {
-      if (ascii) {
-        ascii.innerHTML = `
-       __________________
-      /  __  __  __  __  \\
-  ___/  /  \\/  \\/  \\/  \\  \\___
- / [_]  [_]  [_]  [_]  [_]  [_] \\
- \\_ O === O ________ O === O _/
-        `;
-      }
-    } else if (profileId === 'heavy') {
-      if (ascii) {
-        ascii.innerHTML = `
-    _______________________
-   /                       \\____
-  |  [===]   [===]   [===]  ____|
-  |  [===]   [===]   [===] |
-  [=(_O_O_)=========(_O_O_)=]
-        `;
-      }
-    }
+                </pre>
+                <span class="text-[8px] text-slate-500 mt-2 block uppercase tracking-wider font-bold">Chassis Wireframe: Vector Rendering Live</span>
+              </div>
 
-    if (isChassisBlueprintOpen) {
-      fetchChassisSpecs(true);
-    } else {
-      resetChassisSpecsDisplay();
-    }
-  }
+              <!-- Metrics Readout Grid -->
+              <div id="chassis-specs-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6 min-h-[64px] items-center">
+                <div class="p-3 border border-slate-900 rounded bg-[#020408]/40 text-left">
+                  <span class="text-[8px] text-slate-500 font-bold block mb-1">DRAG RATING</span>
+                  <span class="text-white font-mono text-xs font-bold">0.21 Cd</span>
+                </div>
+                <div class="p-3 border border-slate-900 rounded bg-[#020408]/40 text-left">
+                  <span class="text-[8px] text-slate-500 font-bold block mb-1">BATTERY RANGE</span>
+                  <span class="text-white font-mono text-xs font-bold">1,200 km</span>
+                </div>
+                <div class="p-3 border border-slate-900 rounded bg-[#020408]/40 text-left">
+                  <span class="text-[8px] text-slate-500 font-bold block mb-1">PAYLOAD LIMIT</span>
+                  <span class="text-white font-mono text-xs font-bold">2.5 tonnes</span>
+                </div>
+                <div class="p-3 border border-slate-900 rounded bg-[#020408]/40 text-left">
+                  <span class="text-[8px] text-slate-500 font-bold block mb-1">LIDAR ACCURACY</span>
+                  <span class="text-green-400 font-mono text-xs font-bold">STAGE 4 READY</span>
+                </div>
+              </div>
 
-  function resetChassisSpecsDisplay() {
-    const displayGrid = document.getElementById('chassis-specs-grid');
-    if (!displayGrid) return;
+              <!-- Action Button to Request Chassis Specs -->
+              <button onclick="fetchChassisSpecs()" id="chassis-fetch-btn" class="w-full py-2.5 bg-slate-950 hover:bg-slate-900 text-quantum-blue hover:text-white border border-slate-800 hover:border-quantum-blue/50 rounded text-[10px] uppercase tracking-widest transition-all font-mono flex items-center justify-center gap-2">
+                <i data-lucide="shield" class="w-3.5 h-3.5"></i> Request Blueprint Specs
+              </button>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. Sovereign Gate Recruitment Portal -->
+      <section id="join" class="relative py-24 px-6 border-t border-cyber-border bg-cyber-dark overflow-hidden">
+        <div class="absolute top-1/2 right-0 w-[400px] h-[400px] bg-radial from-quantum-blue/5 to-transparent pointer-events-none glow-ambient"></div>
+
+        <div class="max-w-5xl mx-auto relative z-10 text-left">
+          <div class="relative rounded-2xl border border-cyber-border bg-cyber-card backdrop-blur-md p-8 sm:p-16 shadow-[0_40px_80px_rgba(0,0,0,0.6)] animate-on-scroll">
+            
+            <div class="max-w-3xl">
+              <span class="font-mono text-[10px] text-quantum-blue uppercase tracking-[0.2em] font-bold block mb-4">
+                [ SECURE_ACCESS_PORTAL ]
+              </span>
+              <h2 class="font-sans font-bold text-3xl md:text-5xl text-white tracking-tight leading-none mb-8">
+                Stay in Touch & Join Rheivatech
+              </h2>
+              <p class="font-sans text-xs md:text-sm text-slate-400 leading-relaxed mb-12 normal-case tracking-normal">
+                We are currently in active research and development. Whether you are an engineer, a designer, or just interested in our vision, let's connect. Sign up below to join our network and stay updated!
+              </p>
+
+              <!-- Recruitment form -->
+              <form id="recruitment-form" onsubmit="handleRecruitSubmit(event)" class="space-y-6 max-w-2xl">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div>
+                    <label class="block font-mono text-[10px] uppercase text-slate-400 tracking-wider mb-2" for="reg-name">Your Full Name</label>
+                    <input
+                      required
+                      type="text"
+                      id="reg-name"
+                      placeholder="e.g. Kofi Okafor"
+                      class="w-full bg-[#020408] border border-cyber-border rounded px-4 py-3 font-mono text-xs text-white focus:outline-none focus:border-quantum-blue transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label class="block font-mono text-[10px] uppercase text-slate-400 tracking-wider mb-2" for="reg-email">Your Email Address</label>
+                    <input
+                      required
+                      type="email"
+                      id="reg-email"
+                      placeholder="e.g. kofi@gmail.com"
+                      class="w-full bg-[#020408] border border-cyber-border rounded px-4 py-3 font-mono text-xs text-white focus:outline-none focus:border-quantum-blue transition-all"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block font-mono text-[10px] uppercase text-slate-400 tracking-wider mb-2" for="reg-specialty">What is your specialty? / How can you help?</label>
+                  <select
+                    id="reg-specialty"
+                    class="w-full bg-[#020408] border border-cyber-border rounded px-4 py-3 font-mono text-xs text-slate-300 focus:outline-none focus:border-quantum-blue transition-all"
+                  >
+                    <option value="linguistic_ai">Localized AI & Data Analysis</option>
+                    <option value="microelectronics">Hardware & Device Design</option>
+                    <option value="satellite_mesh">Solar Mesh & Wireless Communication</option>
+                    <option value="autonomous_mobility">Autonomous Vehicles & Car Systems</option>
+                    <option value="other">Other Services or Collaboration</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block font-mono text-[10px] uppercase text-slate-400 tracking-wider mb-2" for="reg-statement">Tell us about yourself / how you'd like to help</label>
+                  <textarea
+                    required
+                    id="reg-statement"
+                    rows="4"
+                    placeholder="Describe how you would like to help us build the future of local, secure technology..."
+                    class="w-full bg-[#020408] border border-cyber-border rounded px-4 py-3 font-mono text-xs text-white focus:outline-none focus:border-quantum-blue transition-all resize-none"
+                  ></textarea>
+                </div>
+
+                <!-- Submit button -->
+                <button
+                  type="submit"
+                  class="px-8 py-3 bg-quantum-blue-glow border border-quantum-blue text-quantum-blue hover:bg-quantum-blue hover:text-cyber-dark transition-all rounded font-mono text-xs font-bold tracking-widest uppercase flex items-center gap-2"
+                >
+                  <i data-lucide="send" class="w-4 h-4"></i>
+                  Join Our Network
+                </button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+       <!-- Modern Global Footer -->
+    <footer class="relative border-t border-cyber-border bg-[#020408]/90 py-12 px-8 z-10 text-xs md:text-sm font-mono uppercase tracking-widest text-slate-500">
+      <div class="max-w-7xl mx-auto space-y-12">
+        <!-- Service listings grid -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 text-left normal-case tracking-normal border-b border-slate-900 pb-12">
+          <div class="md:col-span-4 space-y-4">
+            <div class="flex items-center gap-2 text-white">
+              <div class="w-5 h-5 border border-quantum-blue/40 rounded-sm p-0.5 bg-cyber-dark/60 flex items-center justify-center">
+                <img
+                  src="logo.png"
+                  alt="Rheivatech"
+                  referrerPolicy="no-referrer"
+                  class="w-full h-full object-contain filter drop-shadow-[0_0_4px_rgba(6,182,212,0.6)]"
+                />
+              </div>
+              <span class="font-sans font-bold tracking-[0.2em] text-xs">RHEIVATECH</span>
+            </div>
+            <p class="text-xs text-slate-400 font-sans leading-relaxed max-w-sm">
+              We emulate the native durability of our ecosystem. Bringing the edge of cost over civilization through passion, absolute technical competence, and local sovereign engineering.
+            </p>
+          </div>
+
+          <!-- Services Column 1 -->
+          <div class="md:col-span-4 space-y-3">
+            <span class="font-mono text-[9px] text-quantum-blue font-bold tracking-widest uppercase block mb-1">
+              [ CORE_INFRASTRUCTURE_SERVICES ]
+            </span>
+            <ul class="space-y-2 font-mono text-xs text-slate-400">
+              <li class="flex items-center gap-2"><span class="w-1 h-1 bg-quantum-blue"></span> Web Design &amp; UI Craft</li>
+              <li class="flex items-center gap-2"><span class="w-1 h-1 bg-quantum-blue"></span> Web App Development (Full-Stack)</li>
+              <li class="flex items-center gap-2"><span class="w-1 h-1 bg-quantum-blue"></span> Native App Development</li>
+              <li class="flex items-center gap-2"><span class="w-1 h-1 bg-quantum-blue"></span> Local Database Management</li>
+              <li class="flex items-center gap-2"><span class="w-1 h-1 bg-quantum-blue"></span> Heavy Backend Engineering</li>
+            </ul>
+          </div>
+
+          <!-- Services Column 2 -->
+          <div class="md:col-span-4 space-y-3">
+            <span class="font-mono text-[9px] text-yellow-500 font-bold tracking-widest uppercase block mb-1">
+              [ THIRD_PARTY_SUPPORT_&amp;_ANALYTICS ]
+            </span>
+            <ul class="space-y-2 font-mono text-xs text-slate-400">
+              <li class="flex items-center gap-2"><span class="w-1 h-1 bg-yellow-500"></span> Custom Email Solutions</li>
+              <li class="flex items-center gap-2"><span class="w-1 h-1 bg-yellow-500"></span> Regional Database Administration</li>
+              <li class="flex items-center gap-2">
+                <span class="w-1 h-1 bg-yellow-500"></span> 
+                RheivaAI / Rheivada Custom Reports
+              </li>
+              <li class="flex items-center gap-2 text-slate-500 italic">
+                <span>(Our offline custom data analytics tools coming soon)</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-6 text-xs md:text-sm font-mono text-slate-500">
+          <!-- Left Side: Brand, OS and Location -->
+          <div class="flex flex-col sm:flex-row items-center gap-6">
+            <span>OS: <span class="text-slate-300">R-TECH v4.0.2</span></span>
+            <div class="hidden sm:block w-px h-4 bg-slate-800"></div>
+            <span>LOCATION: <span class="text-slate-300">DISTRIBUTED SOVEREIGN NODES</span></span>
+          </div>
+
+          <!-- Right Side: Connection status and Copyright -->
+          <div class="flex flex-col sm:flex-row items-center gap-4">
+            <span class="text-quantum-blue animate-pulse flex items-center gap-1.5 font-bold">
+              <span class="w-1.5 h-1.5 rounded-full bg-quantum-blue"></span>
+              Connection Secured
+            </span>
+            <p class="text-slate-500">
+              &copy; 2026 RHEIVATECH. ALL RIGHTS RESERVED.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Beautiful In-Page AI Modal -->
+    <div id="ai-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#020408]/85 backdrop-blur-md">
+      <div class="relative w-full max-w-lg border border-quantum-blue/40 bg-cyber-card rounded-xl p-8 shadow-[0_0_50px_rgba(6,182,212,0.15)] text-left flex flex-col justify-between overflow-hidden">
+        
+        <!-- Corner crosshairs for futuristic styling -->
+        <div class="absolute top-4 left-4 w-3 h-3 border-t border-l border-quantum-blue/40"></div>
+        <div class="absolute top-4 right-4 w-3 h-3 border-t border-r border-quantum-blue/40"></div>
+        <div class="absolute bottom-4 left-4 w-3 h-3 border-b border-l border-quantum-blue/40"></div>
+        <div class="absolute bottom-4 right-4 w-3 h-3 border-b border-r border-quantum-blue/40"></div>
+
+        <!-- Modal Close Button -->
+        <button id="close-modal-btn" class="absolute top-6 right-6 text-slate-400 hover:text-quantum-blue transition-colors duration-200 focus:outline-none">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+
+        <div class="space-y-6">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-quantum-blue-glow border border-quantum-blue flex items-center justify-center">
+              <i data-lucide="bot" class="w-6 h-6 text-quantum-blue filter drop-shadow-[0_0_4px_rgba(6,182,212,0.6)]"></i>
+            </div>
+            <div>
+              <span class="text-[9px] font-mono text-quantum-blue font-bold tracking-widest block uppercase">[ KERNEL | ACTIVE_DIALECT_AI ]</span>
+              <h2 class="font-sans font-bold text-xl text-white tracking-tight">RheivaAI Portal</h2>
+            </div>
+          </div>
+
+          <div class="bg-[#020408]/80 rounded border border-cyber-border p-6 font-mono text-xs text-slate-300 leading-relaxed">
+            <span class="text-quantum-blue block mb-2">&gt; rheiva_ai_handshake: INITIATED</span>
+            "Hi, I am <span class="text-white font-bold">RheivaAI</span>. I am being trained as your air-gapped regional intelligence interface. By compiling Mixture-of-Expert frameworks entirely on local systems, I ensure your strategic queries never traverse foreign servers."
+          </div>
+
+          <!-- Bottom placeholder input field -->
+          <div class="relative bg-[#020408]/40 border border-slate-800 rounded px-4 py-3 text-center">
+            <span class="font-mono text-xs text-slate-500 font-bold uppercase tracking-widest block">
+              ⚠️ RheivaAI is under production and coming soon.
+            </span>
+          </div>
+
+          <!-- Footer Buttons -->
+          <div class="flex items-center justify-between pt-4 border-t border-slate-800/60">
+            <span class="text-[9px] font-mono text-slate-500 uppercase font-bold tracking-wider">SECURE LINK STATUS: COMMENCING</span>
+            
+            <button id="view-other-portfolio-btn" class="px-4 py-2 border border-slate-800 bg-[#020408]/80 text-slate-400 hover:text-slate-300 font-mono text-[10px] font-bold tracking-widest uppercase rounded transition-all flex items-center gap-1.5">
+              <i data-lucide="folder-git" class="w-3.5 h-3.5"></i>
+              View other product portfolio
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Interactive Recruitment Operator Registration Modal -->
+    <div id="submit-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#020408]/90 backdrop-blur-md">
+      <div class="relative w-full max-w-lg border border-quantum-blue/40 bg-cyber-card rounded-xl p-8 shadow-[0_0_60px_rgba(6,182,212,0.2)] text-left flex flex-col overflow-hidden">
+        
+        <!-- Crosshairs styling -->
+        <div class="absolute top-4 left-4 w-3 h-3 border-t border-l border-quantum-blue/40"></div>
+        <div class="absolute top-4 right-4 w-3 h-3 border-t border-r border-quantum-blue/40"></div>
+        <div class="absolute bottom-4 left-4 w-3 h-3 border-b border-l border-quantum-blue/40"></div>
+        <div class="absolute bottom-4 right-4 w-3 h-3 border-b border-r border-quantum-blue/40"></div>
+
+        <button onclick="closeSubmitModal()" class="absolute top-6 right-6 text-slate-400 hover:text-quantum-blue transition-colors duration-200">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+
+        <!-- Loading state of modal -->
+        <div id="modal-loading-state" class="flex flex-col items-center justify-center py-12 gap-4">
+          <div class="relative w-12 h-12">
+            <div class="absolute inset-0 rounded-full border-4 border-slate-900"></div>
+            <div class="absolute inset-0 rounded-full border-4 border-t-quantum-blue border-r-quantum-blue/40 animate-spin"></div>
+          </div>
+          <span class="font-mono text-xs text-quantum-blue font-bold tracking-widest uppercase animate-pulse">TRANSMITTING CREDENTIALS...</span>
+        </div>
+
+        <!-- Success details state of modal -->
+        <div id="modal-success-state" class="hidden space-y-6">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-green-500/15 border border-green-500/40 flex items-center justify-center">
+              <i data-lucide="shield-check" class="w-6 h-6 text-green-400"></i>
+            </div>
+            <div>
+              <span class="text-[9px] font-mono text-green-400 font-bold tracking-widest block uppercase">[ SYSTEM | REGISTRATION_LOGGED ]</span>
+              <h2 class="font-sans font-bold text-xl text-white tracking-tight">Sovereign Node Secured</h2>
+            </div>
+          </div>
+
+          <!-- Display Submitted info -->
+          <div class="bg-[#020408]/90 border border-slate-900 rounded p-4 font-mono text-xs space-y-2">
+            <div class="text-slate-500 border-b border-slate-900/60 pb-1 flex justify-between"><span class="font-bold">OPERATOR NAME:</span> <span id="m-success-name" class="text-white font-medium"></span></div>
+            <div class="text-slate-500 border-b border-slate-900/60 pb-1 flex justify-between"><span class="font-bold">EMAIL ADDRESS:</span> <span id="m-success-email" class="text-white font-medium"></span></div>
+            <div class="text-slate-500 border-b border-slate-900/60 pb-1 flex justify-between"><span class="font-bold">SPECIALTY:</span> <span id="m-success-specialty" class="text-white font-medium"></span></div>
+            <div class="text-slate-500 pt-1 leading-relaxed"><span class="font-bold block mb-1">STATED ALIGNMENT:</span> <span id="m-success-statement" class="text-slate-300 italic"></span></div>
+          </div>
+
+          <!-- Absolute core key constraint requested: Access key : You will recieve an email when Rheiva is Executed. -->
+          <div class="p-4 bg-quantum-blue/5 border border-quantum-blue/20 rounded font-mono text-xs text-center leading-relaxed">
+            <span class="font-bold text-quantum-blue block mb-1">ACCESS STATUS: PENDING EXECUTION</span>
+            <span class="text-slate-300">Access key : You will receive an email when Rheiva is Executed.</span>
+          </div>
+
+          <button onclick="closeSubmitModal()" class="w-full py-2.5 bg-[#020408] border border-slate-800 hover:border-slate-700 text-slate-400 hover:text-white font-mono text-[10px] font-bold tracking-widest uppercase rounded transition-all">
+            Dismiss Connection
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Lucide Icons via CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     
-    let drag = "0.21 Cd";
-    let range = "1,200 km";
-    let payload = "2.5 tonnes";
-    let sensor = "STAGE 4 READY";
-    let sensorColor = "text-green-400";
-
-    if (selectedChassisProfileId === 'reinforced') {
-      drag = "0.35 Cd";
-      range = "850 km";
-      payload = "8.0 tonnes";
-      sensor = "STAGE 3 HEAVY";
-      sensorColor = "text-quantum-blue";
-    } else if (selectedChassisProfileId === 'heavy') {
-      drag = "0.48 Cd";
-      range = "620 km";
-      payload = "24.0 tonnes";
-      sensor = "LOW SPEED ONLY";
-      sensorColor = "text-yellow-400";
-    }
-
-    displayGrid.innerHTML = `
-      <div class="p-3 border border-slate-900 rounded bg-[#020408]/40 text-left">
-        <span class="text-[8px] text-slate-500 font-bold block mb-1">DRAG RATING</span>
-        <span class="text-white font-mono text-xs font-bold">${drag}</span>
-      </div>
-      <div class="p-3 border border-slate-900 rounded bg-[#020408]/40 text-left">
-        <span class="text-[8px] text-slate-500 font-bold block mb-1">BATTERY RANGE</span>
-        <span class="text-white font-mono text-xs font-bold">${range}</span>
-      </div>
-      <div class="p-3 border border-slate-900 rounded bg-[#020408]/40 text-left">
-        <span class="text-[8px] text-slate-500 font-bold block mb-1">PAYLOAD LIMIT</span>
-        <span class="text-white font-mono text-xs font-bold">${payload}</span>
-      </div>
-      <div class="p-3 border border-slate-900 rounded bg-[#020408]/40 text-left">
-        <span class="text-[8px] text-slate-500 font-bold block mb-1">LIDAR ACCURACY</span>
-        <span class="${sensorColor} font-mono text-xs font-bold">${sensor}</span>
-      </div>
-    `;
-  }
-
-  function fetchChassisSpecs(forceUpdate = false) {
-    const displayGrid = document.getElementById('chassis-specs-grid');
-    const btn = document.getElementById('chassis-fetch-btn');
-    if (!displayGrid) return;
-
-    if (isChassisBlueprintOpen && !forceUpdate) {
-      isChassisBlueprintOpen = false;
-      resetChassisSpecsDisplay();
-      if (btn) {
-        btn.innerHTML = `<i data-lucide="shield" class="w-3.5 h-3.5"></i> Request Blueprint Specs`;
-        if (window.lucide) window.lucide.createIcons();
-      }
-      return;
-    }
-
-    isChassisBlueprintOpen = true;
-
-    if (btn) {
-      btn.setAttribute('disabled', 'true');
-      btn.innerHTML = `<i data-lucide="refresh-cw" class="w-3.5 h-3.5 animate-spin"></i> Loading Specs...`;
-      if (window.lucide) window.lucide.createIcons();
-    }
-
-    displayGrid.innerHTML = `
-      <div class="col-span-2 sm:col-span-4 flex items-center justify-center py-6 gap-2 text-quantum-blue font-mono text-xs">
-        <div class="w-3.5 h-3.5 rounded-full border border-quantum-blue border-t-transparent animate-spin"></div>
-        <span>AUTHENTICATING TELEMETRY CHANNEL...</span>
-      </div>
-    `;
-
-    setTimeout(() => {
-      let drag = "0.21 Cd";
-      let range = "1,200 km";
-      let payload = "2.5 tonnes";
-      let sensor = "STAGE 4 READY";
-      let sensorColor = "text-green-400";
-      let detailedSpecs = "Air-drag optimized micro-carver chassis built on active telemetry contours.";
-
-      if (selectedChassisProfileId === 'reinforced') {
-        drag = "0.35 Cd";
-        range = "850 km";
-        payload = "8.0 tonnes";
-        sensor = "STAGE 3 HEAVY";
-        sensorColor = "text-quantum-blue";
-        detailedSpecs = "Tough-bed reinforced logistics framework. Ready for extreme load scaling.";
-      } else if (selectedChassisProfileId === 'heavy') {
-        drag = "0.48 Cd";
-        range = "620 km";
-        payload = "24.0 tonnes";
-        sensor = "LOW SPEED ONLY";
-        sensorColor = "text-yellow-400";
-        detailedSpecs = "Heavy-weight locomotive core. Direct high-power battery line routing.";
-      }
-
-      displayGrid.innerHTML = `
-        <div class="p-3 border border-slate-900 rounded bg-[#020408]/40 text-left">
-          <span class="text-[8px] text-slate-500 font-bold block mb-1">DRAG RATING</span>
-          <span class="text-white font-mono text-xs font-bold">${drag}</span>
-        </div>
-        <div class="p-3 border border-slate-900 rounded bg-[#020408]/40 text-left">
-          <span class="text-[8px] text-slate-500 font-bold block mb-1">BATTERY RANGE</span>
-          <span class="text-white font-mono text-xs font-bold">${range}</span>
-        </div>
-        <div class="p-3 border border-slate-900 rounded bg-[#020408]/40 text-left">
-          <span class="text-[8px] text-slate-500 font-bold block mb-1">PAYLOAD LIMIT</span>
-          <span class="text-white font-mono text-xs font-bold">${payload}</span>
-        </div>
-        <div class="p-3 border border-slate-900 rounded bg-[#020408]/40 text-left">
-          <span class="text-[8px] text-slate-500 font-bold block mb-1">LIDAR ACCURACY</span>
-          <span class="${sensorColor} font-mono text-xs font-bold">${sensor}</span>
-        </div>
-        <div class="col-span-2 sm:col-span-4 p-4 border border-quantum-blue/10 bg-quantum-blue/5 rounded text-left font-sans text-xs text-slate-300">
-          <span class="font-mono text-[9px] text-quantum-blue font-bold tracking-widest block mb-1 uppercase">[ COMPARTMENT BLUEPRINT SPECS ]</span>
-          ${detailedSpecs}
-        </div>
-      `;
-
-      if (btn) {
-        btn.removeAttribute('disabled');
-        btn.innerHTML = `<i data-lucide="x" class="w-3.5 h-3.5"></i> Close Blueprint`;
-        if (window.lucide) window.lucide.createIcons();
-      }
-    }, 400);
-  }
-
-  // Automatic Switcher cycle interval
-  window.chassisAutoCycleInterval = setInterval(() => {
-    const profiles = ['slim', 'reinforced', 'heavy'];
-    let nextIdx = (profiles.indexOf(selectedChassisProfileId) + 1) % profiles.length;
-    selectChassisProfile(profiles[nextIdx], true);
-  }, 4000);
-
-  /* Contact / Recruitment Submission handler with beautiful spinner modal */
-  window.handleRecruitSubmit = function(event) {
-    event.preventDefault();
-
-    const nameVal = document.getElementById('reg-name').value.trim();
-    const emailVal = document.getElementById('reg-email').value.trim();
-    const specialtySelect = document.getElementById('reg-specialty');
-    const specialtyVal = specialtySelect.options[specialtySelect.selectedIndex].text;
-    const statementVal = document.getElementById('reg-statement').value.trim();
-
-    const submitModal = document.getElementById('submit-modal');
-    const modalLoading = document.getElementById('modal-loading-state');
-    const modalSuccess = document.getElementById('modal-success-state');
-
-    // Show modal and the spinner state
-    if (submitModal) {
-      submitModal.classList.remove('hidden');
-      if (modalLoading) modalLoading.classList.remove('hidden');
-      if (modalSuccess) modalSuccess.classList.add('hidden');
-    }
-
-    // Wait 2 seconds to simulate high-fidelity transmission encryption
-    setTimeout(() => {
-      // Hide spinner, show success state details
-      if (modalLoading) modalLoading.classList.add('hidden');
-      if (modalSuccess) modalSuccess.classList.remove('hidden');
-
-      // Populate success logs
-      const sName = document.getElementById('m-success-name');
-      const sEmail = document.getElementById('m-success-email');
-      const sSpecialty = document.getElementById('m-success-specialty');
-      const sStatement = document.getElementById('m-success-statement');
-
-      if (sName) sName.textContent = nameVal;
-      if (sEmail) sEmail.textContent = emailVal;
-      if (sSpecialty) sSpecialty.textContent = specialtyVal;
-      if (sStatement) sStatement.textContent = `"${statementVal}"`;
-    }, 2000);
-  };
-
-  window.closeSubmitModal = function() {
-    const submitModal = document.getElementById('submit-modal');
-    if (submitModal) {
-      submitModal.classList.add('hidden');
-    }
-  };
-
-  window.closeAnalyticsSection = function() {
-    const section = document.getElementById('analytics-section');
-    if (section) section.classList.add('hidden');
-    appendLog('closeanalysis');
-    appendLog('<span class="text-slate-500">&gt; data analytics service deactivated.</span>', true);
-  };
-
-  /* Expose methods to global scope for HTML event triggers */
-  window.updateMoeMetrics = updateMoeMetrics;
-  window.simulateMoeCompile = simulateMoeCompile;
-  window.selectMeshMode = selectMeshMode;
-  window.selectMeshNode = selectMeshNode;
-  window.fetchMeshSpecs = fetchMeshSpecs;
-  window.selectChassisProfile = selectChassisProfile;
-  window.fetchChassisSpecs = fetchChassisSpecs;
-
-  /* Initializing default states for simulators */
-  updateMoeMetrics();
-  fetchMeshSpecs();
-  resetChassisSpecsDisplay();
-
-  /* 7. Onscroll Animations using IntersectionObserver */
-  const scrollElements = document.querySelectorAll('.animate-on-scroll');
-  if (scrollElements.length > 0) {
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px 0px -8% 0px',
-      threshold: 0.05
-    };
-
-    const scrollObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    scrollElements.forEach(el => {
-      scrollObserver.observe(el);
-    });
-  }
-});
+    <!-- Link to external javascript -->
+    <script src="script.js" defer></script>
+  </body>
+</html>
