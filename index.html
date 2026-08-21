@@ -3,20 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rheivatech || Sovereign Intelligence | Universal Infrastructure</title>
+    <title>Rheivatech | Sovereign Intelligence | Universal Infrastructure</title>
     
     <!-- logo2.png is strictly used for Favicon as requested -->
     <link rel="icon" type="image/png" href="logo2.png" />
 
-    <!-- External custom styles -->
+    <!-- External custom styles (compiled with Tailwind CSS v4 via Vite) -->
     <link rel="stylesheet" href="style.css" />
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-
-    <!-- Tailwind CSS via CDN -->
+    <!-- Fallback Tailwind CSS via CDN (enables perfect styling in direct offline/local filesystem viewing) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -38,6 +33,11 @@
         }
       }
     </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   </head>
   <body class="relative min-h-screen bg-cyber-dark text-[#cbd5e1] font-sans selection:bg-quantum-blue/30 selection:text-white overflow-x-hidden">
 
@@ -285,7 +285,7 @@
             </p>
             
             <a href="#terminal-section" class="inline-flex items-center gap-2.5 font-mono text-xs font-bold text-white uppercase tracking-[0.15em] px-5 py-3 border border-slate-800 hover:border-quantum-blue rounded bg-slate-950 transition-all hover:bg-quantum-blue/15 shadow-[0_0_15px_rgba(6,182,212,0.02)]">
-              Click to Check Live Terminal Shell <i data-lucide="chevrons-down" class="w-4 h-4 animate-bounce"></i>
+              Launch Live Terminal Shell <i data-lucide="chevrons-down" class="w-4 h-4 animate-bounce"></i>
             </a>
           </div>
 
@@ -459,13 +459,13 @@
               </div>
 
               <!-- Terminal Input Box -->
-              <div class="bg-cyber-dark/95 border-t border-cyber-border p-3 flex items-center gap-3">
-                <span class="text-quantum-blue text-xs ml-2 font-bold">$</span>
+              <div class="bg-white border border-slate-300 rounded-lg m-3 p-3 flex items-center gap-3 shadow-[0_4px_15px_rgba(255,255,255,0.1)] focus-within:border-quantum-blue focus-within:shadow-[0_0_20px_rgba(6,182,212,0.25)] transition-all">
+                <span class="text-slate-900 text-[10px] font-mono font-bold whitespace-nowrap">R-TECH@SOVEREIGN_NODE:~ $</span>
                 <input
                   type="text"
                   id="terminal-input"
-                  placeholder="enter telemetry commands (e.g. status, clear, vector)..."
-                  class="bg-transparent text-white border-0 outline-none w-full text-xs font-mono placeholder:text-slate-600 focus:ring-0 focus:border-0"
+                  placeholder="enter telemetry commands (e.g. status, analysis, intellect, help)..."
+                  class="bg-transparent text-slate-900 border-0 outline-none w-full text-xs font-mono placeholder:text-slate-500 focus:ring-0 focus:border-0 p-0 font-semibold"
                   onkeydown="handleTerminalSubmit(event)"
                 />
               </div>
@@ -633,7 +633,7 @@
               <div class="mt-4 inline-flex items-center gap-2 bg-yellow-500/5 border border-yellow-500/20 px-3.5 py-1.5 rounded-lg">
                 <span class="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse"></span>
                 <span class="font-mono text-[9px] uppercase tracking-[0.15em] text-yellow-500">
-                  DEVELOPER PROTOCOL: Add additional slides by appending objects to the <code class="text-white font-bold">ANALYSIS_PORTFOLIO</code> array inside your local <code class="text-white font-bold">script.js</code>.
+                  PROTOCOL: Slides here represents objects showcasing custom analytic tools built locally by our team. Embedded with artificial intellegence that creates analytical reports, streamlining thought processes for making data driven businesss decisions.</code>.
                 </span>
               </div>
             </div>
@@ -641,6 +641,222 @@
             <!-- Dynamic Grid rendered from script.js -->
             <div id="analytics-portfolio-container" class="grid grid-cols-1 md:grid-cols-2 gap-8">
               <!-- Dynamically populated from script.js -->
+            </div>
+
+            <!-- Integration Synthesis Column -->
+            <div class="mt-12 p-6 md:p-8 rounded-xl border border-yellow-500/10 bg-yellow-500/[0.01] hover:border-yellow-500/20 transition-all duration-300 relative overflow-hidden group">
+              <div class="absolute inset-y-0 right-0 w-1/3 bg-radial from-yellow-500/[0.03] to-transparent pointer-events-none"></div>
+              <div class="flex flex-col md:flex-row md:items-center gap-6 justify-between">
+                <div class="space-y-3 max-w-3xl">
+                  <span class="font-mono text-[9px] text-yellow-500 uppercase tracking-[0.2em] font-bold flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse"></span>
+                    Synthesizing AI, Custom Analytics &amp; Web Design
+                  </span>
+                  <h4 class="font-sans font-bold text-xl text-white tracking-tight">
+                    Fusing Machine Intelligence with Custom Tactical Dashboards
+                  </h4>
+                  <p class="font-sans text-xs md:text-sm text-slate-300 leading-relaxed">
+                    We specialize in constructing end-to-end interactive systems where advanced deep learning meets high-fidelity web engineering. By merging custom statistical knowledge-bases with beautiful, performance-optimized visual layouts, we build custom portals that empower businesses relying heavily on data analytics to uncover hidden correlations, automate forecast signals, and execute trade policies seamlessly.
+                  </p>
+                </div>
+                <div class="flex flex-wrap gap-3 font-mono text-[10px] text-slate-400">
+                  <div class="px-3.5 py-1.5 rounded border border-slate-800 bg-[#020408]">CUSTOM_AI_INTEGRATION</div>
+                  <div class="px-3.5 py-1.5 rounded border border-slate-800 bg-[#020408]">DATA_ENGINEERING</div>
+                  <div class="px-3.5 py-1.5 rounded border border-slate-800 bg-[#020408]">HIGH_FIDELITY_HUD</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 3.6 Hidden Local AI Portfolio (Intellect Section) -->
+      <section id="intellect-section" class="hidden transition-all duration-700 ease-in-out py-24 px-6 border-t border-cyber-border bg-[#020408]/85 overflow-hidden relative">
+        <div class="absolute inset-0 pointer-events-none cyber-grid opacity-15"></div>
+        <div class="absolute top-1/2 left-10 w-96 h-96 bg-radial from-pink-500/5 to-transparent pointer-events-none filter blur-2xl"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10 text-left">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div class="max-w-3xl">
+              <span class="font-mono text-[10px] text-pink-500 uppercase tracking-[0.2em] font-bold block mb-4">
+                [ LAYER_02_INTELLECT | PRIVATE_COGNITIVE_REPOS ]
+              </span>
+              <div class="flex flex-wrap items-center gap-3">
+                <h2 class="font-sans font-bold text-3xl md:text-5xl text-white tracking-tight uppercase">
+                  Sovereign Intellect Core
+                </h2>
+                <span class="px-2.5 py-0.5 rounded text-[8px] font-mono font-bold tracking-widest text-pink-500 border border-pink-500/30 bg-pink-500/5 uppercase">
+                  ● CLASSIFIED / LOCAL_ONLY
+                </span>
+              </div>
+              <p class="font-mono text-xs md:text-sm text-slate-400 leading-relaxed mt-4">
+                We design and host air-gapped, optimized intelligence models engineered for direct on-chassis and local node execution. This preview displays internal models not currently released to the general public, designed to process secure regional tasks without external data telemetry.
+              </p>
+            </div>
+            <button onclick="closeIntellectSection()" class="px-4 py-2 border border-slate-800 hover:border-pink-500/40 text-slate-400 hover:text-pink-400 font-mono text-[10px] font-bold tracking-widest uppercase rounded transition-all flex items-center gap-1.5 bg-[#020408]/40">
+              <i data-lucide="x" class="w-3.5 h-3.5"></i> Close Intellect Core
+            </button>
+          </div>
+
+          <!-- Main Showcase Grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left Side: Interactive Mockup and stats -->
+            <div class="lg:col-span-7 space-y-6">
+              <div class="border border-slate-900 rounded-xl p-6 bg-cyber-card/60 relative group overflow-hidden hover:border-pink-500/30 transition-all duration-300">
+                <div class="absolute inset-0 bg-radial from-pink-500/2 to-transparent pointer-events-none"></div>
+                
+                <!-- Image Frame -->
+                <div class="relative w-full aspect-video rounded-lg overflow-hidden border border-slate-900 bg-slate-950 flex items-center justify-center">
+                  <img 
+                    src="intellect_1.jpeg" 
+                    alt="Sovereign AI Intellect Interface" 
+                    referrerPolicy="no-referrer"
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div class="absolute inset-0 bg-[#020408]/65 backdrop-blur-[1px] opacity-100 group-hover:opacity-0 transition-opacity duration-300 flex flex-col items-center justify-center gap-2">
+                    <div class="w-8 h-8 rounded-full border border-pink-500/40 flex items-center justify-center bg-pink-500/5 text-pink-500">
+                      <i data-lucide="eye" class="w-4 h-4"></i>
+                    </div>
+                    <span class="font-mono text-[9px] text-pink-500 font-bold uppercase tracking-widest px-2 py-0.5 border border-pink-500/15 bg-pink-500/5 rounded">Examine System Console</span>
+                  </div>
+                </div>
+
+                <div class="mt-6 flex justify-between items-center text-[10px] font-mono text-slate-400">
+                  <span>SYSTEM_MODEL: <span class="text-white font-bold">RHEIVA-COG-v1.4</span></span>
+                  <span>SECURITY_CLEARANCE: <span class="text-pink-400 font-bold">LEVEL_04_CONFIDENTIAL</span></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Side: Model List / Portfolio specs -->
+            <div class="lg:col-span-5 space-y-6">
+              <div class="space-y-4">
+                <h3 class="font-sans font-bold text-lg text-white uppercase tracking-wider">
+                  Localized AI Repositories
+                </h3>
+                <p class="font-sans text-xs text-slate-400 leading-relaxed">
+                  The following model configurations are active on our localized clusters. They execute 100% server-side or on-chassis, requiring zero internet queries.
+                </p>
+              </div>
+
+              <!-- List of AI Repos -->
+              <div class="space-y-4">
+                
+                <!-- Model 1 -->
+                <div class="p-4 rounded-lg border border-slate-900 bg-[#020408]/40 hover:border-pink-500/20 transition-all duration-300">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="font-mono text-xs text-white font-bold uppercase">1. Llama-Sovereign-3B</span>
+                    <span class="font-mono text-[9px] px-2 py-0.5 rounded text-green-400 bg-green-400/5 border border-green-400/10">STABLE</span>
+                  </div>
+                  <p class="font-sans text-xs text-slate-400 leading-relaxed">
+                    A highly quantized, fine-tuned 3-billion parameter model optimized for resource-constrained Edge environments, with custom guardrails suited for regional command telemetry parsing.
+                  </p>
+                </div>
+
+                <!-- Model 2 -->
+                <div class="p-4 rounded-lg border border-slate-900 bg-[#020408]/40 hover:border-pink-500/20 transition-all duration-300">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="font-mono text-xs text-white font-bold uppercase">2. MoE-Local-Mesh-Router</span>
+                    <span class="font-mono text-[9px] px-2 py-0.5 rounded text-pink-400 bg-pink-400/5 border border-pink-400/10">PRE-RELEASE</span>
+                  </div>
+                  <p class="font-sans text-xs text-slate-400 leading-relaxed">
+                    A mixture-of-experts routing module built to coordinate physical node load distributions, routing energy cells and computing thresholds dynamically over solar networks.
+                  </p>
+                </div>
+
+                <!-- Model 3 -->
+                <div class="p-4 rounded-lg border border-slate-900 bg-[#020408]/40 hover:border-pink-500/20 transition-all duration-300">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="font-mono text-xs text-white font-bold uppercase">3. Sovereign Reasoning Engine</span>
+                    <span class="font-mono text-[9px] px-2 py-0.5 rounded text-yellow-500 bg-yellow-500/5 border border-yellow-500/10">IN_TRAINING</span>
+                  </div>
+                  <p class="font-sans text-xs text-slate-400 leading-relaxed">
+                    An autonomous logical reasoning framework operating via structured chain-of-thought feedback loops, calculating predictive optimization targets for hardware-in-the-loop systems.
+                  </p>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Divider -->
+          <div class="h-px bg-slate-900/60 my-16"></div>
+
+          <!-- RHEIVAAI GENESIS & JOURNEY CHRONICLES -->
+          <div id="rheiva-genesis" class="relative overflow-hidden">
+            <div class="max-w-3xl mb-16 text-left">
+              <span class="font-mono text-[10px] text-pink-500 uppercase tracking-[0.2em] font-bold block mb-4">
+                [ RHEIVAAI | SYSTEM_GENESIS_CHRONICLES ]
+              </span>
+              <h2 class="font-sans font-bold text-3xl md:text-5xl text-white tracking-tight mb-6 uppercase">
+                The Genesis of RheivaAI
+              </h2>
+              <p class="font-mono text-xs md:text-sm text-slate-400 leading-relaxed">
+                Bringing an air-gapped regional intelligence model to life is not just a story of algorithms; it is a story of overcoming hardware constraints, data bottlenecks, and rigorous training iterations on decentralized, consumer-grade silicon.
+              </p>
+            </div>
+
+            <!-- Chronicles Bento Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+              
+              <!-- Box 1: Hardware constraints -->
+              <div class="border border-slate-900/80 rounded-xl p-6 bg-[#020408]/60 backdrop-blur-sm hover:border-pink-500/40 transition-all duration-300 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center gap-2.5 mb-4 text-pink-500">
+                    <i data-lucide="cpu" class="w-5 h-5"></i>
+                    <span class="font-mono text-[10px] font-bold tracking-wider uppercase">[ 01. SILICON LIMITS ]</span>
+                  </div>
+                  <h3 class="font-sans font-bold text-lg text-white mb-2 uppercase">Silicon Under Pressure</h3>
+                  <p class="font-sans text-xs text-slate-400 leading-relaxed">
+                    Most modern LLMs require clusters of heavy cloud-based GPU nodes. We engineered and fine-tuned RheivaAI directly on highly constrained consumer-grade chips — surviving on standard dual-core processors and a strict 2.0GB VRAM ceiling. This pushed us to pioneer aggressive quantization, layer-freezing techniques, and intensive memory-optimized learning rates.
+                  </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-slate-900/60 flex items-center justify-between font-mono text-[9px] text-slate-500">
+                  <span>VRAM Cap: 2.0GB Dedicated</span>
+                  <span class="text-pink-500 font-bold">100% EXECUTED</span>
+                </div>
+              </div>
+
+              <!-- Box 2: Pipeline and Token Alignment -->
+              <div class="border border-slate-900/80 rounded-xl p-6 bg-[#020408]/60 backdrop-blur-sm hover:border-pink-500/40 transition-all duration-300 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center gap-2.5 mb-4 text-pink-500">
+                    <i data-lucide="shuffle" class="w-5 h-5"></i>
+                    <span class="font-mono text-[10px] font-bold tracking-wider uppercase">[ 02. PIPELINE &amp; TOKENS ]</span>
+                  </div>
+                  <h3 class="font-sans font-bold text-lg text-white mb-2 uppercase">Taming Token Alignment</h3>
+                  <p class="font-sans text-xs text-slate-400 leading-relaxed">
+                    During data curation, we battled EOF CSV formatting issues, quote escape anomalies, and input length token limits where sequence distributions would conflict with the context window. We constructed a robust compilation pipeline to strip bad records, merge disparate knowledge bases, and dynamically truncate inputs to prevent out-of-memory crashes.
+                  </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-slate-900/60 flex items-center justify-between font-mono text-[9px] text-slate-500">
+                  <span>Epochs: Compressed Iterations</span>
+                  <span class="text-pink-500 font-bold">STABLE ALIGNMENT</span>
+                </div>
+              </div>
+
+              <!-- Box 3: Hybrid Retrieval & Algorithms -->
+              <div class="border border-slate-900/80 rounded-xl p-6 bg-[#020408]/60 backdrop-blur-sm hover:border-pink-500/40 transition-all duration-300 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center gap-2.5 mb-4 text-pink-500">
+                    <i data-lucide="git-branch" class="w-5 h-5"></i>
+                    <span class="font-mono text-[10px] font-bold tracking-wider uppercase">[ 03. ALGORITHMIC FUSION ]</span>
+                  </div>
+                  <h3 class="font-sans font-bold text-lg text-white mb-2 uppercase">FAISS &amp; MoE Architecture</h3>
+                  <p class="font-sans text-xs text-slate-400 leading-relaxed">
+                    To achieve lightning-fast air-gapped performance, we implemented a hybrid Retrieval-Augmented Generation (RAG) framework. By marrying a fine-tuned GPT decoder network with a locally hosted FAISS L2 similarity index (utilizing dense SentenceTransformers) and a zero-dependency TF-IDF offline routing fallback, we brought a completely autonomous, secure system to life.
+                  </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-slate-900/60 flex items-center justify-between font-mono text-[9px] text-slate-500">
+                  <span>Index Flat: Cosine L2 Dist</span>
+                  <span class="text-green-400 font-bold">100% ONLINE</span>
+                </div>
+              </div>
+
             </div>
           </div>
 
@@ -1135,6 +1351,8 @@
         </div>
       </section>
 
+
+
       <!-- PHASE 02 DETAILED SECTION -->
       <section id="phase-02" class="relative py-24 px-6 border-t border-cyber-border bg-cyber-dark/60 overflow-hidden">
         <div class="absolute inset-0 pointer-events-none cyber-grid opacity-15"></div>
@@ -1195,23 +1413,23 @@
                 <div class="grid grid-cols-2 gap-4">
                   <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
                     <span class="text-[9px] text-slate-500 font-bold block mb-1">PROBED REGION</span>
-                    <span class="text-slate-500 font-mono italic">[AWAITING PROBE]</span>
+                    <span class="text-slate-400 font-mono text-[10px] uppercase font-bold animate-pulse">Use detect button to get values</span>
                   </div>
                   <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
                     <span class="text-[9px] text-slate-500 font-bold block mb-1">COORDINATES</span>
-                    <span class="text-slate-500 font-mono italic">[LAT: -- / LON: --]</span>
+                    <span class="text-slate-400 font-mono text-[10px] uppercase font-bold animate-pulse">Use detect button to get values</span>
                   </div>
                   <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
                     <span class="text-[9px] text-slate-500 font-bold block mb-1">SOLAR YIELD</span>
-                    <span class="text-slate-500 font-mono italic">[AWAITING SENSOR]</span>
+                    <span class="text-slate-400 font-mono text-[10px] uppercase font-bold animate-pulse">Use detect button to get values</span>
                   </div>
                   <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
                     <span class="text-[9px] text-slate-500 font-bold block mb-1">HARDWARE AVAILABILITY</span>
-                    <span class="text-slate-500 font-mono italic">[AWAITING LINK]</span>
+                    <span class="text-slate-400 font-mono text-[10px] uppercase font-bold animate-pulse">Use detect button to get values</span>
                   </div>
                 </div>
                 <div class="grid grid-cols-2 gap-4 pt-2 border-t border-slate-800/60 font-mono text-[9px] text-slate-500 uppercase">
-                  <div>Transmitting latency: <span class="text-slate-500">-- ms</span></div>
+                  <div>Transmitting latency: <span class="text-slate-500 font-bold">Use detect button to get values</span></div>
                   <div>Mesh coordination: <span class="text-slate-500">OFFLINE</span></div>
                 </div>
               </div>
@@ -1443,7 +1661,7 @@
       <div class="max-w-7xl mx-auto space-y-12">
         <!-- Service listings grid -->
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 text-left normal-case tracking-normal border-b border-slate-900 pb-12">
-          <div class="md:col-span-4 space-y-4">
+          <div class="md:col-span-3 space-y-4">
             <div class="flex items-center gap-2 text-white">
               <div class="w-5 h-5 border border-quantum-blue/40 rounded-sm p-0.5 bg-cyber-dark/60 flex items-center justify-center">
                 <img
@@ -1461,7 +1679,7 @@
           </div>
 
           <!-- Services Column 1 -->
-          <div class="md:col-span-4 space-y-3">
+          <div class="md:col-span-3 space-y-3">
             <span class="font-mono text-[9px] text-quantum-blue font-bold tracking-widest uppercase block mb-1">
               [ CORE_INFRASTRUCTURE_SERVICES ]
             </span>
@@ -1475,7 +1693,7 @@
           </div>
 
           <!-- Services Column 2 -->
-          <div class="md:col-span-4 space-y-3">
+          <div class="md:col-span-3 space-y-3">
             <span class="font-mono text-[9px] text-yellow-500 font-bold tracking-widest uppercase block mb-1">
               [ THIRD_PARTY_SUPPORT_&amp;_ANALYTICS ]
             </span>
@@ -1488,6 +1706,31 @@
               </li>
               <li class="flex items-center gap-2 text-slate-500 italic">
                 <span>(Our offline custom data analytics tools coming soon)</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact Column -->
+          <div class="md:col-span-3 space-y-3">
+            <span class="font-mono text-[9px] text-pink-500 font-bold tracking-widest uppercase block mb-1">
+              [ SECURE_COMMUNICATIONS ]
+            </span>
+            <ul class="space-y-2 font-mono text-xs text-slate-400">
+              <li class="flex items-center gap-2">
+                <i data-lucide="linkedin" class="w-3.5 h-3.5 text-pink-500"></i>
+                <a href="https://www.linkedin.com/in/omotayo-oladapo-dan-placeholder" target="_blank" rel="noopener noreferrer" class="hover:text-pink-400 transition-all duration-200">LinkedIn Profile</a>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="message-square" class="w-3.5 h-3.5 text-pink-500"></i>
+                <a href="https://wa.me/2348000000000" target="_blank" rel="noopener noreferrer" class="hover:text-pink-400 transition-all duration-200">WhatsApp Secure</a>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="mail" class="w-3.5 h-3.5 text-pink-500"></i>
+                <a href="mailto:contact@rheivatech.com" class="hover:text-pink-400 transition-all duration-200">contact@rheivatech.com</a>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="phone" class="w-3.5 h-3.5 text-pink-500"></i>
+                <a href="tel:+2348000000000" class="hover:text-pink-400 transition-all duration-200">+234 (0) 800-000-0000</a>
               </li>
             </ul>
           </div>
@@ -1546,11 +1789,24 @@
             "Hi, I am <span class="text-white font-bold">RheivaAI</span>. I am being trained as your air-gapped regional intelligence interface. By compiling Mixture-of-Expert frameworks entirely on local systems, I ensure your strategic queries never traverse foreign servers."
           </div>
 
-          <!-- Bottom placeholder input field -->
-          <div class="relative bg-[#020408]/40 border border-slate-800 rounded px-4 py-3 text-center">
-            <span class="font-mono text-xs text-slate-500 font-bold uppercase tracking-widest block">
-              ⚠️ RheivaAI is under production and coming soon.
-            </span>
+          <!-- Interactive Gateway to Testbed -->
+          <div class="relative bg-quantum-blue/5 border border-quantum-blue/20 rounded-xl p-5 text-center space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[10px] text-quantum-blue font-bold uppercase tracking-widest flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-quantum-blue animate-pulse"></span>
+                ACTIVE COGNITIVE GATEWAY
+              </span>
+              <span class="font-mono text-[9px] text-slate-500 uppercase font-bold">NODE: LOCAL_8000</span>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed text-left">
+              The air-gapped training datasets have been standardized. You can now launch our regional AI Test-Bed UI to run live semantic search simulations and model inference testing.
+            </p>
+            <div class="flex gap-3">
+              <a href="/RheivaAI/test_interface.html" target="_blank" class="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 bg-quantum-blue hover:bg-cyan-500 border border-cyan-400 text-slate-950 font-mono text-[11px] font-bold tracking-wider uppercase rounded-all transition-all duration-200 shadow-[0_0_15px_rgba(6,182,212,0.15)] hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] rounded-lg">
+                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                Launch AI Test-Bed
+              </a>
+            </div>
           </div>
 
           <!-- Footer Buttons -->
