@@ -1,3 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-cyber-dark: #020408;
+  --color-cyber-card: rgba(15, 23, 42, 0.4);
+  --color-quantum-blue: #06b6d4;
+  --color-quantum-blue-glow: rgba(6, 182, 212, 0.15);
+  --color-cyber-border: #1e293b;
+  --color-text-muted: #94a3b8;
+}
+
 /* style.css - Custom stylesheet for Rheivatech landing page */
 
 html {
@@ -5,7 +19,7 @@ html {
   background-color: #020408;
   color: #cbd5e1;
   overflow-x: hidden;
-  font-size: 104.5%; /* Slightly larger font size for all devices */
+  font-size: 116.5%; /* Increased font size for enhanced portfolio legibility */
 }
 
 /* Custom scrollbars matching Immersive UI */
@@ -80,3 +94,9 @@ html {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Ensure footer remains compact as requested */
+footer, footer *, footer span, footer a, footer p, footer div {
+  font-size: 11.5px !important;
+}
+
