@@ -426,7 +426,76 @@ document.addEventListener('DOMContentLoaded', () => {
 
       setTimeout(() => {
         if (command === 'help') {
-          appendLog('&gt; Available commands: <b>status</b>, <b>analysis</b>, <b>clear</b>, <b>vector</b>, <b>epoch</b>, <b>nodes</b>', true);
+          appendLog('&gt; Available commands: <b>status</b>, <b>analysis</b>, <b>intellect</b>, <b>clear</b>, <b>vector</b>, <b>epoch</b>, <b>nodes</b>, <b>contacts</b>', true);
+        } else if (command === 'contacts') {
+          appendLog('&gt; <span class="text-quantum-blue">INITIATING SECURE LOCAL DATABASE DECRYPTION...</span>', true);
+          appendLog('&gt; <span class="text-slate-500">QUERYING ACTIVE NETWORK OPERATORS LEDGER...</span>', true);
+          
+          fetch('/api/contacts')
+            .then(res => res.json())
+            .then(data => {
+              const serverContacts = data.contacts || [];
+              let localContacts = [];
+              try {
+                const cached = localStorage.getItem('rheivatech_contacts');
+                if (cached) localContacts = JSON.parse(cached);
+              } catch (e) { console.error(e); }
+              
+              // Filter out duplicates that might be in both places
+              const allContacts = [...serverContacts];
+              localContacts.forEach(lc => {
+                if (!allContacts.some(sc => sc.email.toLowerCase() === lc.email.toLowerCase())) {
+                  allContacts.push(lc);
+                }
+              });
+
+              setTimeout(() => {
+                if (allContacts.length === 0) {
+                  appendLog('&gt; <span class="text-yellow-500">DATABASE STATUS: ONLINE | RECORDS: 0</span>', true);
+                  appendLog('&gt; No operators registered yet. Be the first to join by submitting the Secure Access Portal form below!', true);
+                } else {
+                  appendLog(`&gt; <span class="text-green-400">DECRYPTION SUCCESSFUL! FOUND ${allContacts.length} ACTIVE OPERATOR(S):</span>`, true);
+                  appendLog('&gt; -------------------------------------------------------------', true);
+                  allContacts.forEach((c, idx) => {
+                    const origin = c.id ? '<span class="text-green-500">[SERVER_DB]</span>' : '<span class="text-yellow-500">[LOCAL_CACHE]</span>';
+                    appendLog(`&gt; <span class="text-white font-bold">OPERATOR #${idx + 1} ${origin}</span>`, true);
+                    appendLog(`&gt; <span class="text-slate-400">NAME:</span> ${c.name}`, true);
+                    appendLog(`&gt; <span class="text-slate-400">EMAIL:</span> ${c.email}`, true);
+                    appendLog(`&gt; <span class="text-slate-400">SPECIALTY:</span> ${c.specialty}`, true);
+                    appendLog(`&gt; <span class="text-slate-400">STATED ALIGNMENT:</span> "${c.statement}"`, true);
+                    appendLog(`&gt; <span class="text-slate-400">DATE:</span> ${c.timestamp || new Date().toISOString()}`, true);
+                    appendLog('&gt; -------------------------------------------------------------', true);
+                  });
+                }
+              }, 800);
+            })
+            .catch(err => {
+              // Offline/Static local fallback
+              let localContacts = [];
+              try {
+                const cached = localStorage.getItem('rheivatech_contacts');
+                if (cached) localContacts = JSON.parse(cached);
+              } catch (e) { console.error(e); }
+
+              setTimeout(() => {
+                if (localContacts.length === 0) {
+                  appendLog('&gt; <span class="text-yellow-500">DATABASE STATUS: OFFLINE (LOCAL FALLBACK ACTIVE) | RECORDS: 0</span>', true);
+                  appendLog('&gt; No offline operators registered yet. Use the Join Our Network form to save contacts locally!', true);
+                } else {
+                  appendLog(`&gt; <span class="text-yellow-500">DATABASE STATUS: OFFLINE (LOCAL FALLBACK ACTIVE) | RECORDS: ${localContacts.length}</span>`, true);
+                  appendLog('&gt; -------------------------------------------------------------', true);
+                  localContacts.forEach((c, idx) => {
+                    appendLog(`&gt; <span class="text-white font-bold">OFFLINE OPERATOR #${idx + 1} <span class="text-yellow-500">[LOCAL_CACHE]</span></span>`, true);
+                    appendLog(`&gt; <span class="text-slate-400">NAME:</span> ${c.name}`, true);
+                    appendLog(`&gt; <span class="text-slate-400">EMAIL:</span> ${c.email}`, true);
+                    appendLog(`&gt; <span class="text-slate-400">SPECIALTY:</span> ${c.specialty}`, true);
+                    appendLog(`&gt; <span class="text-slate-400">STATED ALIGNMENT:</span> "${c.statement}"`, true);
+                    appendLog(`&gt; <span class="text-slate-400">DATE:</span> ${c.timestamp || new Date().toISOString()}`, true);
+                    appendLog('&gt; -------------------------------------------------------------', true);
+                  });
+                }
+              }, 800);
+            });
         } else if (command === 'status') {
           appendLog('&gt; [ STATUS REPORT: UNDER PRODUCTION ]', true);
           appendLog('&gt; CURRENT COGNITIVE INFRASTRUCTURE: DEVELOPMENT PHASE', true);
@@ -445,6 +514,23 @@ document.addEventListener('DOMContentLoaded', () => {
               section.scrollIntoView({ behavior: 'smooth' });
             }
           }, 1200);
+        } else if (command === 'intellect') {
+          appendLog('&gt; <span class="text-pink-500">INITIALIZING COGNITIVE INTERFACE...</span>', true);
+          appendLog('&gt; <span class="text-slate-500">DECRYPTING LOCAL REPOSITORY METADATA...</span>', true);
+          setTimeout(() => {
+            appendLog('&gt; <span class="text-green-400">ACCESS GRANTED: OPENING SOVEREIGN INTELLECT CORES.</span>', true);
+            const section = document.getElementById('intellect-section');
+            if (section) {
+              section.classList.remove('hidden');
+              section.scrollIntoView({ behavior: 'smooth' });
+            }
+          }, 1200);
+        } else if (command === 'closeintellect' || command === 'close intellect') {
+          appendLog('&gt; deactivating localized AI section...', true);
+          const section = document.getElementById('intellect-section');
+          if (section) {
+            section.classList.add('hidden');
+          }
         } else if (command === 'closeanalysis' || command === 'close analysis') {
           appendLog('&gt; deactivating data analytics service section...', true);
           const section = document.getElementById('analytics-section');
@@ -1000,23 +1086,23 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="grid grid-cols-2 gap-4 text-xs font-mono">
         <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
           <span class="text-[9px] text-slate-500 font-bold block mb-1">PROBED REGION</span>
-          <span class="text-slate-500 font-mono italic">[AWAITING PROBE]</span>
+          <span class="text-slate-400 font-mono text-[10px] uppercase font-bold animate-pulse">Use detect button to get values</span>
         </div>
         <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
           <span class="text-[9px] text-slate-500 font-bold block mb-1">COORDINATES</span>
-          <span class="text-slate-500 font-mono italic">[LAT: -- / LON: --]</span>
+          <span class="text-slate-400 font-mono text-[10px] uppercase font-bold animate-pulse">Use detect button to get values</span>
         </div>
         <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
           <span class="text-[9px] text-slate-500 font-bold block mb-1">SOLAR YIELD</span>
-          <span class="text-slate-500 font-mono italic">[AWAITING SENSOR]</span>
+          <span class="text-slate-400 font-mono text-[10px] uppercase font-bold animate-pulse">Use detect button to get values</span>
         </div>
         <div class="p-3 border border-slate-900 rounded bg-[#020408]/40">
           <span class="text-[9px] text-slate-500 font-bold block mb-1">HARDWARE AVAILABILITY</span>
-          <span class="text-slate-500 font-mono italic">[AWAITING LINK]</span>
+          <span class="text-slate-400 font-mono text-[10px] uppercase font-bold animate-pulse">Use detect button to get values</span>
         </div>
       </div>
       <div class="grid grid-cols-2 gap-4 pt-2 border-t border-slate-800/60 font-mono text-[9px] text-slate-500 uppercase">
-        <div>Transmitting latency: <span class="text-slate-500">-- ms</span></div>
+        <div>Transmitting latency: <span class="text-slate-500 font-bold">Use detect button to get values</span></div>
         <div>Mesh coordination: <span class="text-slate-500">OFFLINE</span></div>
       </div>
     `;
@@ -1354,7 +1440,7 @@ document.addEventListener('DOMContentLoaded', () => {
     selectChassisProfile(profiles[nextIdx], true);
   }, 4000);
 
-  /* Contact / Recruitment Submission handler with beautiful spinner modal */
+  /* Contact / Recruitment Submission handler with beautiful spinner modal and real JSON DB API */
   window.handleRecruitSubmit = function(event) {
     event.preventDefault();
 
@@ -1371,27 +1457,104 @@ document.addEventListener('DOMContentLoaded', () => {
     // Show modal and the spinner state
     if (submitModal) {
       submitModal.classList.remove('hidden');
-      if (modalLoading) modalLoading.classList.remove('hidden');
+      if (modalLoading) {
+        modalLoading.classList.remove('hidden');
+        modalLoading.innerHTML = `
+          <div class="relative w-12 h-12">
+            <div class="absolute inset-0 rounded-full border-4 border-slate-900"></div>
+            <div class="absolute inset-0 rounded-full border-4 border-t-quantum-blue border-r-quantum-blue/40 animate-spin"></div>
+          </div>
+          <span class="font-mono text-xs text-quantum-blue font-bold tracking-widest uppercase animate-pulse">TRANSMITTING CREDENTIALS TO DATABASE...</span>
+        `;
+      }
       if (modalSuccess) modalSuccess.classList.add('hidden');
     }
 
-    // Wait 2 seconds to simulate high-fidelity transmission encryption
-    setTimeout(() => {
-      // Hide spinner, show success state details
-      if (modalLoading) modalLoading.classList.add('hidden');
-      if (modalSuccess) modalSuccess.classList.remove('hidden');
+    // Attempt to write to real JSON DB via Express server
+    fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: nameVal,
+        email: emailVal,
+        specialty: specialtyVal,
+        statement: statementVal
+      })
+    })
+    .then(async (response) => {
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || 'Transmission error');
+      }
+      return data;
+    })
+    .then((data) => {
+      // Successfully written to database!
+      setTimeout(() => {
+        if (modalLoading) modalLoading.classList.add('hidden');
+        if (modalSuccess) modalSuccess.classList.remove('hidden');
 
-      // Populate success logs
-      const sName = document.getElementById('m-success-name');
-      const sEmail = document.getElementById('m-success-email');
-      const sSpecialty = document.getElementById('m-success-specialty');
-      const sStatement = document.getElementById('m-success-statement');
+        const sName = document.getElementById('m-success-name');
+        const sEmail = document.getElementById('m-success-email');
+        const sSpecialty = document.getElementById('m-success-specialty');
+        const sStatement = document.getElementById('m-success-statement');
+        const sBadge = document.querySelector('[id="submit-modal"] [class*="text-green-400"]');
 
-      if (sName) sName.textContent = nameVal;
-      if (sEmail) sEmail.textContent = emailVal;
-      if (sSpecialty) sSpecialty.textContent = specialtyVal;
-      if (sStatement) sStatement.textContent = `"${statementVal}"`;
-    }, 2000);
+        if (sName) sName.textContent = nameVal;
+        if (sEmail) sEmail.textContent = emailVal;
+        if (sSpecialty) sSpecialty.textContent = specialtyVal;
+        if (sStatement) sStatement.textContent = `"${statementVal}"`;
+        if (sBadge) sBadge.textContent = '[ SYSTEM | SECURE_JSON_DB_LOGGED ]';
+
+        appendLog(`&gt; <span class="text-green-400">Database saved: Registered operator "${nameVal}" (${emailVal}) to Rheiva secure ledger.</span>`, true);
+      }, 1000);
+    })
+    .catch((err) => {
+      // Fallback gracefully to LocalStorage database if server is offline (e.g. static GitHub Pages hosting)
+      console.warn('Backend DB server not available or returned error. Syncing to local memory fallback...', err);
+
+      let offlineContacts = [];
+      try {
+        const cached = localStorage.getItem('rheivatech_contacts');
+        if (cached) offlineContacts = JSON.parse(cached);
+      } catch (e) {
+        console.error(e);
+      }
+
+      const isDup = offlineContacts.some(c => c.email.toLowerCase() === emailVal.toLowerCase());
+      if (!isDup) {
+        offlineContacts.push({
+          name: nameVal,
+          email: emailVal,
+          specialty: specialtyVal,
+          statement: statementVal,
+          timestamp: new Date().toISOString(),
+          storage: 'local_cache'
+        });
+        localStorage.setItem('rheivatech_contacts', JSON.stringify(offlineContacts));
+      }
+
+      setTimeout(() => {
+        if (modalLoading) modalLoading.classList.add('hidden');
+        if (modalSuccess) modalSuccess.classList.remove('hidden');
+
+        const sName = document.getElementById('m-success-name');
+        const sEmail = document.getElementById('m-success-email');
+        const sSpecialty = document.getElementById('m-success-specialty');
+        const sStatement = document.getElementById('m-success-statement');
+        const sBadge = document.querySelector('[id="submit-modal"] [class*="text-green-400"]');
+
+        if (sName) sName.textContent = nameVal;
+        if (sEmail) sEmail.textContent = emailVal;
+        if (sSpecialty) sSpecialty.textContent = specialtyVal;
+        if (sStatement) sStatement.textContent = `"${statementVal}"`;
+        
+        // Update badge to highlight offline compatibility / GitHub pages fallback!
+        if (sBadge) sBadge.textContent = '[ LOCAL_CLIENT | CACHED_SYNC_STABLE ]';
+
+        appendLog(`&gt; <span class="text-yellow-500">Local-Sync active: Saved "${nameVal}" (${emailVal}) to browser localStorage backup.</span>`, true);
+      }, 1000);
+    });
   };
 
   window.closeSubmitModal = function() {
@@ -1406,6 +1569,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (section) section.classList.add('hidden');
     appendLog('closeanalysis');
     appendLog('<span class="text-slate-500">&gt; data analytics service deactivated.</span>', true);
+  };
+
+  window.closeIntellectSection = function() {
+    const section = document.getElementById('intellect-section');
+    if (section) section.classList.add('hidden');
+    appendLog('closeintellect');
+    appendLog('<span class="text-slate-500">&gt; localized AI section deactivated.</span>', true);
   };
 
   /* Expose methods to global scope for HTML event triggers */
