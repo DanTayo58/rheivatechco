@@ -1,57 +1,74 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-sans: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   
-  --color-cyber-dark: #020408;
-  --color-cyber-card: rgba(15, 23, 42, 0.4);
-  --color-quantum-blue: #06b6d4;
-  --color-quantum-blue-glow: rgba(6, 182, 212, 0.15);
-  --color-cyber-border: #1e293b;
-  --color-text-muted: #94a3b8;
+  --color-cyber-dark: #ffffff;
+  --color-cyber-card: #ffffff;
+  --color-quantum-blue: #0284c7;
+  --color-quantum-blue-glow: rgba(2, 132, 199, 0.12);
+  --color-cyber-border: #e2e8f0;
+  --color-text-muted: #64748b;
 }
 
-/* style.css - Custom stylesheet for Rheivatech landing page */
+/* style.css - Clean light theme for Rheivatech */
 
 html {
   scroll-behavior: smooth;
-  background-color: #020408;
-  color: #cbd5e1;
+  background-color: #ffffff;
+  color: #1e293b;
   overflow-x: hidden;
-  font-size: 116.5%; /* Increased font size for enhanced portfolio legibility */
+  font-size: 100%; /* Computer standard base font size */
 }
 
-/* Custom scrollbars matching Immersive UI */
+/* Progress bar at the top of the viewport */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #1e3a8a, #0284c7, #06b6d4);
+  z-index: 100;
+  width: 0%;
+  transition: width 0.1s ease-out;
+}
+
+/* Custom scrollbars matching clean design */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: #020408;
+  background: #f1f5f9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 3px;
+  background: #cbd5e1;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #06b6d4;
+  background: #0284c7;
 }
 
 /* Background Grids & Ambient Backdrops */
 .cyber-grid {
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 32px 32px;
+  background-image: radial-gradient(circle, rgba(15, 23, 42, 0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.cyber-grid-dense {
+  background-image: radial-gradient(circle, rgba(2, 132, 199, 0.08) 1px, transparent 1px);
+  background-size: 20px 20px;
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #ffffff 30%, #06b6d4 100%);
+  background: linear-gradient(135deg, #0f172a 20%, #1e40af 60%, #0284c7 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.text-gradient-cyan {
-  background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+.text-gradient-blue {
+  background: linear-gradient(135deg, #1e3a8a 0%, #0284c7 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -62,24 +79,33 @@ html {
 }
 
 .laser-scan {
-  animation: scanning 3s linear infinite;
+  animation: scanning 3.5s linear infinite;
 }
 
 /* Micro grid animation overlay */
 @keyframes grid-glow {
-  0%, 100% { opacity: 0.15; }
-  50% { opacity: 0.25; }
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0.9; }
 }
 .grid-glow {
   animation: grid-glow 8s ease-in-out infinite;
 }
 
-/* Onscroll Animations */
+/* Onscroll Animations with safe visibility fallback */
 .animate-on-scroll {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.js-loaded .animate-on-scroll:not(.is-visible) {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
+  transform: translateY(16px);
+}
+
+.js-loaded .animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -90,13 +116,15 @@ html {
   }
 }
 
-.animate-on-scroll.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+/* Portfolio carousel slide animations */
+.portfolio-slide {
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
 
-/* Ensure footer remains compact as requested */
-footer, footer *, footer span, footer a, footer p, footer div {
-  font-size: 11.5px !important;
+/* Social link hover bounce */
+.social-badge {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
+.social-badge:hover {
+  transform: translateY(-3px);
+}
