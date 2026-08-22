@@ -8,10 +8,10 @@ const FOUNDERS_REGISTRY = [
     name: "Omotayo Oladapo Dan",
     title: "Founder & Chief Architect",
     bio: "Technology owns the responsibility of transforming the world for the better as we know it. With our impending infrastructural procurement, that duty extends to our arms to provide our contributions; which I believe will be one the world has never seen before.",
-    focus: "SYSTEM INTEGRATION & HARDWARE",
+    focus: "SYSTEM DESIGN AND INTEGRATION",
     status: "ACTIVE",
     email: "dantayo58@gmail.com",
-    linkedinUrl: "https://www.linkedin.com/posts/rheivatech_rheivatech-linkedin-activity-7483134289891622912-3dJL?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEmkmhEBrPE1HZTbFSTrISGEeay-1DwboKE",
+    linkedinUrl: "www.linkedin.com/in/omotayo-oladapo-4699362a5",
     imageUrl: "owner.png"
   },
   {
@@ -68,17 +68,17 @@ const PORTFOLIO_REGISTRY = [
   {
     id: "spec_02",
     specNumber: "02",
-    tag: "Web Platform & Food Commerce",
-    title: "Fingerchopsng.com",
-    subtitle: "A dynamic web platform & sovereign culinary commerce destination.",
+    tag: "Web Platform for Food Commerce",
+    title: "Fingerchops Ventures Limited",
+    subtitle: "A dynamic web portfolio and contact interface.",
     badge: "LIVE WEB PLATFORM",
     statusColor: "sky",
     featuresRheivada: false,
     rheivadaRole: null,
-    summary: "An optimized, high-converting digital storefront and culinary commerce destination crafted for Fingerchops NG. Built for blazing fast delivery logistics, interactive menus, frictionless multi-channel ordering, and streamlined customer transaction flows.",
+    summary: "An optimized, high-converting digital portfolio website for culinary commerce; crafted for Fingerchops Ventures Limited. Built to steamline customer outreach, food ordering processes and so on.",
     liveUrl: "https://fingerchopsng.com",
     // Primary display image on the card
-    displayImage: "logo.png",
+    displayImage: "fcv.png",
     // Gallery Modal Images: YOU CAN ADD AS MANY IMAGES AS YOU WANT HERE!
     gallery: [
       "logo.png",
@@ -87,10 +87,10 @@ const PORTFOLIO_REGISTRY = [
     ],
     metrics: [
       { label: "DOMAIN", val: "fingerchopsng.com" },
-      { label: "UPTIME", val: "99.99%" },
-      { label: "ORDER FLOW", val: "INSTANT" }
+      { label: "UPTIME", val: "100%" },
+      { label: "UI", val: "Rheivatech innovation" }
     ],
-    tech: ["Full-Stack Web", "Responsive UI", "Payment Flow", "Logistics Routing"]
+    tech: ["Web Design & Development", "Responsive UI", "Integrated Contact Logic"]
   },
   {
     id: "spec_03",
