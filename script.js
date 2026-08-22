@@ -13,7 +13,7 @@ const FOUNDERS_REGISTRY = [
     bio: "Pioneering sovereign industrial-grade hardware, localized cognitive compilers, and independent solar communications grids across the African tech ecosystem.",
     focus: "SYSTEM INTEGRATION",
     status: "ACTIVE",
-    linkedinUrl: "https://www.linkedin.com/in/omotayo-oladapo-dan-placeholder",
+    linkedinUrl: "www.linkedin.com/in/omotayo-oladapo-4699362a5",
     imageUrl: "logo.png"
   }
 ];
