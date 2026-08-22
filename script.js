@@ -10,18 +10,21 @@ const FOUNDERS_REGISTRY = [
   {
     name: "Omotayo Oladapo Dan",
     title: "Founder & Chief Architect",
-    bio: "Taking the utilization of data science and technology to a whole new level with our infrastructure. A future that assures progress and advancement through us.",
-    focus: "SYSTEM INTEGRATION",
+    bio: "Technology owns the responsibility of transforming the world for the better as we know it. With our impending infrascructural procurement, that duty extends to our arms to provide our contributions; which i believe will be one the world has never seen before.",
+    focus: "SYSTEM INTEGRATION & HARDWARE",
     status: "ACTIVE",
-    linkedinUrl: "www.linkedin.com/in/omotayo-oladapo-4699362a5",
+    email: "dantayo58@gmail.com",
+    linkedinUrl: "https://www.linkedin.com/posts/rheivatech_rheivatech-linkedin-activity-7483134289891622912-3dJL?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEmkmhEBrPE1HZTbFSTrISGEeay-1DwboKE",
     imageUrl: "owner.png"
-  }
-   name: "Kachi",
-    title: "Co-founder & Media director",
-    bio: "Outreach is only the bare minimum. Our client trust and satisfaction is our sole priority. We stay connected with them to build that trust.",
-    focus: "MEDIA AUGMENTATION",
+  },
+  {
+    name: "Akwiwu Kachi Nwando",
+    title: "Co-Founder & Media Director",
+    bio: "Directing strategic brand architecture, multimedia communications, creative storytelling, and continental outreach to amplify sovereign technology initiatives.",
+    focus: "MEDIA & BRAND STRATEGY",
     status: "ACTIVE",
-    linkedinUrl: "www.linkedin.com/in/omotayo-oladapo-4699362a5",
+    email: "kachiakwiwu@gmail.com",
+    linkedinUrl: "https://www.linkedin.com/posts/rheivatech_rheivatech-linkedin-activity-7483134289891622912-3dJL?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEmkmhEBrPE1HZTbFSTrISGEeay-1DwboKE",
     imageUrl: "logo.png"
   }
 ];
@@ -44,6 +47,21 @@ const ANALYSIS_PORTFOLIO = [
   }
 ];
 
+/* Global Modal Scroll Helpers */
+function lockBodyScroll() {
+  document.body.classList.add('overflow-hidden');
+}
+
+function unlockBodyScroll() {
+  const aiModal = document.getElementById('ai-modal');
+  const submitModal = document.getElementById('submit-modal');
+  const isAiOpen = aiModal && !aiModal.classList.contains('hidden');
+  const isSubmitOpen = submitModal && !submitModal.classList.contains('hidden');
+  if (!isAiOpen && !isSubmitOpen) {
+    document.body.classList.remove('overflow-hidden');
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   /* Render Founders Carousel Dynamically */
   const carouselTrack = document.getElementById('carousel-track');
@@ -51,49 +69,57 @@ document.addEventListener('DOMContentLoaded', () => {
     carouselTrack.innerHTML = FOUNDERS_REGISTRY.map((founder, index) => {
       const idNum = String(index + 1).padStart(2, '0');
       const avatarSrc = founder.imageUrl || "logo.png";
-      const linkedinHref = founder.linkedinUrl || "#";
+      const linkedinHref = founder.linkedinUrl || "https://www.linkedin.com/posts/rheivatech_rheivatech-linkedin-activity-7483134289891622912-3dJL?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEmkmhEBrPE1HZTbFSTrISGEeay-1DwboKE";
+      const emailHref = founder.email ? `mailto:${founder.email}` : "mailto:dantayo58@gmail.com";
       
       return `
-        <div class="w-full max-w-6xl border border-cyber-border rounded-xl p-10 md:p-16 bg-cyber-card flex-shrink-0 relative group overflow-hidden transition-all duration-300 hover:border-quantum-blue/40 mx-auto min-h-[460px] flex items-center">
+        <div class="w-full max-w-6xl border border-cyber-border rounded-xl p-8 md:p-14 bg-cyber-card flex-shrink-0 relative group overflow-hidden transition-all duration-300 hover:border-quantum-blue/40 mx-auto min-h-[460px] flex items-center">
           <div class="absolute top-0 right-0 w-48 h-48 bg-radial from-quantum-blue/5 to-transparent pointer-events-none"></div>
           
-          <div class="flex flex-col md:flex-row gap-12 items-center justify-between w-full">
+          <div class="flex flex-col md:flex-row gap-10 items-center justify-between w-full">
             <!-- Left Side: Typography -->
-            <div class="flex-1 text-left space-y-6">
+            <div class="flex-1 text-left space-y-5">
               <div>
-                <span class="font-mono text-[10px] text-quantum-blue font-bold tracking-[0.25em] block mb-3 uppercase">MEMBER_${idNum} | FOUNDING MEMBER</span>
+                <span class="font-mono text-[10px] text-quantum-blue font-bold tracking-[0.25em] block mb-2 uppercase">MEMBER_${idNum} | FOUNDING COLLECTIVE</span>
                 <h3 class="font-sans font-bold text-3xl md:text-5xl text-white tracking-tight leading-none">${founder.name}</h3>
-                <p class="font-mono text-xs text-slate-500 uppercase tracking-[0.15em] mt-2">${founder.title}</p>
+                <p class="font-mono text-xs text-slate-400 uppercase tracking-[0.15em] mt-2">${founder.title}</p>
               </div>
               <div class="h-px bg-slate-800"></div>
               
-              <p class="font-sans text-sm md:text-base text-slate-400 leading-relaxed max-w-2xl">
+              <p class="font-sans text-sm md:text-base text-slate-300 leading-relaxed max-w-2xl">
                 ${founder.bio}
               </p>
 
-              <!-- Interactive LinkedIn Hover overlay action guide -->
-              <div class="pt-2">
-                <a href="${linkedinHref}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 font-mono text-xs font-bold text-quantum-blue hover:text-white transition-colors duration-200 uppercase tracking-widest">
-                  <i data-lucide="linkedin" class="w-4.5 h-4.5"></i>
-                  Connect on LinkedIn <span class="text-slate-500 font-normal">(Click or Hover)</span>
+              <!-- Interactive LinkedIn & Email Connect Actions -->
+              <div class="flex flex-wrap items-center gap-3 pt-2">
+                <!-- Direct LinkedIn Connect Button -->
+                <a href="${linkedinHref}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-quantum-blue/40 bg-quantum-blue/10 text-quantum-blue hover:bg-quantum-blue hover:text-slate-950 font-mono text-xs font-bold transition-all duration-200 uppercase tracking-wider shadow-[0_0_15px_rgba(6,182,212,0.15)] group/btn">
+                  <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                  <span>LinkedIn Channel</span>
+                </a>
+
+                <!-- Direct Email Connect Button -->
+                <a href="${emailHref}" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-800 bg-[#020408]/80 text-slate-300 hover:text-white hover:border-slate-700 font-mono text-xs font-bold transition-all duration-200 uppercase tracking-wider">
+                  <svg class="w-4 h-4 fill-none stroke-current stroke-2 shrink-0" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                  <span>${founder.email || 'Email Direct'}</span>
                 </a>
               </div>
 
-              <div class="font-mono text-[10px] text-slate-500 flex flex-wrap items-center gap-x-8 gap-y-2 uppercase pt-6 border-t border-slate-900/60">
+              <div class="font-mono text-[10px] text-slate-500 flex flex-wrap items-center gap-x-8 gap-y-2 uppercase pt-5 border-t border-slate-900/60">
                 <span>Focus Area: <span class="text-slate-300 font-bold">${founder.focus}</span></span>
                 <span>Status: <span class="text-green-400 font-bold">● ${founder.status}</span></span>
               </div>
             </div>
 
-            <!-- Right Side: Image scaled up to exactly 2.5x of previous proportions -->
-            <div class="relative w-80 h-80 md:w-[440px] md:h-[440px] rounded-2xl overflow-hidden border border-slate-800/80 bg-slate-950/80 flex items-center justify-center p-8 group/avatar flex-shrink-0">
+            <!-- Right Side: Image with hover overlay -->
+            <div class="relative w-72 h-72 md:w-[380px] md:h-[380px] rounded-2xl overflow-hidden border border-slate-800/80 bg-slate-950/80 flex items-center justify-center p-8 group/avatar flex-shrink-0">
               <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(6,182,212,0.1),transparent_70%)]"></div>
               
               <img 
                 src="${avatarSrc}" 
                 alt="${founder.name}" 
                 referrerPolicy="no-referrer"
-                class="w-60 h-60 md:w-[240px] md:h-[240px] object-contain filter drop-shadow-[0_0_12px_rgba(6,182,212,0.5)] transition-transform duration-500 group-hover/avatar:scale-110 z-10"
+                class="w-52 h-52 md:w-[220px] md:h-[220px] object-contain filter drop-shadow-[0_0_12px_rgba(6,182,212,0.5)] transition-transform duration-500 group-hover/avatar:scale-110 z-10"
               />
               
               <!-- LinkedIn Link overlay specifically on image as well -->
@@ -104,9 +130,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 class="absolute inset-0 bg-[#020408]/90 backdrop-blur-sm flex flex-col items-center justify-center gap-3 opacity-0 group-hover/avatar:opacity-100 transition-all duration-300 cursor-pointer z-20"
               >
                 <div class="w-12 h-12 rounded-full bg-quantum-blue-glow border border-quantum-blue flex items-center justify-center text-quantum-blue shadow-[0_0_20px_rgba(6,182,212,0.3)]">
-                  <i data-lucide="linkedin" class="w-5 h-5"></i>
+                  <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
                 </div>
-                <span class="font-mono text-[10px] text-quantum-blue font-bold tracking-widest uppercase text-center px-4">LinkedIn Portal</span>
+                <span class="font-mono text-[10px] text-quantum-blue font-bold tracking-widest uppercase text-center px-4">LinkedIn Channel</span>
               </a>
             </div>
           </div>
@@ -190,55 +216,126 @@ document.addEventListener('DOMContentLoaded', () => {
     window.lucide.createIcons();
   }
 
-  /* Robot Head peek-a-boo loop (every 5 seconds, slides revealing half of it) */
+  /* Robot Head peek-a-boo loop (Centered behind logo, slides out half its face for 2s, swipes back in) */
   const robotHead = document.getElementById('robot-head');
   if (robotHead) {
     setInterval(() => {
-      robotHead.classList.remove('translate-x-0', 'opacity-0');
-      robotHead.classList.add('translate-x-[22px]', 'opacity-100');
+      // Slides out from center (-50%) to 16px right of center so half of face peeks out past the logo box
+      robotHead.style.transform = 'translate(16px, -50%)';
+      robotHead.classList.remove('opacity-0');
+      robotHead.classList.add('opacity-100');
       
-      /* Slide back after 1.8 seconds */
+      /* Stay out for 2 seconds then swipe back behind the logo */
       setTimeout(() => {
-        robotHead.classList.remove('translate-x-[22px]', 'opacity-100');
-        robotHead.classList.add('translate-x-0', 'opacity-0');
-      }, 1800);
-    }, 5000);
+        robotHead.style.transform = 'translate(-50%, -50%)';
+        robotHead.classList.remove('opacity-100');
+        robotHead.classList.add('opacity-0');
+      }, 2000);
+    }, 4500);
   }
 
-  /* In-Page AI Modal Interactive Handlers */
+  /* Upcoming RheivaAI Teaser Modal Interactive Handlers */
   const logoLink = document.getElementById('logo-link');
   const aiModal = document.getElementById('ai-modal');
   const closeModalBtn = document.getElementById('close-modal-btn');
   const viewOtherBtn = document.getElementById('view-other-portfolio-btn');
 
-  if (logoLink && aiModal) {
-    logoLink.addEventListener('click', (e) => {
-      e.preventDefault();
+  function openAiModal(e) {
+    if (e) e.preventDefault();
+    if (aiModal) {
       aiModal.classList.remove('hidden');
+      lockBodyScroll();
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+    }
+  }
+
+  function closeAiModal() {
+    if (aiModal) {
+      aiModal.classList.add('hidden');
+      unlockBodyScroll();
+    }
+  }
+
+  if (logoLink) {
+    logoLink.addEventListener('click', openAiModal);
+  }
+
+  if (robotHead) {
+    robotHead.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openAiModal(e);
     });
   }
 
-  if (closeModalBtn && aiModal) {
-    closeModalBtn.addEventListener('click', () => {
-      aiModal.classList.add('hidden');
-    });
+  if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', closeAiModal);
+  }
 
+  if (aiModal) {
     /* Close on outside overlay click */
     aiModal.addEventListener('click', (e) => {
       if (e.target === aiModal) {
-        aiModal.classList.add('hidden');
+        closeAiModal();
       }
     });
   }
 
+  const submitModalElem = document.getElementById('submit-modal');
+  if (submitModalElem) {
+    submitModalElem.addEventListener('click', (e) => {
+      if (e.target === submitModalElem) {
+        window.closeSubmitModal();
+      }
+    });
+  }
+
+  /* Global Escape Key Handler to close any open modal and unlock scroll */
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const aiModalElem = document.getElementById('ai-modal');
+      const submitModalElem = document.getElementById('submit-modal');
+      if (aiModalElem && !aiModalElem.classList.contains('hidden')) {
+        aiModalElem.classList.add('hidden');
+      }
+      if (submitModalElem && !submitModalElem.classList.contains('hidden')) {
+        submitModalElem.classList.add('hidden');
+      }
+      document.body.classList.remove('overflow-hidden');
+    }
+  });
+
+  /* Handle Early Access Pre-release Dispatch Subscription */
+  window.handleAiNotify = function(e) {
+    if (e) e.preventDefault();
+    const emailInput = document.getElementById('ai-notify-email');
+    const statusBox = document.getElementById('ai-notify-status');
+    const submitBtn = document.getElementById('ai-notify-submit-btn');
+
+    if (emailInput && emailInput.value.trim()) {
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<i data-lucide="check" class="w-3.5 h-3.5"></i> Queued`;
+      }
+      if (statusBox) {
+        statusBox.classList.remove('hidden');
+      }
+      emailInput.disabled = true;
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+    }
+  };
+
   if (viewOtherBtn) {
     viewOtherBtn.addEventListener('click', () => {
       /* Turn button grey, update cursor and disable */
-      viewOtherBtn.classList.remove('text-slate-400', 'hover:text-slate-300', 'border-slate-800');
+      viewOtherBtn.classList.remove('text-slate-400', 'hover:text-slate-200', 'border-slate-800');
       viewOtherBtn.classList.add('bg-slate-800/40', 'text-slate-600', 'border-slate-800/30', 'cursor-not-allowed');
       viewOtherBtn.setAttribute('title', 'Coming Soon');
       viewOtherBtn.setAttribute('disabled', 'true');
-      viewOtherBtn.innerHTML = `<i data-lucide="alert-octagon" class="w-3.5 h-3.5"></i> Coming Soon`;
+      viewOtherBtn.innerHTML = `<i data-lucide="alert-octagon" class="w-3.5 h-3.5"></i> In Development`;
       if (window.lucide) {
          window.lucide.createIcons();
       }
@@ -1465,6 +1562,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Show modal and the spinner state
     if (submitModal) {
       submitModal.classList.remove('hidden');
+      lockBodyScroll();
       if (modalLoading) {
         modalLoading.classList.remove('hidden');
         modalLoading.innerHTML = `
@@ -1570,6 +1668,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (submitModal) {
       submitModal.classList.add('hidden');
     }
+    unlockBodyScroll();
   };
 
   window.closeAnalyticsSection = function() {
