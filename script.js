@@ -102,8 +102,8 @@ const PORTFOLIO_REGISTRY = [
     rheivadaRole: "Features Rheivada Workforce Analytics, Attendance Matrices & Predictive Payroll",
     summary: "Teamgrid is a comprehensive HR aid suite and workforce management SaaS platform. Powered by the Rheivada analytical AI infrastructure model to orchestrate end-to-end employee lifecycles, real-time attendance matrices, performance analytics, predictive payroll distributions, leave workflows, and team collaboration within a sovereign cloud cockpit.",
     liveUrl: "https://teamgrid.rheivatech.space",
-    // Primary display image on the card
-    displayImage: "tg.png",
+    // Primary display image on the card (tg.png was missing; point to existing asset)
+    displayImage: "tg2.png",
     // Gallery Modal Images: YOU CAN ADD AS MANY IMAGES AS YOU WANT HERE!
     gallery: [
       "tg2.png",
@@ -384,7 +384,8 @@ window.resumePortfolioAutoPlayHover = resumePortfolioAutoPlayHover;
 /* =========================================================================
    PORTFOLIO GALLERY / LIGHTBOX MODAL HANDLERS
    ========================================================================= */
-let activeModalPortfolioId = "spec_01";
+// Initialize active modal portfolio id to first registry item to avoid mismatches
+let activeModalPortfolioId = PORTFOLIO_REGISTRY[0]?.id || null;
 let activeModalImageIndex = 0;
 
 function openPortfolioGalleryModal(specId, imageIndex = 0) {
