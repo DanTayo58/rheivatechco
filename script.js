@@ -10,8 +10,16 @@ const FOUNDERS_REGISTRY = [
   {
     name: "Omotayo Oladapo Dan",
     title: "Founder & Chief Architect",
-    bio: "Pioneering sovereign industrial-grade hardware, localized cognitive compilers, and independent solar communications grids across the African tech ecosystem.",
+    bio: "Taking the utilization of data science and technology to a whole new level with our infrastructure. A future that assures progress and advancement through us.",
     focus: "SYSTEM INTEGRATION",
+    status: "ACTIVE",
+    linkedinUrl: "www.linkedin.com/in/omotayo-oladapo-4699362a5",
+    imageUrl: "owner.png"
+  }
+   name: "Kachi",
+    title: "Co-founder & Media director",
+    bio: "Outreach is only the bare minimum. Our client trust and satisfaction is our sole priority. We stay connected with them to build that trust.",
+    focus: "MEDIA AUGMENTATION",
     status: "ACTIVE",
     linkedinUrl: "www.linkedin.com/in/omotayo-oladapo-4699362a5",
     imageUrl: "logo.png"
