@@ -8,7 +8,7 @@ const FOUNDERS_REGISTRY = [
     name: "Omotayo Oladapo Dan",
     title: "Founder & Chief Architect",
     bio: "Technology owns the responsibility of transforming the world for the better as we know it. With our impending infrastructural procurement, that duty extends to our arms to provide our contributions; which I believe will be one the world has never seen before.",
-    focus: "SYSTEM INTEGRATION & HARDWARE",
+    focus: "SYSTEM INNOVATION & INTEGRATION",
     status: "ACTIVE",
     email: "dantayo58@gmail.com",
     linkedinUrl: "https://www.linkedin.com/in/omotayo-oladapo-4699362a5",
@@ -38,7 +38,7 @@ const FOUNDERS_REGISTRY = [
    ========================================================================= */
 const PORTFOLIO_REGISTRY = [
   {
-    id: "spec_01",
+    id: "Prod 1",
     specNumber: "01",
     tag: "Enterprise Trading & E-Commerce",
     title: "Trading Enterprise & High-Performance E-Commerce Platform",
@@ -54,9 +54,7 @@ const PORTFOLIO_REGISTRY = [
     // Gallery Modal Images: YOU CAN ADD AS MANY IMAGES AS YOU WANT HERE!
     gallery: [
       "analysis_1.jpeg",
-      "analysis_2.jpeg",
-      "analysis_4.jpeg",
-      "analysis_5.jpeg"
+      "analysis_2.jpeg"
     ],
     metrics: [
       { label: "AI ENGINE", val: "RHEIVADA CORE" },
@@ -66,7 +64,7 @@ const PORTFOLIO_REGISTRY = [
     tech: ["Rheivada Analytics Core", "Custom PHP Core", "High-Volume Orders", "Real-Time Margins", "PostgreSQL", "Buy-Sell Spread Engine"]
   },
   {
-    id: "spec_02",
+    id: "Prod 2",
     specNumber: "02",
     tag: "Web Platform & Food Commerce",
     title: "Fingerchopsng.com",
@@ -78,12 +76,12 @@ const PORTFOLIO_REGISTRY = [
     summary: "An optimized, high-converting digital storefront and culinary commerce destination crafted for Fingerchops NG. Built for blazing fast delivery logistics, interactive menus, frictionless multi-channel ordering, and streamlined customer transaction flows.",
     liveUrl: "https://fingerchopsng.com",
     // Primary display image on the card
-    displayImage: "logo.png",
+    displayImage: "fcv.png",
     // Gallery Modal Images: YOU CAN ADD AS MANY IMAGES AS YOU WANT HERE!
     gallery: [
-      "logo.png",
-      "analysis_2.jpeg",
-      "analysis_4.jpeg"
+      "fcv2.png",
+      "fcv3.png",
+      "fcv4.png"
     ],
     metrics: [
       { label: "DOMAIN", val: "fingerchopsng.com" },
@@ -93,7 +91,7 @@ const PORTFOLIO_REGISTRY = [
     tech: ["Full-Stack Web", "Responsive UI", "Payment Flow", "Logistics Routing"]
   },
   {
-    id: "spec_03",
+    id: "Prod 3",
     specNumber: "03",
     tag: "HR Aid Suite SaaS",
     title: "Teamgrid",
@@ -105,12 +103,12 @@ const PORTFOLIO_REGISTRY = [
     summary: "Teamgrid is a comprehensive HR aid suite and workforce management SaaS platform. Powered by the Rheivada analytical AI infrastructure model to orchestrate end-to-end employee lifecycles, real-time attendance matrices, performance analytics, predictive payroll distributions, leave workflows, and team collaboration within a sovereign cloud cockpit.",
     liveUrl: "https://teamgrid.rheivatech.space",
     // Primary display image on the card
-    displayImage: "logo2.png",
+    displayImage: "tg.png",
     // Gallery Modal Images: YOU CAN ADD AS MANY IMAGES AS YOU WANT HERE!
     gallery: [
-      "logo2.png",
-      "analysis_5.jpeg",
-      "analysis_1.jpeg"
+      "tg2.png",
+      "tg3.png",
+      "tg4.png"
     ],
     metrics: [
       { label: "AI ENGINE", val: "RHEIVADA CORE" },
