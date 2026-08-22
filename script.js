@@ -8,10 +8,10 @@ const FOUNDERS_REGISTRY = [
     name: "Omotayo Oladapo Dan",
     title: "Founder & Chief Architect",
     bio: "Technology owns the responsibility of transforming the world for the better as we know it. With our impending infrastructural procurement, that duty extends to our arms to provide our contributions; which I believe will be one the world has never seen before.",
-    focus: "SYSTEM DESIGN AND INTEGRATION",
+    focus: "SYSTEM INTEGRATION & HARDWARE",
     status: "ACTIVE",
     email: "dantayo58@gmail.com",
-    linkedinUrl: "www.linkedin.com/in/omotayo-oladapo-4699362a5",
+    linkedinUrl: "https://www.linkedin.com/in/omotayo-oladapo-4699362a5",
     imageUrl: "owner.png"
   },
   {
@@ -68,17 +68,17 @@ const PORTFOLIO_REGISTRY = [
   {
     id: "spec_02",
     specNumber: "02",
-    tag: "Web Platform for Food Commerce",
-    title: "Fingerchops Ventures Limited",
-    subtitle: "A dynamic web portfolio and contact interface.",
+    tag: "Web Platform & Food Commerce",
+    title: "Fingerchopsng.com",
+    subtitle: "A dynamic web platform & sovereign culinary commerce destination.",
     badge: "LIVE WEB PLATFORM",
     statusColor: "sky",
     featuresRheivada: false,
     rheivadaRole: null,
-    summary: "An optimized, high-converting digital portfolio website for culinary commerce; crafted for Fingerchops Ventures Limited. Built to steamline customer outreach, food ordering processes and so on.",
+    summary: "An optimized, high-converting digital storefront and culinary commerce destination crafted for Fingerchops NG. Built for blazing fast delivery logistics, interactive menus, frictionless multi-channel ordering, and streamlined customer transaction flows.",
     liveUrl: "https://fingerchopsng.com",
     // Primary display image on the card
-    displayImage: "fcv.png",
+    displayImage: "logo.png",
     // Gallery Modal Images: YOU CAN ADD AS MANY IMAGES AS YOU WANT HERE!
     gallery: [
       "logo.png",
@@ -87,10 +87,10 @@ const PORTFOLIO_REGISTRY = [
     ],
     metrics: [
       { label: "DOMAIN", val: "fingerchopsng.com" },
-      { label: "UPTIME", val: "100%" },
-      { label: "UI", val: "Rheivatech innovation" }
+      { label: "UPTIME", val: "99.99%" },
+      { label: "ORDER FLOW", val: "INSTANT" }
     ],
-    tech: ["Web Design & Development", "Responsive UI", "Integrated Contact Logic"]
+    tech: ["Full-Stack Web", "Responsive UI", "Payment Flow", "Logistics Routing"]
   },
   {
     id: "spec_03",
