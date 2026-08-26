@@ -8,7 +8,7 @@ const FOUNDERS_REGISTRY = [
     name: "Omotayo Oladapo Dan",
     title: "Founder & Chief Architect",
     bio: "Technology owns the responsibility of transforming the world for the better as we know it. With our impending infrastructural procurement, that duty extends to our arms to provide our contributions; which I believe will be one the world has never seen before.",
-    focus: "SYSTEM INNOVATION & INTEGRATION",
+    focus: "SYSTEM INTEGRATION & HARDWARE",
     status: "ACTIVE",
     email: "dantayo58@gmail.com",
     linkedinUrl: "https://www.linkedin.com/in/omotayo-oladapo-4699362a5",
@@ -27,45 +27,67 @@ const FOUNDERS_REGISTRY = [
 ];
 
 /* =========================================================================
-   PORTFOLIO OF WORKS REGISTRY (3 ACTIVE PLATFORMS)
-   -------------------------------------------------------------------------
-   HOW TO ADD MORE PORTFOLIOS OR IMAGES IN THE FUTURE:
-   1. Add a new object to this array with a unique id (e.g. id: "spec_04").
-   2. Set `featuresRheivada: true` if the application features the Rheivada
-      Analytical AI model, or `false` otherwise.
-   3. In the `gallery` array, add as many image filenames/URLs as you want!
-   4. Update `displayImage` for the primary cover and `liveUrl` for direct link.
+   DEPLOYED APPS ECOSYSTEM REGISTRY (TEAMGRID & SKRIMLAP)
+   ========================================================================= */
+const APPS_REGISTRY = [
+  {
+    id: "teamgrid",
+    title: "Teamgrid",
+    tag: "Enterprise HR Aid Suite SaaS",
+    subtitle: "Workforce intelligence, attendance matrices & automated payroll analytics.",
+    badge: "LIVE ENTERPRISE SAAS",
+    statusColor: "emerald",
+    featuresRheivada: true,
+    rheivadaRole: "Workforce Analytics, Attendance Matrices & Predictive Payroll AI",
+    summary: "Teamgrid is a comprehensive HR aid suite and workforce management SaaS platform. Powered by the Rheivada analytical AI infrastructure model to orchestrate end-to-end employee lifecycles, real-time attendance matrices, performance analytics, predictive payroll distributions, leave workflows, and team collaboration within a sovereign cloud cockpit.",
+    liveUrl: "https://teamgrid.rheivatech.space",
+    displayImage: "logo2.png",
+    gallery: [
+      "logo2.png",
+      "analysis_5.jpeg",
+      "analysis_1.jpeg"
+    ],
+    metrics: [
+      { label: "AI ENGINE", val: "RHEIVADA" },
+      { label: "PLATFORM", val: "HR SAAS" },
+      { label: "WORKFLOWS", val: "100% AUTOMATED" }
+    ],
+    tech: ["Rheivada Analytics AI", "HR Intelligence", "Cloud SaaS", "Role-Based Access", "Workflow Engine", "Payroll Analytics"]
+  },
+  {
+    id: "skrimlap",
+    title: "Skrimlap",
+    tag: "Enterprise Trading & E-Commerce",
+    subtitle: "High-performance trading enterprise & algorithmic buy-sell spread analytics platform.",
+    badge: "LIVE TRADING PLATFORM",
+    statusColor: "emerald",
+    featuresRheivada: true,
+    rheivadaRole: "Algorithmic Trading Analytics & High-Frequency Spread Engine",
+    summary: "Skrimlap is our flagship trading enterprise and e-commerce platform custom-engineered in PHP. Powered by the Rheivada analytical AI infrastructure model to process high-frequency purchase orders, inventory buy-sell spreads, real-time margins, and merchant velocity metrics with unprecedented speed and accuracy.",
+    liveUrl: "https://rheivatech.space",
+    displayImage: "analysis_1.jpeg",
+    gallery: [
+      "analysis_1.jpeg",
+      "analysis_2.jpeg",
+      "analysis_4.jpeg",
+      "analysis_5.jpeg"
+    ],
+    metrics: [
+      { label: "AI ENGINE", val: "RHEIVADA" },
+      { label: "ANALYTICS", val: "HIGH FREQ" },
+      { label: "ACCURACY", val: "99.98%" }
+    ],
+    tech: ["Rheivada Analytics Core", "PHP Backend Engine", "Order Velocity Engine", "Real-Time Margins", "PostgreSQL", "Spread Arbitrage"]
+  }
+];
+
+/* =========================================================================
+   WEB PAGE PORTFOLIO REGISTRY (FINGERCHOPS.COM)
    ========================================================================= */
 const PORTFOLIO_REGISTRY = [
   {
-    id: "Prod 1",
+    id: "fingerchops",
     specNumber: "01",
-    tag: "Enterprise Trading & E-Commerce",
-    title: "Trading Enterprise & High-Performance E-Commerce Platform",
-    subtitle: "Programmed in PHP with an analytics ability that outperforms conventional systems.",
-    badge: "ACTIVE DEPLOYMENT",
-    statusColor: "emerald",
-    featuresRheivada: true,
-    rheivadaRole: "Features Rheivada Algorithmic Trading Analytics & High-Frequency Spread Engine",
-    summary: "Our flagship trading enterprise and e-commerce platform custom-engineered in PHP. Powered by the Rheivada analytical AI infrastructure model to process high-frequency purchase orders, inventory buy-sell spreads, real-time margins, and merchant velocity metrics with unprecedented speed and accuracy.",
-    liveUrl: "https://rheivatech.space",
-    // Primary display image on the card
-    displayImage: "analysis_1.jpeg",
-    // Gallery Modal Images: YOU CAN ADD AS MANY IMAGES AS YOU WANT HERE!
-    gallery: [
-      "analysis_1.jpeg",
-      "analysis_2.jpeg"
-    ],
-    metrics: [
-      { label: "AI ENGINE", val: "RHEIVADA CORE" },
-      { label: "ANALYTICS", val: "HIGH FREQUENCY" },
-      { label: "ACCURACY", val: "99.98%" }
-    ],
-    tech: ["Rheivada Analytics Core", "Custom PHP Core", "High-Volume Orders", "Real-Time Margins", "PostgreSQL", "Buy-Sell Spread Engine"]
-  },
-  {
-    id: "Prod 2",
-    specNumber: "02",
     tag: "Web Platform & Food Commerce",
     title: "Fingerchopsng.com",
     subtitle: "A dynamic web platform & sovereign culinary commerce destination.",
@@ -75,13 +97,11 @@ const PORTFOLIO_REGISTRY = [
     rheivadaRole: null,
     summary: "An optimized, high-converting digital storefront and culinary commerce destination crafted for Fingerchops NG. Built for blazing fast delivery logistics, interactive menus, frictionless multi-channel ordering, and streamlined customer transaction flows.",
     liveUrl: "https://fingerchopsng.com",
-    // Primary display image on the card
-    displayImage: "fcv.png",
-    // Gallery Modal Images: YOU CAN ADD AS MANY IMAGES AS YOU WANT HERE!
+    displayImage: "logo.png",
     gallery: [
-      "fcv2.png",
-      "fcv3.png",
-      "fcv4.png"
+      "logo.png",
+      "analysis_2.jpeg",
+      "analysis_4.jpeg"
     ],
     metrics: [
       { label: "DOMAIN", val: "fingerchopsng.com" },
@@ -89,34 +109,17 @@ const PORTFOLIO_REGISTRY = [
       { label: "ORDER FLOW", val: "INSTANT" }
     ],
     tech: ["Full-Stack Web", "Responsive UI", "Payment Flow", "Logistics Routing"]
-  },
-  {
-    id: "Prod 3",
-    specNumber: "03",
-    tag: "HR Aid Suite SaaS",
-    title: "Teamgrid",
-    subtitle: "Enterprise HR aid suite & workforce intelligence SaaS platform.",
-    badge: "ENTERPRISE SAAS",
-    statusColor: "indigo",
-    featuresRheivada: true,
-    rheivadaRole: "Features Rheivada Workforce Analytics, Attendance Matrices & Predictive Payroll",
-    summary: "Teamgrid is a comprehensive HR aid suite and workforce management SaaS platform. Powered by the Rheivada analytical AI infrastructure model to orchestrate end-to-end employee lifecycles, real-time attendance matrices, performance analytics, predictive payroll distributions, leave workflows, and team collaboration within a sovereign cloud cockpit.",
-    liveUrl: "https://teamgrid.rheivatech.space",
-    // Primary display image on the card (tg.png was missing; point to existing asset)
-    displayImage: "tg2.png",
-    // Gallery Modal Images: YOU CAN ADD AS MANY IMAGES AS YOU WANT HERE!
-    gallery: [
-      "tg2.png",
-      "tg3.png",
-      "tg4.png"
-    ],
-    metrics: [
-      { label: "AI ENGINE", val: "RHEIVADA CORE" },
-      { label: "TYPE", val: "HR AID SUITE" },
-      { label: "WORKFLOWS", val: "100% AUTOMATED" }
-    ],
-    tech: ["Rheivada Analytics AI", "HR Intelligence", "Cloud SaaS", "Role-Based Access", "Workflow Engine", "Payroll Analytics"]
   }
+];
+
+/* UNIFIED REGISTRY FOR MODALS & LIGHTBOXES */
+const ALL_PROJECTS_REGISTRY = [
+  ...PORTFOLIO_REGISTRY,
+  ...APPS_REGISTRY,
+  // Alias mappings for legacy references
+  { ...APPS_REGISTRY[1], id: "spec_01" },
+  { ...PORTFOLIO_REGISTRY[0], id: "spec_02" },
+  { ...APPS_REGISTRY[0], id: "spec_03" }
 ];
 
 /* Global Modal Scroll Helpers */
@@ -128,15 +131,100 @@ function unlockBodyScroll() {
   const aiModal = document.getElementById('ai-modal');
   const submitModal = document.getElementById('submit-modal');
   const galleryModal = document.getElementById('portfolio-gallery-modal');
+  const appModal = document.getElementById('app-spec-modal');
 
   const isAiOpen = aiModal && !aiModal.classList.contains('hidden');
   const isSubmitOpen = submitModal && !submitModal.classList.contains('hidden');
   const isGalleryOpen = galleryModal && !galleryModal.classList.contains('hidden');
+  const isAppOpen = appModal && !appModal.classList.contains('hidden');
 
-  if (!isAiOpen && !isSubmitOpen && !isGalleryOpen) {
+  if (!isAiOpen && !isSubmitOpen && !isGalleryOpen && !isAppOpen) {
     document.body.classList.remove('overflow-hidden');
   }
 }
+
+/* =========================================================================
+   APP SPECIFICATION MODAL HANDLERS (TEAMGRID & SKRIMLAP)
+   ========================================================================= */
+function openAppSpecModal(appId) {
+  const app = APPS_REGISTRY.find(a => a.id === appId) || APPS_REGISTRY[0];
+  const modal = document.getElementById('app-spec-modal');
+  if (!modal) return;
+
+  const titleEl = document.getElementById('app-modal-title');
+  const badgeEl = document.getElementById('app-modal-badge');
+  const aiRoleEl = document.getElementById('app-modal-ai-role');
+  const descEl = document.getElementById('app-modal-desc');
+  const metricsEl = document.getElementById('app-modal-metrics');
+  const techEl = document.getElementById('app-modal-tech');
+  const previewsEl = document.getElementById('app-modal-previews');
+  const liveLinkEl = document.getElementById('app-modal-live-link');
+  const galleryBtn = document.getElementById('app-modal-gallery-btn');
+
+  if (titleEl) titleEl.textContent = app.title;
+  if (badgeEl) badgeEl.textContent = app.badge;
+  if (aiRoleEl) aiRoleEl.textContent = app.rheivadaRole || "Powered by Rheivada AI Engine";
+  if (descEl) descEl.textContent = app.summary;
+  if (liveLinkEl) liveLinkEl.href = app.liveUrl;
+
+  if (metricsEl) {
+    metricsEl.innerHTML = app.metrics.map(m => `
+      <div class="p-2.5 rounded-xl border border-slate-200 bg-slate-50 text-left">
+        <span class="text-[9px] font-mono text-slate-400 font-bold block uppercase">${m.label}</span>
+        <span class="text-xs font-mono font-bold text-slate-900 truncate block">${m.val}</span>
+      </div>
+    `).join('');
+  }
+
+  if (techEl) {
+    techEl.innerHTML = app.tech.map(t => `
+      <span class="px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[10px] font-semibold">${t}</span>
+    `).join('');
+  }
+
+  if (previewsEl) {
+    previewsEl.innerHTML = app.gallery.slice(0, 3).map((img, idx) => `
+      <div onclick="closeAppSpecModal(); openPortfolioGalleryModal('${app.id}', ${idx});" class="aspect-4/3 rounded-xl overflow-hidden border border-slate-200 bg-slate-100 cursor-pointer group hover:border-sky-500 transition-all relative">
+        <img src="${img}" alt="${app.title} preview" class="w-full h-full object-cover group-hover:scale-105 transition-transform" onerror="this.onerror=null;this.src='logo.png'" />
+        <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
+          <i data-lucide="zoom-in" class="w-4 h-4"></i>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  if (galleryBtn) {
+    galleryBtn.onclick = () => {
+      closeAppSpecModal();
+      openPortfolioGalleryModal(app.id, 0);
+    };
+  }
+
+  modal.classList.remove('hidden');
+  lockBodyScroll();
+
+  if (window.lucide) {
+    window.lucide.createIcons();
+  }
+}
+window.openAppSpecModal = openAppSpecModal;
+
+function closeAppSpecModal() {
+  const modal = document.getElementById('app-spec-modal');
+  if (modal) {
+    modal.classList.add('hidden');
+    unlockBodyScroll();
+  }
+}
+window.closeAppSpecModal = closeAppSpecModal;
+
+function handleAppSpecModalBackdropClick(event) {
+  const modal = document.getElementById('app-spec-modal');
+  if (event.target === modal) {
+    closeAppSpecModal();
+  }
+}
+window.handleAppSpecModalBackdropClick = handleAppSpecModalBackdropClick;
 
 /* =========================================================================
    PORTFOLIO AUTOMATED CAROUSEL STATE & CONTROLS
@@ -384,12 +472,11 @@ window.resumePortfolioAutoPlayHover = resumePortfolioAutoPlayHover;
 /* =========================================================================
    PORTFOLIO GALLERY / LIGHTBOX MODAL HANDLERS
    ========================================================================= */
-// Initialize active modal portfolio id to first registry item to avoid mismatches
-let activeModalPortfolioId = PORTFOLIO_REGISTRY[0]?.id || null;
+let activeModalPortfolioId = "fingerchops";
 let activeModalImageIndex = 0;
 
 function openPortfolioGalleryModal(specId, imageIndex = 0) {
-  const item = PORTFOLIO_REGISTRY.find(p => p.id === specId) || PORTFOLIO_REGISTRY[0];
+  const item = ALL_PROJECTS_REGISTRY.find(p => p.id === specId) || ALL_PROJECTS_REGISTRY[0];
   activeModalPortfolioId = item.id;
   activeModalImageIndex = Math.max(0, Math.min(imageIndex, (item.gallery.length - 1)));
 
@@ -424,7 +511,7 @@ function handlePortfolioModalBackdropClick(event) {
 window.handlePortfolioModalBackdropClick = handlePortfolioModalBackdropClick;
 
 function updateGalleryModalUI() {
-  const item = PORTFOLIO_REGISTRY.find(p => p.id === activeModalPortfolioId) || PORTFOLIO_REGISTRY[0];
+  const item = ALL_PROJECTS_REGISTRY.find(p => p.id === activeModalPortfolioId) || ALL_PROJECTS_REGISTRY[0];
   const gallery = item.gallery && item.gallery.length > 0 ? item.gallery : [item.displayImage || "logo.png"];
 
   // Ensure index is in bounds
@@ -442,7 +529,7 @@ function updateGalleryModalUI() {
   const mainImg = document.getElementById('gallery-modal-main-img');
   const thumbsContainer = document.getElementById('gallery-modal-thumbnails');
 
-  if (specTag) specTag.textContent = item.id.toUpperCase();
+  if (specTag) specTag.textContent = (item.specNumber ? `SPEC_0${item.specNumber}` : item.id).toUpperCase();
   if (titleElem) titleElem.textContent = item.title;
   if (counterElem) counterElem.textContent = `Image ${activeModalImageIndex + 1} of ${gallery.length}`;
   
@@ -478,7 +565,7 @@ function updateGalleryModalUI() {
 }
 
 function slideGalleryModal(direction) {
-  const item = PORTFOLIO_REGISTRY.find(p => p.id === activeModalPortfolioId) || PORTFOLIO_REGISTRY[0];
+  const item = ALL_PROJECTS_REGISTRY.find(p => p.id === activeModalPortfolioId) || ALL_PROJECTS_REGISTRY[0];
   const gallery = item.gallery && item.gallery.length > 0 ? item.gallery : [item.displayImage || "logo.png"];
   
   if (direction === 'next') {
@@ -490,6 +577,12 @@ function slideGalleryModal(direction) {
   updateGalleryModalUI();
 }
 window.slideGalleryModal = slideGalleryModal;
+
+function selectGalleryModalImage(index) {
+  activeModalImageIndex = index;
+  updateGalleryModalUI();
+}
+window.selectGalleryModalImage = selectGalleryModalImage;
 
 function selectGalleryModalImage(index) {
   activeModalImageIndex = index;
@@ -603,8 +696,9 @@ document.addEventListener('DOMContentLoaded', () => {
   /* 3. Render Static Analysis Portal (Only apps featuring Rheivada: ERP & Teamgrid) */
   const portfolioContainer = document.getElementById('analytics-portfolio-container');
   if (portfolioContainer) {
-    const rheivadaApps = PORTFOLIO_REGISTRY.filter(item => item.featuresRheivada);
+    const rheivadaApps = APPS_REGISTRY;
     portfolioContainer.innerHTML = rheivadaApps.map((item, index) => {
+      const specNumber = index + 1;
       return `
         <div class="border border-amber-200/80 rounded-2xl p-6 bg-gradient-to-b from-amber-50/20 to-white flex flex-col justify-between hover:shadow-md transition-all relative overflow-hidden">
           <div class="space-y-4">
@@ -648,7 +742,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <a href="${item.liveUrl}" target="_blank" rel="noopener noreferrer" class="text-amber-700 hover:text-amber-900 font-bold hover:underline">
               visit this page directly &rarr;
             </a>
-            <span class="font-bold text-slate-400">SPEC 0${item.specNumber}</span>
+            <span class="font-bold text-slate-400">SPEC 0${specNumber}</span>
           </div>
         </div>
       `;
@@ -663,6 +757,8 @@ document.addEventListener('DOMContentLoaded', () => {
     phasesBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       phasesMenu.classList.toggle('hidden');
+      const appsMenu = document.getElementById('apps-dropdown-menu');
+      if (appsMenu) appsMenu.classList.add('hidden');
       const chevron = phasesBtn.querySelector('i[data-lucide="chevron-down"]');
       if (chevron) {
         chevron.classList.toggle('rotate-180');
@@ -673,6 +769,32 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!phasesBtn.contains(e.target) && !phasesMenu.contains(e.target)) {
         phasesMenu.classList.add('hidden');
         const chevron = phasesBtn.querySelector('i[data-lucide="chevron-down"]');
+        if (chevron) {
+          chevron.classList.remove('rotate-180');
+        }
+      }
+    });
+  }
+
+  /* 4b. Apps click-to-toggle dropdown (Teamgrid & Skrimlap) */
+  const appsBtn = document.getElementById('apps-dropdown-btn');
+  const appsMenu = document.getElementById('apps-dropdown-menu');
+
+  if (appsBtn && appsMenu) {
+    appsBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      appsMenu.classList.toggle('hidden');
+      if (phasesMenu) phasesMenu.classList.add('hidden');
+      const chevron = appsBtn.querySelector('i[data-lucide="chevron-down"]');
+      if (chevron) {
+        chevron.classList.toggle('rotate-180');
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!appsBtn.contains(e.target) && !appsMenu.contains(e.target)) {
+        appsMenu.classList.add('hidden');
+        const chevron = appsBtn.querySelector('i[data-lucide="chevron-down"]');
         if (chevron) {
           chevron.classList.remove('rotate-180');
         }
