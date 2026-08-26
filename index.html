@@ -55,9 +55,9 @@
       <div class="max-w-7xl mx-auto h-full px-6 flex items-center justify-between">
         
         <!-- Brand & Logo (Moved a bit more to the right with pl-2 md:pl-4) -->
-        <div class="flex items-center gap-3 relative pl-2 md:pl-4">
-          <a id="logo-link" href="javascript:void(0)" class="flex items-center gap-3 group focus:outline-none relative cursor-pointer" title="Click to inspect RheivaAI preview">
-            <div class="relative flex items-center justify-center">
+        <div class="flex items-center gap-4 relative pl-2 md:pl-4">
+          <a id="logo-link" href="javascript:void(0)" class="flex items-center group focus:outline-none relative cursor-pointer" title="Click to inspect RheivaAI preview">
+            <div class="relative flex items-center justify-center mr-4 sm:mr-5">
               <div class="w-10 h-10 rounded-xl bg-white border border-slate-300 p-1.5 flex items-center justify-center shadow-sm transition-all duration-300 group-hover:border-sky-500 group-hover:shadow-md relative z-10">
                 <img
                   src="logo.png"
@@ -80,8 +80,10 @@
               </div>
             </div>
             
-            <div class="flex flex-col relative z-10 ml-2">
-              <span class="text-base font-sans font-extrabold tracking-[0.18em] text-slate-900 group-hover:text-sky-600 transition-colors duration-300">RHEIVATECH</span>
+            <div class="flex flex-col relative z-10 pl-1 sm:pl-2">
+              <span class="text-base font-sans font-extrabold tracking-[0.18em] transition-opacity duration-300">
+                <span class="text-sky-600">RHEIVA</span><span class="text-slate-900">TECH</span>
+              </span>
               <span class="text-[10px] uppercase tracking-widest text-slate-500 font-mono font-medium">Innovation Interface</span>
             </div>
           </a>
@@ -89,7 +91,7 @@
 
         <!-- Desktop Navigation -->
         <nav class="hidden md:flex items-center gap-8">
-          <div class="flex items-center gap-6">
+          <div class="flex items-center gap-5 lg:gap-6">
             <a href="#manifesto" class="font-mono text-xs font-semibold tracking-wider text-slate-600 hover:text-sky-600 transition-colors py-1">HOME</a>
             
             <!-- Phases Dropdown -->
@@ -132,20 +134,72 @@
               </div>
             </div>
 
+            <!-- Apps Dropdown (Teamgrid & Skrimlap) -->
+            <div class="relative py-1">
+              <button id="apps-dropdown-btn" class="flex items-center gap-1 font-mono text-xs font-semibold tracking-wider text-slate-600 hover:text-sky-600 transition-colors focus:outline-none uppercase">
+                Apps <i data-lucide="chevron-down" class="w-3.5 h-3.5 transition-transform duration-300"></i>
+              </button>
+              <div id="apps-dropdown-menu" class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-80 rounded-xl border border-slate-200 bg-white/98 backdrop-blur-md shadow-xl p-2.5 hidden z-50 text-left">
+                <div class="px-3 py-1.5 border-b border-slate-100 mb-1.5 flex items-center justify-between">
+                  <span class="text-[10px] text-slate-400 font-bold tracking-wider uppercase font-mono">Deployed App Ecosystem</span>
+                  <span class="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold text-amber-800 bg-amber-50 border border-amber-200 uppercase">Rheivada AI</span>
+                </div>
+
+                <!-- Teamgrid -->
+                <div class="p-2.5 rounded-lg hover:bg-slate-50 transition-colors group border border-transparent hover:border-slate-200 mb-1.5">
+                  <div class="flex items-start justify-between gap-2 mb-1">
+                    <div>
+                      <span class="text-xs font-bold text-slate-900 group-hover:text-sky-600 transition-colors font-sans block">Teamgrid</span>
+                      <span class="text-[10px] text-slate-500 font-mono">Enterprise HR Aid Suite SaaS</span>
+                    </div>
+                    <span class="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 shrink-0">LIVE</span>
+                  </div>
+                  <p class="text-[11px] text-slate-600 font-sans leading-relaxed mb-2">
+                    Workforce intelligence, real-time attendance matrices &amp; automated payroll analytics powered by Rheivada.
+                  </p>
+                  <div class="flex items-center justify-between pt-1 text-[11px] font-mono">
+                    <button onclick="openAppSpecModal('teamgrid')" class="text-sky-600 hover:text-sky-800 font-bold flex items-center gap-1 cursor-pointer">
+                      Inspect Specs <i data-lucide="eye" class="w-3 h-3"></i>
+                    </button>
+                    <a href="https://teamgrid.rheivatech.space" target="_blank" rel="noopener noreferrer" class="text-slate-700 hover:text-sky-600 font-bold flex items-center gap-1">
+                      Open App <i data-lucide="external-link" class="w-3 h-3"></i>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Skrimlap -->
+                <div class="p-2.5 rounded-lg hover:bg-slate-50 transition-colors group border border-transparent hover:border-slate-200">
+                  <div class="flex items-start justify-between gap-2 mb-1">
+                    <div>
+                      <span class="text-xs font-bold text-slate-900 group-hover:text-sky-600 transition-colors font-sans block">Skrimlap</span>
+                      <span class="text-[10px] text-slate-500 font-mono">Enterprise Trading &amp; E-Commerce Platform</span>
+                    </div>
+                    <span class="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 shrink-0">LIVE</span>
+                  </div>
+                  <p class="text-[11px] text-slate-600 font-sans leading-relaxed mb-2">
+                    High-frequency buy-sell spread engine, inventory telemetry &amp; algorithmic profit margin analytics powered by Rheivada.
+                  </p>
+                  <div class="flex items-center justify-between pt-1 text-[11px] font-mono">
+                    <button onclick="openAppSpecModal('skrimlap')" class="text-sky-600 hover:text-sky-800 font-bold flex items-center gap-1 cursor-pointer">
+                      Inspect Specs <i data-lucide="eye" class="w-3 h-3"></i>
+                    </button>
+                    <a href="https://rheivatech.space" target="_blank" rel="noopener noreferrer" class="text-slate-700 hover:text-sky-600 font-bold flex items-center gap-1">
+                      Open App <i data-lucide="external-link" class="w-3 h-3"></i>
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
             <a href="#vector" class="font-mono text-xs font-semibold tracking-wider text-slate-600 hover:text-sky-600 transition-colors py-1">INFRASTRUCTURE</a>
             <a href="#terminal-section" class="font-mono text-xs font-semibold tracking-wider text-slate-600 hover:text-sky-600 transition-colors py-1">TERMINAL</a>
-            <a href="#portfolio-section" class="font-mono text-xs font-semibold tracking-wider text-slate-600 hover:text-sky-600 transition-colors py-1">PORTFOLIO</a>
+            <a href="#portfolio-section" class="font-mono text-xs font-semibold tracking-wider text-slate-600 hover:text-sky-600 transition-colors py-1">WEB PORTFOLIO</a>
             <a href="#team-carousel" class="font-mono text-xs font-semibold tracking-wider text-slate-600 hover:text-sky-600 transition-colors py-1">COLLECTIVE</a>
           </div>
 
-          <div class="flex items-center gap-4">
-            <div class="flex flex-col items-end">
-              <span class="text-[10px] text-slate-400 uppercase font-mono font-medium">Node Status</span>
-              <span class="text-xs text-emerald-600 font-mono font-semibold">OPTIMAL • 0.04ms</span>
-            </div>
-            <div class="w-px h-8 bg-slate-200"></div>
-
-            <!-- Changed from Access Login to Contact Us -->
+          <div class="flex items-center">
+            <!-- Contact Us Action -->
             <a
               href="#join"
               class="px-5 py-2.5 bg-slate-900 hover:bg-sky-600 text-white rounded-lg text-xs uppercase tracking-wider font-mono font-bold transition-all shadow-sm hover:shadow-md"
@@ -171,23 +225,35 @@
         id="mobile-menu"
         class="hidden absolute top-20 left-0 w-full bg-white/98 backdrop-blur-xl border-b border-slate-200 py-6 px-6 flex flex-col gap-4 z-50 shadow-xl"
       >
-        <a href="#manifesto" class="font-mono text-xs font-bold tracking-wider text-slate-700 hover:text-sky-600 py-1" onclick="toggleMobileMenu()">HOME</a>
+        <a href="#manifesto" class="font-mono text-xs font-bold tracking-wider text-slate-700 hover:text-sky-600 py-1" onclick="toggleMobileMenu()">HOME / ABOUT</a>
         <a href="#phases-section" class="font-mono text-xs font-bold tracking-wider text-slate-700 hover:text-sky-600 py-1" onclick="toggleMobileMenu()">SYSTEM PHASES</a>
+        
+        <!-- Mobile Apps Section -->
+        <div class="py-1 border-y border-slate-100 my-1">
+          <span class="text-[10px] text-slate-400 font-bold tracking-wider uppercase font-mono block mb-2">Deployed Apps</span>
+          <div class="flex flex-col gap-2 pl-2">
+            <a href="javascript:void(0)" onclick="openAppSpecModal('teamgrid'); toggleMobileMenu();" class="text-xs font-mono font-bold text-slate-800 hover:text-sky-600 flex items-center justify-between">
+              <span>• Teamgrid (HR SaaS)</span>
+              <span class="text-[10px] text-emerald-600">LIVE</span>
+            </a>
+            <a href="javascript:void(0)" onclick="openAppSpecModal('skrimlap'); toggleMobileMenu();" class="text-xs font-mono font-bold text-slate-800 hover:text-sky-600 flex items-center justify-between">
+              <span>• Skrimlap (Trading Platform)</span>
+              <span class="text-[10px] text-emerald-600">LIVE</span>
+            </a>
+          </div>
+        </div>
+
         <a href="#vector" class="font-mono text-xs font-bold tracking-wider text-slate-700 hover:text-sky-600 py-1" onclick="toggleMobileMenu()">INFRASTRUCTURE</a>
         <a href="#terminal-section" class="font-mono text-xs font-bold tracking-wider text-slate-700 hover:text-sky-600 py-1" onclick="toggleMobileMenu()">TERMINAL</a>
-        <a href="#portfolio-section" class="font-mono text-xs font-bold tracking-wider text-slate-700 hover:text-sky-600 py-1" onclick="toggleMobileMenu()">PORTFOLIO</a>
+        <a href="#portfolio-section" class="font-mono text-xs font-bold tracking-wider text-slate-700 hover:text-sky-600 py-1" onclick="toggleMobileMenu()">WEB PAGE PORTFOLIO</a>
         <a href="#team-carousel" class="font-mono text-xs font-bold tracking-wider text-slate-700 hover:text-sky-600 py-1" onclick="toggleMobileMenu()">COLLECTIVE</a>
         
         <div class="w-full h-px bg-slate-100 my-1"></div>
         
-        <div class="flex items-center justify-between pt-2">
-          <div class="flex flex-col">
-            <span class="text-[10px] text-slate-400 uppercase font-mono">Node Status</span>
-            <span class="text-xs text-emerald-600 font-mono font-semibold">OPTIMAL • 0.04ms</span>
-          </div>
+        <div class="pt-2">
           <a
             href="#join"
-            class="px-5 py-2.5 bg-slate-900 hover:bg-sky-600 text-white rounded-lg text-xs uppercase tracking-wider font-mono font-bold text-center"
+            class="block w-full py-2.5 bg-slate-900 hover:bg-sky-600 text-white rounded-lg text-xs uppercase tracking-wider font-mono font-bold text-center transition-colors shadow-sm"
             onclick="toggleMobileMenu()"
           >
             Contact Us
@@ -224,13 +290,13 @@
             <span class="text-gradient">Universal Infrastructure.</span>
           </h1>
 
-          <!-- Manifesto Paragraphs -->
+          <!-- Refined About / Manifesto Paragraphs -->
           <div class="space-y-4 max-w-2xl text-left mb-8">
             <p class="font-sans text-sm md:text-base text-slate-600 leading-relaxed text-justify">
               Rheivatech is a generational blueprint for continental self-reliance. We are rewriting the tech stack of Africa from the bedrock up. What begins as localized digital intelligence will evolve into physical hardware, secure telecommunications grids, ambient smart environments, and autonomous transit solutions built directly for our unique realities.
             </p>
             <p class="font-sans text-sm md:text-base text-slate-600 leading-relaxed text-justify">
-              We reject the passive consumption of foreign architecture. Rheivatech is an uncompromising commitment to complete technology sovereignty—engineering high-availability software platforms and heavy industrial infrastructure designed to endure, empower, and outlive its creators.
+              We reject the passive consumption of foreign architecture. Rheivatech is an uncompromising commitment to complete technology sovereignty; engineering high-availability software platforms and heavy industrial infrastructure designed to endure, empower, and outlive its creators. Our goal from the birth of rheivatech is to initiate our services via intelligent and sophisticated software and web designs, then further into greater tech stacks like featuring the advancements made on the artificial models currently in production.
             </p>
           </div>
 
@@ -671,95 +737,134 @@
         </div>
       </section>
 
-      <!-- 7. DISTINCT SECTION: Sovereign Portfolio & Automated Works Showcase -->
+      <!-- 7. DISTINCT SECTION: Web Page Portfolio -->
       <section id="portfolio-section" class="relative py-20 px-6 border-t border-slate-200 bg-slate-50/70">
         <div class="max-w-7xl mx-auto text-left relative z-10">
           
           <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10 animate-on-scroll">
             <div class="max-w-3xl">
               <span class="font-mono text-xs text-sky-700 uppercase tracking-widest font-bold block mb-2">
-                Layer 03 • Sovereign Portfolio &amp; Works
+                Layer 03 • Web Page Portfolio
               </span>
               <h2 class="font-sans font-bold text-2xl sm:text-3xl md:text-4xl text-slate-900 tracking-tight mb-3">
-                Portfolio of Works
+                Web Page Portfolio
               </h2>
               <p class="font-sans text-sm md:text-base text-slate-600 leading-relaxed text-justify">
-                Showcasing our deployed platforms, localized ERP data analytics engines, linguistic cognitive models, and air-gapped infrastructure systems. This automated carousel continuously rotates through active projects.
+                Showcasing our deployed web destinations, responsive storefronts, and sovereign digital commerce platforms engineered for instant loading, frictionless multi-channel transactions, and rock-solid uptime.
               </p>
             </div>
 
-            <!-- Carousel Controls Header -->
+            <!-- Web Badge -->
             <div class="flex items-center gap-3 shrink-0">
-              <div class="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-slate-200 bg-white shadow-xs font-mono text-xs">
-                <span id="portfolio-status-dot" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span id="portfolio-status-text" class="text-slate-700 font-bold uppercase tracking-wider">AUTO-PLAYING</span>
-              </div>
-
-              <!-- Play/Pause Toggle -->
-              <button 
-                id="portfolio-play-pause-btn" 
-                onclick="togglePortfolioAutoPlay()" 
-                class="px-3.5 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-900 hover:text-white hover:border-slate-900 text-slate-700 font-mono text-xs font-bold transition-all shadow-xs flex items-center gap-1.5"
-                title="Pause or Resume Automated Rotation"
-              >
-                <i id="portfolio-play-pause-icon" data-lucide="pause" class="w-3.5 h-3.5"></i>
-                <span id="portfolio-play-pause-label">Pause</span>
-              </button>
-
-              <!-- Slide Counter -->
-              <div class="px-3 py-1.5 rounded-xl border border-slate-200 bg-white shadow-xs font-mono text-xs font-bold text-sky-700">
-                <span id="portfolio-slide-counter">01 / 06</span>
+              <div class="flex items-center gap-2 px-3.5 py-2 rounded-xl border border-slate-200 bg-white shadow-xs font-mono text-xs">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-slate-700 font-bold uppercase tracking-wider">LIVE PRODUCTION DEPLOYMENT</span>
               </div>
             </div>
           </div>
 
-          <!-- Automated Portfolio Carousel Container -->
-          <div 
-            id="portfolio-carousel-wrapper" 
-            class="relative w-full max-w-6xl mx-auto animate-on-scroll group/carousel"
-            onmouseenter="pausePortfolioAutoPlayHover()"
-            onmouseleave="resumePortfolioAutoPlayHover()"
-          >
-            <!-- Progress Line for Current Slide -->
-            <div class="w-full bg-slate-200 h-1 rounded-t-2xl overflow-hidden">
-              <div id="portfolio-progress-bar" class="h-full bg-sky-600 transition-all duration-300" style="width: 16.66%;"></div>
-            </div>
-
-            <!-- Outer Frame -->
-            <div class="overflow-hidden rounded-b-2xl border-x border-b border-slate-200 bg-white shadow-lg relative min-h-[500px]">
+          <!-- Web Portfolio Showcase Container (Featuring Fingerchops NG) -->
+          <div class="max-w-5xl mx-auto animate-on-scroll">
+            <div class="rounded-2xl border border-slate-200 bg-white shadow-lg p-6 sm:p-8 md:p-10 transition-all hover:border-sky-300 hover:shadow-xl relative overflow-hidden">
               
-              <!-- The Carousel Track -->
-              <div id="portfolio-carousel-track" class="flex transition-transform duration-500 ease-out" style="transform: translateX(0px);">
-                <!-- Dynamic portfolio project slides injected by script.js -->
+              <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center justify-between">
+                
+                <!-- Left: Fingerchops Details -->
+                <div class="flex-1 text-left space-y-4">
+                  <div class="flex flex-wrap items-center gap-2 mb-1">
+                    <span class="font-mono text-xs text-sky-700 font-bold tracking-widest uppercase">WEB PLATFORM • FOOD COMMERCE</span>
+                    <span class="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold tracking-widest bg-sky-50 text-sky-700 border border-sky-200 uppercase">
+                      ACTIVE WEB PLATFORM
+                    </span>
+                  </div>
+
+                  <div>
+                    <h3 class="font-sans font-extrabold text-2xl sm:text-3xl md:text-4xl text-slate-900 tracking-tight leading-snug">
+                      Fingerchopsng.com
+                    </h3>
+                    <p class="font-sans text-xs sm:text-sm font-semibold text-slate-500 mt-1">
+                      A dynamic web platform &amp; sovereign culinary commerce destination.
+                    </p>
+                  </div>
+
+                  <div class="h-px bg-slate-200 my-2"></div>
+
+                  <p class="font-sans text-xs sm:text-sm text-slate-600 leading-relaxed text-justify">
+                    An optimized, high-converting digital storefront and culinary commerce destination crafted for Fingerchops NG. Built for blazing fast delivery logistics, interactive menus, frictionless multi-channel ordering, and streamlined customer transaction flows.
+                  </p>
+
+                  <!-- Metrics Specs Grid -->
+                  <div class="grid grid-cols-3 gap-2.5 pt-2">
+                    <div class="p-2.5 rounded-xl border border-slate-200 bg-slate-50 text-left">
+                      <span class="text-[9px] font-mono text-slate-400 font-bold block uppercase">DOMAIN</span>
+                      <span class="text-xs font-mono font-bold text-slate-900 truncate block">fingerchopsng.com</span>
+                    </div>
+                    <div class="p-2.5 rounded-xl border border-slate-200 bg-slate-50 text-left">
+                      <span class="text-[9px] font-mono text-slate-400 font-bold block uppercase">UPTIME</span>
+                      <span class="text-xs font-mono font-bold text-slate-900 truncate block">99.99%</span>
+                    </div>
+                    <div class="p-2.5 rounded-xl border border-slate-200 bg-slate-50 text-left">
+                      <span class="text-[9px] font-mono text-slate-400 font-bold block uppercase">ORDER FLOW</span>
+                      <span class="text-xs font-mono font-bold text-slate-900 truncate block">INSTANT</span>
+                    </div>
+                  </div>
+
+                  <!-- Tech Stack Badges -->
+                  <div class="flex flex-wrap items-center gap-1.5 pt-2">
+                    <span class="px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[10px] font-semibold">Full-Stack Web</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[10px] font-semibold">Responsive UI</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[10px] font-semibold">Payment Flow</span>
+                    <span class="px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[10px] font-semibold">Logistics Routing</span>
+                  </div>
+
+                  <!-- Direct Visit Page Link & Gallery Trigger -->
+                  <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-100">
+                    <a 
+                      href="https://fingerchopsng.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      class="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-sky-600 text-white font-mono text-xs font-bold transition-all shadow-sm hover:shadow-md group/btn"
+                    >
+                      <span>visit this page directly</span>
+                      <i data-lucide="arrow-up-right" class="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"></i>
+                    </a>
+
+                    <button 
+                      onclick="openPortfolioGalleryModal('fingerchops', 0)" 
+                      class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-sky-200 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white font-mono text-xs font-bold transition-all shadow-xs cursor-pointer"
+                      title="Open screenshot gallery modal"
+                    >
+                      <i data-lucide="image" class="w-4 h-4"></i>
+                      <span>Inspect Screenshots Gallery</span>
+                    </button>
+                  </div>
+
+                </div>
+
+                <!-- Right: Visual Image Preview Frame -->
+                <div 
+                  onclick="openPortfolioGalleryModal('fingerchops', 0)" 
+                  class="relative w-full sm:w-80 md:w-96 aspect-4/3 rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 shadow-md flex items-center justify-center p-3 group/img shrink-0 cursor-pointer"
+                  title="Click to view full image gallery"
+                >
+                  <img 
+                    src="logo.png" 
+                    alt="Fingerchops NG" 
+                    referrerPolicy="no-referrer"
+                    onerror="this.onerror=null;this.src='logo.png'"
+                    class="w-full h-full object-cover rounded-xl transition-transform duration-500 group-hover/img:scale-105"
+                  />
+                  
+                  <!-- Hover Overlay -->
+                  <div class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-2 text-white p-4">
+                    <i data-lucide="zoom-in" class="w-8 h-8 text-sky-400"></i>
+                    <span class="font-mono text-xs font-bold uppercase tracking-wider text-center">Click to Inspect Gallery</span>
+                  </div>
+                </div>
+
               </div>
 
-              <!-- Prev Carousel Button docked inside Left -->
-              <button 
-                onclick="slidePortfolioCarousel('prev')" 
-                class="absolute left-3 md:left-5 top-1/2 -translate-y-1/2 w-11 h-11 md:w-12 md:h-12 rounded-full border border-slate-300 bg-white/95 hover:bg-sky-600 text-slate-700 hover:text-white shadow-md flex items-center justify-center transition-all duration-200 z-30 focus:outline-none hover:scale-105" 
-                aria-label="Previous Work"
-                title="Previous Work"
-              >
-                <i data-lucide="chevron-left" class="w-6 h-6"></i>
-              </button>
-
-              <!-- Next Carousel Button docked inside Right -->
-              <button 
-                onclick="slidePortfolioCarousel('next')" 
-                class="absolute right-3 md:right-5 top-1/2 -translate-y-1/2 w-11 h-11 md:w-12 md:h-12 rounded-full border border-slate-300 bg-white/95 hover:bg-sky-600 text-slate-700 hover:text-white shadow-md flex items-center justify-center transition-all duration-200 z-30 focus:outline-none hover:scale-105" 
-                aria-label="Next Work"
-                title="Next Work"
-              >
-                <i data-lucide="chevron-right" class="w-6 h-6"></i>
-              </button>
-
             </div>
-
-            <!-- Bottom Interactive Slide Selector / Thumbnail Chips -->
-            <div id="portfolio-indicator-dots" class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-5">
-              <!-- Dynamically populated indicator buttons -->
-            </div>
-
           </div>
 
         </div>
@@ -1119,8 +1224,8 @@
         
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 text-left normal-case border-b border-slate-800 pb-8">
           <div class="md:col-span-4 space-y-3">
-            <div class="flex items-center gap-2 text-white">
-              <div class="w-6 h-6 rounded-md bg-white p-0.5 flex items-center justify-center">
+            <div class="flex items-center gap-2.5 text-white">
+              <div class="w-7 h-7 rounded-lg bg-white p-1 flex items-center justify-center">
                 <img
                   src="logo.png"
                   alt="Rheivatech"
@@ -1128,7 +1233,9 @@
                   class="w-full h-full object-contain"
                 />
               </div>
-              <span class="font-sans font-bold tracking-widest text-sm text-white">RHEIVATECH</span>
+              <span class="font-sans font-extrabold tracking-widest text-sm">
+                <span class="text-sky-400">RHEIVA</span><span class="text-white">TECH</span>
+              </span>
             </div>
             <p class="text-xs text-slate-400 font-sans leading-relaxed max-w-sm">
               We emulate the native durability of our ecosystem. Bringing the edge of cost over civilization through passion, absolute technical competence, and local sovereign engineering.
@@ -1291,6 +1398,109 @@
           <button onclick="closeSubmitModal()" class="w-full py-2.5 bg-slate-900 hover:bg-sky-600 text-white font-mono text-xs font-bold tracking-wider uppercase rounded-xl transition-all">
             Dismiss
           </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- App Specification & Interactive Modal (For Teamgrid & Skrimlap) -->
+    <div 
+      id="app-spec-modal" 
+      class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/80 backdrop-blur-md transition-opacity duration-300"
+      onclick="handleAppSpecModalBackdropClick(event)"
+    >
+      <div class="relative w-full max-w-2xl bg-white border border-slate-200 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh] text-left">
+        
+        <!-- Header -->
+        <div class="px-6 py-4 bg-slate-900 text-white flex items-center justify-between gap-4 shrink-0">
+          <div class="flex items-center gap-3 truncate">
+            <span id="app-modal-badge" class="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold tracking-widest bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 uppercase">
+              LIVE DEPLOYMENT
+            </span>
+            <h3 id="app-modal-title" class="font-sans font-bold text-base sm:text-lg text-white truncate">
+              Teamgrid
+            </h3>
+          </div>
+          <button 
+            onclick="closeAppSpecModal()" 
+            class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition-colors focus:outline-none"
+            aria-label="Close App Modal"
+          >
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- Content Body -->
+        <div class="p-6 overflow-y-auto space-y-5">
+          
+          <!-- Rheivada AI Callout -->
+          <div id="app-modal-ai-callout" class="p-3.5 rounded-xl bg-amber-50 border border-amber-200 flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-800 flex items-center justify-center shrink-0 mt-0.5">
+              <i data-lucide="sparkles" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <span class="text-[10px] font-mono font-bold text-amber-900 uppercase tracking-wider block">POWERED BY RHEIVADA AI</span>
+              <p id="app-modal-ai-role" class="text-xs font-sans text-amber-900 leading-relaxed">
+                Workforce intelligence, attendance matrices &amp; automated payroll analytics.
+              </p>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div>
+            <span class="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider block mb-1">APPLICATION OVERVIEW</span>
+            <p id="app-modal-desc" class="text-xs sm:text-sm font-sans text-slate-700 leading-relaxed text-justify">
+              Teamgrid is a comprehensive HR aid suite and workforce management SaaS platform. Powered by the Rheivada analytical AI infrastructure model to orchestrate employee lifecycles, real-time attendance matrices, and automated payroll distributions.
+            </p>
+          </div>
+
+          <!-- Live Metrics Grid -->
+          <div id="app-modal-metrics" class="grid grid-cols-3 gap-2.5">
+            <!-- Dynamically populated -->
+          </div>
+
+          <!-- Tech Stack -->
+          <div>
+            <span class="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider block mb-2">SYSTEM ARCHITECTURE &amp; STACK</span>
+            <div id="app-modal-tech" class="flex flex-wrap gap-1.5">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Gallery Screenshots Preview -->
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider">INTERFACE SCREENSHOTS</span>
+              <button id="app-modal-gallery-btn" class="text-[11px] font-mono font-bold text-sky-600 hover:text-sky-800 flex items-center gap-1 cursor-pointer">
+                View Fullscreen Gallery <i data-lucide="maximize-2" class="w-3 h-3"></i>
+              </button>
+            </div>
+            <div id="app-modal-previews" class="grid grid-cols-3 gap-2">
+              <!-- Dynamically populated preview thumbnails -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Footer Actions -->
+        <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between gap-3 shrink-0">
+          <button 
+            onclick="closeAppSpecModal()" 
+            class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-mono text-xs font-bold rounded-xl transition-all"
+          >
+            Close
+          </button>
+          
+          <a 
+            id="app-modal-live-link" 
+            href="#" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="inline-flex items-center gap-1.5 px-5 py-2 bg-slate-900 hover:bg-sky-600 text-white font-mono text-xs font-bold rounded-xl transition-all shadow-sm group"
+          >
+            <span>Launch Live App</span>
+            <i data-lucide="arrow-up-right" class="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></i>
+          </a>
         </div>
 
       </div>
