@@ -6,7 +6,7 @@
 const FOUNDERS_REGISTRY = [
   {
     name: "Omotayo Oladapo Dan",
-    title: "Founder & Chief Architect",
+    title: "Founder, CEO & Chief Architect",
     bio: "Technology owns the responsibility of transforming the world for the better as we know it. With our impending infrastructural procurement, that duty extends to our arms to provide our contributions; which I believe will be one the world has never seen before.",
     focus: "SYSTEM INTEGRATION & HARDWARE",
     status: "ACTIVE",
@@ -16,7 +16,7 @@ const FOUNDERS_REGISTRY = [
   },
   {
     name: "Akwiwu Kachi Nwando",
-    title: "Co-Founder & Media Director",
+    title: "Co-Founder, Brand & Media Director",
     bio: "Directing strategic brand architecture, multimedia communications, creative storytelling, and continental outreach to amplify sovereign technology initiatives.",
     focus: "MEDIA & BRAND STRATEGY",
     status: "ACTIVE",
